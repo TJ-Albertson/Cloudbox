@@ -12,7 +12,9 @@ export default function NavBar(props) {
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link'>{props.isLoggedIn ? 'Login' : 'Logout'}</a>
+                    <a className='Link' href='http://localhost:5000/auth/auth0'>
+                        {props.isLoggedIn ? 'Login' : 'Logout'}
+                    </a>
                 </li>
 
                 <li className='NavRight'>
