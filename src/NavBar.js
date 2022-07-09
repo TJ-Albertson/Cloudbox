@@ -3,15 +3,19 @@ import './CSS/NavBar.css'
 
 export default function NavBar(props) {
 
-    async function getProfileJSON() {
-        try {
-          let response = await fetch('http://localhost:5000/profile');
-          let responseJSON = await response.json();
-          return responseJSON;
-         } catch(error) {
-          console.error(error);
-        }
-      }
+    function log() {
+        const data = fetch('http://localhost:5000/test').then(response => response.json())
+        return data
+    }
+    
+    fetch('http://localhost:5000/test2', {credentials: 'include', mode: 'cors'})
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+    
+    function test() {
+        return 'text'
+    }
 
     return (
         <div>
@@ -33,7 +37,7 @@ export default function NavBar(props) {
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link'>{getProfileJSON().name}</a>
+                    <a className='Link'>{test()}</a>
                 </li>
                 
             </ul>
