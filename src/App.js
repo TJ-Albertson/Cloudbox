@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 import NavBar from "./NavBar"
-
+import BoxCase from "./BoxCase"
 
 import logo from './SVG/logo.svg'
 import './CSS/App.css'
-
 
 export default function App() {
 
@@ -13,22 +12,16 @@ export default function App() {
   return (
     <div>
       
+      
       <div className='NavBar'>
         <NavBar isLoggedIn={authenticated} />
       </div>
+      
+      <h1 className='BehindNavBar'></h1>
 
       <div className="App">
-      
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Edit <code>src/App.js</code> and save to reload.</p>
-
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Learn React</a>
+          <BoxCase />
         </header>
       </div>
 

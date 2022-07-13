@@ -3,16 +3,6 @@ import './CSS/NavBar.css'
 
 export default function NavBar(props) {
 
-    function log() {
-        const data = fetch('http://localhost:5000/test').then(response => response.json())
-        return data
-    }
-    
-    fetch('http://localhost:5000/test2', {credentials: 'include', mode: 'cors'})
-        .then(response => response.json())
-        .then(data => console.log(data));
-
-    
     function test() {
         return 'text'
     }
