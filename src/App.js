@@ -19,11 +19,10 @@ export default function App() {
       
       <h1 className='BehindNavBar'></h1>
 
-      <div className="App">
-        <header className="App-header">
-          <BoxCase />
-        </header>
-      </div>
+      
+
+
+      <BoxCase />
 
       <h1>bottom</h1>
 
