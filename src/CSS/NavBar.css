@@ -1,21 +1,20 @@
 .NavLeft {
     float: left;
-    border-left:1px solid #bbb;
-    border-right:1px solid #bbb;
+    border:1px solid #bbb;
 }
 
 .NavRight {
     float: right;
-    border-right:1px solid #bbb;
-    border-left:1px solid #bbb;
+    border:1px solid #bbb;
 }
   
 .List {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5%;
   overflow: hidden;
-  background-color: #333;
+
+  background-color: #0B5345;
 }
 
 .Link {
