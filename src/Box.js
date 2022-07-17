@@ -25,7 +25,7 @@ export default function Box(props) {
     return (
         <div>
             <div className='Box' onDrop={drop} onDragOver={allowDrop}>
-                <img id={Math.floor(Math.random() * 1000)} src={props.image} width="100" height="49" draggable="true" onDragStart={drag} />
+                <img id={Math.floor(Math.random() * 1000)} src={props.image} width="150" height="150" draggable="true" onDragStart={drag} />
             </div>
         </div>
     )

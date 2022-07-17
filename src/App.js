@@ -2,32 +2,33 @@ import React, { useState, useEffect } from "react"
 import NavBar from "./NavBar"
 import BoxCase from "./BoxCase"
 
-import logo from './SVG/logo.svg'
 import './CSS/App.css'
 
 export default function App() {
 
   const [authenticated, setAuthenticated] = useState(true)
-  const [boxCount, setBoxCount] = useState(true)
+  const [boxes, setBoxes] = useState([1])
 
-  const handleChange2 = () => {
-    setBoxCount(boxCount + 1);
-    console.log(boxCount);
+  const addBox = () => {
+   setBoxes([...boxes, boxes[boxes.length - 1] + 1]);
   }
 
-  const handleChange = event => {
-    setBoxCount(event.target.value);
-    console.log('box count: ' + boxCount)
+  const removeBox = () => {
+    if (boxes.length > 1) {
+      const temp = new Array(...boxes);
+      temp.pop();
+      setBoxes(temp);
+    }
   }
 
   return (
     <div>
       
       <div className='NavBar'>
-        <NavBar isLoggedIn={authenticated} handleChange={handleChange}/>
+        <NavBar isLoggedIn={authenticated} addBox={addBox} removeBox={removeBox}/>
       </div>
 
-      <BoxCase boxes={boxCount} />
+      <BoxCase boxes={boxes} />
 
     </div>
   )

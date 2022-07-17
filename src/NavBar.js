@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CSS/NavBar.css'
 
-
 export default function NavBar(props) {
-
-    function test() {
-        return 'text'
-    } 
 
     return (
         <div>
@@ -26,13 +21,13 @@ export default function NavBar(props) {
                 <li className='NavRight'>
                     <a className='Link'>Settings</a>
                 </li>
-
+                
                 <li className='NavRight'>
-                    <a className='Link'>{test()}</a>
+                    <input type='checkbox' onChange={event => props.addBox(event)} />
                 </li>
 
                 <li className='NavRight'>
-                    <input type='checkbox' onChange={event => props.handleChange(event)} />
+                    <input type='checkbox' onChange={event => props.removeBox(event)} />
                 </li>
                 
             </ul>
