@@ -21,6 +21,21 @@ export default function App() {
     }
   }
 
+  function GetData() {
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+
+      fetch('/test')
+      .then(res => res.json ())
+      .then(data => setData(data))
+    }, [])
+
+    return(
+      <div>name {data.name} age {data.age}</div>
+    )
+  }
+
   return (
     <div>
       
@@ -29,6 +44,8 @@ export default function App() {
       </div>
 
       <BoxCase boxes={boxes} />
+
+      <h1></h1>
 
     </div>
   )

@@ -5,7 +5,7 @@ export default function NavBar(props) {
 
     return (
         <div>
-
+            
             <ul className='List'>
                 
                 <li className='NavLeft'>
@@ -21,7 +21,7 @@ export default function NavBar(props) {
                 <li className='NavRight'>
                     <a className='Link'>Settings</a>
                 </li>
-                
+
                 <li className='NavRight'>
                     <input type='checkbox' onChange={event => props.addBox(event)} />
                 </li>
