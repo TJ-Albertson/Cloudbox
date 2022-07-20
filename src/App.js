@@ -26,7 +26,7 @@ export default function App() {
 
     useEffect(() => {
 
-      fetch('/test')
+      fetch('http://localhost:5000/profile')
       .then(res => res.json ())
       .then(data => setData(data))
     }, [])
@@ -45,7 +45,7 @@ export default function App() {
 
       <BoxCase boxes={boxes} />
 
-      <h1></h1>
+      <h1>{GetData()}</h1>
 
     </div>
   )

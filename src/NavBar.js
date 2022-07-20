@@ -13,7 +13,7 @@ export default function NavBar(props) {
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link' href='http://localhost:5000/auth/auth0'>
+                    <a className='Link' href='http://localhost:5000/profile'>
                         {props.isLoggedIn ? 'Login' : 'Logout'}
                     </a>
                 </li>
