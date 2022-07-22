@@ -4,8 +4,11 @@ import BoxCase from "./BoxCase"
 
 import './CSS/App.css'
 
-export default function CloudBox() {
+import { useNavigate } from "react-router-dom";
 
+
+export default function CloudBox() {
+  const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [boxes, setBoxes] = useState([1])
 
@@ -30,6 +33,9 @@ export default function CloudBox() {
     .then(res => res.json())
     .then(data => data.isLoggedIn ? setEmail(data.email) : null)
   }, [])
+
+
+  
 
   function Login() {
 
@@ -94,6 +100,7 @@ export default function CloudBox() {
     )
   }
   
+
 
     return (
         <div>

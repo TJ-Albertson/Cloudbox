@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './CSS/NavBar.css'
 
+import { useNavigate } from "react-router-dom";
+
+
 export default function NavBar(props) {
+
+    const navigate = useNavigate()
+
+    async function logout() {
+        localStorage.removeItem("token")
+        navigate("../", { replace: true });
+    }
 
     return (
         <div>
@@ -13,9 +23,7 @@ export default function NavBar(props) {
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link' href='http://localhost:5000/profile'>
-                        {props.isLoggedIn ? 'Login' : 'Logout'}
-                    </a>
+                    <a className='Link' onClick={event => logout()}>Logout</a>
                 </li>
 
                 <li className='NavRight'>
