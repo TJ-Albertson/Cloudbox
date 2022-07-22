@@ -5,7 +5,6 @@ import Box from "./Box"
 export default function BoxCase(props) {
 
     const boxes = props.boxes;
-    console.log(props.boxes)
 
     return (
 
