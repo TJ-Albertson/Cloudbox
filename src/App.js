@@ -7,6 +7,8 @@ import './CSS/App.css'
 
 export default function App() {
 
+  
+
 
   function Authenticate() {
 
@@ -20,7 +22,6 @@ export default function App() {
       }
     }
 
-    
 
   }
 
@@ -45,7 +46,7 @@ export default function App() {
     }
   }
 
-  function Login() {
+  function Login2() {
 
     function handleLogin(e) {
       e.preventDefault()
@@ -72,7 +73,7 @@ export default function App() {
 
   return (
     <div>
-      
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/cloudbox" element={<CloudBox />} />
