@@ -24,6 +24,7 @@ export default function CloudBox() {
     }
   }
 
+  //Auto navigate if  NOT logged in
   useEffect(() => {
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
@@ -31,8 +32,14 @@ export default function CloudBox() {
       }
     })
     .then(res => res.json())
-    .then(data => data.isLoggedIn ? setEmail(data.email) : null)
-  }, [])
+    .then(
+      (data) => {
+        if(!data.isLoggedIn) {
+          setEmail(data.email)
+          navigate("./cloudbox", { replace: true });
+        }
+      })
+  }, [])  
 
 
   

@@ -5,7 +5,9 @@ export default function Login() {
 
   const [email, setEmail] = useState("")
   const navigate = useNavigate()
+  const [message, setMessage] = useState("")
 
+  //Auto navigate if logged in
   useEffect(() => {
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
@@ -13,9 +15,13 @@ export default function Login() {
       }
     })
     .then(res => res.json())
-    .then(data => data.isLoggedIn ? setEmail(data.email) : null)
-
-    navigate("./cloudbox", { replace: true });
+    .then(
+      (data) => {
+        if(data.isLoggedIn) {
+          setEmail(data.email)
+          navigate("./cloudbox", { replace: true });
+        }
+      })
   }, [])    
 
     
@@ -23,6 +29,11 @@ export default function Login() {
     //All in one login + register
     async function handleLogin(e) {
       e.preventDefault()
+
+        const isEmailTakenURL = "http://localhost:5000/isEmailTaken"
+        const loginURL = "http://localhost:5000/login"
+        const registerURL = "http://localhost:5000/register"
+        const fetchMethod = {}
     
         const form = e.target
         const user = {
@@ -30,39 +41,38 @@ export default function Login() {
           password: form[1].value
         }
           
-        fetch("http://localhost:5000/isEmailTaken", {
+        fetch(isEmailTakenURL, {
           method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
+          headers: { "Content-type": "application/json"},
           body: JSON.stringify(user)
         })
         .then(res => res.json())
         //.then(data => console.log(data.message))
-        .then(data => setEmail(data.message))
-
-        if (email) {
-          fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify(user)
-          })
-          .then(res => res.json())
-          .then(data => {
-            localStorage.setItem("token", data.token)
-          })
-        } else {
-          fetch("http://localhost:5000/register", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify(user)
-          })
-          .then(res => res.json())
-        }
+        .then(
+          (data) => {
+            if (data.isEmailTaken) {
+              fetch(loginURL, {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(user)
+              })
+              .then(res => res.json())
+              .then(data => {
+                setMessage(data.message)
+                if(data.message == "Success") {
+                  localStorage.setItem("token", data.token)
+                  navigate("./cloudbox", { replace: true });
+                }
+              })
+            } else {
+              fetch(registerURL, {
+                method: "POST",
+                headers: { "Content-type": "application/json"},
+                body: JSON.stringify(user)
+              })
+              .then(res => res.json())
+            }
+        })
     }
 
     return (
@@ -74,7 +84,7 @@ export default function Login() {
               <input type="submit" value="Submit" />
             </form>
 
-            
+            <h1>Message: {message}</h1>
       </div>
     )
   }

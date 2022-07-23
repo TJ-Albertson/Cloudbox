@@ -27,7 +27,7 @@ export default function NavBar(props) {
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link'>Email {props.email}</a>
+                    <a className='Link'>Email: {props.email}</a>
                 </li>
 
                 <li className='NavRight'>
