@@ -7,13 +7,19 @@ import './CSS/App.css'
 
 export default function App() {
 
-  
+  const [email, setEmail] = useState("")
+
+  const addEmail = (data) => {
+    console.log(data)
+    setEmail(data)
+  }
+
   return (
     <div>
 
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/cloudbox" element={<CloudBox />} />
+        <Route path="/" element={<Login addEmail={addEmail}/>} />
+        <Route path="/cloudbox" element={<CloudBox email={email}/>} />
       </Routes>
       
     </div>
