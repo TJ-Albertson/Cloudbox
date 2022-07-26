@@ -1,4 +1,4 @@
-.Box {
+.Box2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,38 +18,40 @@
     background-repeat: no-repeat;
 }
 
+.Box {
+    
+    background: #353535;
 
+    border-radius: 4px;
+   
 
-.Box2 {
-    display: flex;
-    width:350px;
-    height:350px;
-    border:15px solid #aaaaaa;
+   
 }
 
+
 .files-container {
-    width: 98%;
+    width: 100%;
     overflow-x: auto;
   }
 
 
-  .files-table {
-    width: 100%;
+.files-table {
+    width: 20%;
     border: 1px solid #ccc;
     border-collapse: collapse;
   
-    tr,
-    td,
-    th {
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-  
-    .file-title {
-      width: 20%;
-    }
-  
-    .file-description {
-      width: 70%;
-    }
+    
+}
+
+tr, td, th {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .file-title {
+    width: 20%;
+  }
+
+  .file-description {
+    width: 40%;
   }

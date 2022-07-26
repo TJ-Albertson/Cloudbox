@@ -38,46 +38,43 @@ export default function Box(props) {
         };
     
         getFilesList();
-      }, []);
+    }, []);
    
     return (
-      <div className='Box' onDrop={drop} onDragOver={allowDrop}>
+      <div className="Box" onDrop={drop} onDragOver={allowDrop}>
         {/*<img id={props.id} src={props.image} width="150" height="150" draggable="true" onDragStart={drag} />*/}
-        <div id={props.id} width="150" height="150" draggable="true" onDragStart={drag}>
-        <table className="files-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Download File</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filesList.length > 0 ? (
-            filesList.map(
-              ({ _id, title, description, file_path, file_mimetype }) => (
-                <tr key={_id}>
-                  <td className="file-title">{title}</td>
-                  <td className="file-description">{description}</td>
-                  <td>
-                    <a
-                      href="#/"
-                    >
-                      Download
-                    </a>
-                  </td>
+        <div className="files-container">
+          <div id={props.id} width="150" height="150" draggable="true" onDragStart={drag}>
+            <table className="files-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Download File</th>
+                  <th>ID: {props.id}</th>
                 </tr>
-              )
-            )
-          ) : (
-            <tr>
-              <td colSpan={3} style={{ fontWeight: '300' }}>
-                No files found. Please add some.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              </thead>
+              <tbody>
+                {filesList.length > 0 ? (
+                  filesList.map(({ _id, title, description, file_path, file_mimetype }) => (
+                    <tr key={_id}>
+                      <td className="file-title">{title}</td>
+                      <td className="file-description">{description}</td>
+                      <td>
+                        <a href="#/" >Download</a>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} style={{ fontWeight: '300' }}>
+                      No files found. Please add some.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     )
