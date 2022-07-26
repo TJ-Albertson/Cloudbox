@@ -10,6 +10,9 @@ export default function CloudBox(props) {
   const navigate = useNavigate()
   const [boxes, setBoxes] = useState([1])
 
+  const [emailArray, setEmailArray] = useState({})
+  //ill have array of emails, make a box for each email, and pass email to each box as prop, ause each email for file location
+
   //Auto navigate if NOT logged in
   useEffect(() => {
     fetch("http://localhost:5000/isLoggedIn", {
@@ -42,9 +45,9 @@ export default function CloudBox(props) {
     <div>
       <div className='NavBar'>
         <NavBar email={props.email} addBox={addBox} removeBox={removeBox}/>
-        </div>
+      </div>
     
-        <BoxCase boxes={boxes} />
+      <BoxCase boxes={boxes} />
 
     </div>
   )

@@ -26,3 +26,30 @@
     height:350px;
     border:15px solid #aaaaaa;
 }
+
+.files-container {
+    width: 98%;
+    overflow-x: auto;
+  }
+
+
+  .files-table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+  
+    tr,
+    td,
+    th {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  
+    .file-title {
+      width: 20%;
+    }
+  
+    .file-description {
+      width: 70%;
+    }
+  }

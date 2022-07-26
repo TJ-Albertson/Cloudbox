@@ -8,3 +8,14 @@
     background-color: #17202A;
 }
 
+.box {
+    margin-top: 60px;
+}
+
+.container {
+    touch-action: none;
+    width: 90%;
+    margin: 1rem auto;
+    margin-top: 75px;
+  }
+
