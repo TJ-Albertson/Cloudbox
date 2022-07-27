@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CSS/BoxCase.css'
 import Box from "./Box"
+import Upload from "./Upload"
 
 export default function BoxCase(props) {
 
@@ -14,6 +15,8 @@ export default function BoxCase(props) {
             {boxes.map((box) => 
                 <Box key={box.toString()} id={box} image='https://content.fortune.com/wp-content/uploads/2019/04/brb05.19.plus_.jpg'/>
             )}
+
+            <Upload />
         </div>
 
     )
