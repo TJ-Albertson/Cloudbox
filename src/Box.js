@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CSS/Box.css'
 import axios from 'axios';
+import download from 'downloadjs';
 
 export default function Box(props) {
 
@@ -39,6 +40,22 @@ export default function Box(props) {
     
         getFilesList();
     }, []);
+
+    const downloadFile = async (id, path, mimetype) => {
+      try {
+        const result = await axios.get(`http://localhost:5000/download/${id}`, {
+          responseType: 'blob'
+        });
+        const split = path.split('/');
+        const filename = split[split.length - 1];
+        setErrorMsg('');
+        return download(result.data, filename, mimetype);
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          setErrorMsg('Error while downloading file. Try again later');
+        }
+      }
+    };
    
     return (
       <div className="Box" onDrop={drop} onDragOver={allowDrop}>
@@ -61,7 +78,7 @@ export default function Box(props) {
                       <td className="file-title">{title}</td>
                       <td className="file-description">{description}</td>
                       <td>
-                        <a href="#/" >Download</a>
+                        <a href="#/" onClick={() => downloadFile(_id, file_path, file_mimetype)}>Download</a>
                       </td>
                     </tr>
                   ))
