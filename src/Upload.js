@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-export default function Upload() {
+export default function Upload(props) {
 
   const [file, setFile] = useState()
 
@@ -14,12 +14,14 @@ export default function Upload() {
     const url = 'http://localhost:5000/upload';
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('title', file.name);
+    formData.append('ownerEmail', props.email)
+    formData.append('fileName', file.name);
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
       },
     };
+    
     axios.post(url, formData, config).then((response) => {
       console.log(response.data);
     });

@@ -17,7 +17,6 @@ export default function Login(props) {
     .then(
       (data) => {
         if(data.isLoggedIn) {
-          props.addEmail(data.email)
           navigate("./cloudbox", { replace: true });
         }
       })

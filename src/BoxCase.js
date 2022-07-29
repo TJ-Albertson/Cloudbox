@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './CSS/BoxCase.css'
 import Box from "./Box"
 import Upload from "./Upload"
 
