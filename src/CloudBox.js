@@ -33,7 +33,7 @@ export default function CloudBox(props) {
 
           setEmail(data.email)
           setEmailGroup(data.emailsForBoxes[0].emailArray)
-          console.log(data.emailsForBoxes[0].emailArray)
+          console.log(data.emailsForBoxes)
     
         } else {
           navigate("../", { replace: true });
