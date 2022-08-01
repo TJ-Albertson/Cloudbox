@@ -13,13 +13,14 @@ export default function CloudBox(props) {
   const navigate = useNavigate()
   const [boxes, setBoxes] = useState([1])
 
-  const [emailGroup, setEmailGroup] = useState({})
+  const [emailGroup, setEmailGroup] = useState([])
   const [email, setEmail] = useState("")
 
   //ill have array of emails, make a box for each email, and pass email to each box as prop, ause each email for file location
 
   //Auto navigate
   useEffect(() => {
+
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
         "x-access-token": localStorage.getItem("token")
@@ -31,8 +32,8 @@ export default function CloudBox(props) {
         if(data.isLoggedIn) {
 
           setEmail(data.email)
-          setEmailGroup(data.emailGroup)
-          console.log(data.emailGroup)
+          setEmailGroup(data.emailsForBoxes[0].emailArray)
+          console.log(data.emailsForBoxes[0].emailArray)
     
         } else {
           navigate("../", { replace: true });
@@ -61,10 +62,8 @@ export default function CloudBox(props) {
       </div>
 
       <div className='Grid'>
-            <Box id={57} email={email} image='https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Solid_red.svg/512px-Solid_red.svg.png'/>
-
-            {boxes.map((box) => 
-                <Box key={box.toString()} id={box} email={email} image='https://content.fortune.com/wp-content/uploads/2019/04/brb05.19.plus_.jpg'/>
+            {emailGroup.map((box) => 
+                <Box key={box.toString()} id={box} email={email} />
             )}
 
             <Upload email={email}/>

@@ -30,7 +30,12 @@ export default function Box(props) {
     useEffect(() => {
         const getFilesList = async () => {
           try {
-            const { data } = await axios.get(`http://localhost:5000/getAllFiles`);
+            console.log(props.email)
+            const { data } = await axios.get(`http://localhost:5000/getFiles`, {
+              params: {
+                email: props.email
+              }      
+            });
             setErrorMsg('');
             setFilesList(data);
           } catch (error) {
