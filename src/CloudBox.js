@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+
 import NavBar from "./NavBar"
-import BoxCase from "./BoxCase"
 import Box from "./Box"
 import Upload from "./Upload"
 
@@ -15,11 +15,8 @@ export default function CloudBox(props) {
   const [emailGroup, setEmailGroup] = useState([])
   const [email, setEmail] = useState("")
 
-  //ill have array of emails, make a box for each email, and pass email to each box as prop, ause each email for file location
-
-  //Auto navigate
+  //data fetch + auto logout
   useEffect(() => {
-
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
         "x-access-token": localStorage.getItem("token")
@@ -29,16 +26,12 @@ export default function CloudBox(props) {
     .then(
       (data) => {
         if(data.isLoggedIn) {
-
           setEmail(data.email)
           setEmailGroup(data.emailGroups[0].boxArray)
-    
         } else {
           navigate("../", { replace: true });
         }
       })
-
-    
   }, [])  
    
   return (
@@ -48,13 +41,12 @@ export default function CloudBox(props) {
       </div>
 
       <div className='Grid'>
-            {emailGroup.map((box) => 
-                <Box key={box.toString()} id={box} email={box} />
-            )}
+        {emailGroup.map((box) => 
+          <Box key={box.toString()} id={box} email={box} />
+        )}
 
-            <Upload email={email}/>
+        <Upload email={email}/>
       </div>
-
     </div>
   )
 }

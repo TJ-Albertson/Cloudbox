@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Route, Routes } from "react-router-dom";
+
 import Login from "./Login"
 import CloudBox from "./CloudBox"
 
@@ -16,12 +17,10 @@ export default function App() {
 
   return (
     <div>
-
       <Routes>
         <Route path="/" element={<Login addEmail={addEmail}/>} />
         <Route path="/cloudbox" element={<CloudBox email={email}/>} />
       </Routes>
-      
     </div>
   )
 }

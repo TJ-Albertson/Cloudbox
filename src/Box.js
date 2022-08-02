@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './CSS/Box.css'
 import axios from 'axios';
 import download from 'downloadjs';
 
+import './CSS/Box.css'
+
 export default function Box(props) {
 
-  //these functions let me drag, drop, and swap whats inside them
+  //these functions let me drag, drop, and swap whats inside the
   function allowDrop(ev) {
     ev.preventDefault();
   }

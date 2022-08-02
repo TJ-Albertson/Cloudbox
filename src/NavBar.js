@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './CSS/NavBar.css'
-
 import { useNavigate } from "react-router-dom";
+import { Navbar, Container } from "react-bootstrap"
 
+import './CSS/NavBar.css'
 
 export default function NavBar(props) {
 
@@ -15,6 +15,12 @@ export default function NavBar(props) {
 
     return (
         <div>
+            <Navbar bg="light">
+                <Container>
+                    <Navbar.Brand href="#home">Brand link</Navbar.Brand>
+                </Container>
+            </Navbar>
+   
             <ul className='List'>
                 <li className='NavLeft'>
                     <a className='Link'>Email: {props.email}</a>
