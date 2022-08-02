@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Navbar, Container } from "react-bootstrap"
 
 import './CSS/NavBar.css'
+import './free.svg'
 
 export default function NavBar(props) {
 
@@ -17,6 +18,15 @@ export default function NavBar(props) {
         <div>
             <Navbar bg="light">
                 <Container>
+                    <Navbar.Brand href="#home">
+                        <img
+                            src="/free.svg"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />
+                    </Navbar.Brand>
                     <Navbar.Brand href="#home">Brand link</Navbar.Brand>
                 </Container>
             </Navbar>
