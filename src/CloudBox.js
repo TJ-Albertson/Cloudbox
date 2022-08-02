@@ -11,7 +11,6 @@ import './CSS/CloudBox.css'
 export default function CloudBox(props) {
 
   const navigate = useNavigate()
-  const [boxes, setBoxes] = useState([1])
 
   const [emailGroup, setEmailGroup] = useState([])
   const [email, setEmail] = useState("")
@@ -32,8 +31,7 @@ export default function CloudBox(props) {
         if(data.isLoggedIn) {
 
           setEmail(data.email)
-          setEmailGroup(data.emailsForBoxes[0].emailArray)
-          console.log(data.emailsForBoxes)
+          setEmailGroup(data.emailGroups[0].boxArray)
     
         } else {
           navigate("../", { replace: true });
@@ -42,28 +40,16 @@ export default function CloudBox(props) {
 
     
   }, [])  
-
-  const addBox = () => {
-   setBoxes([...boxes, boxes[boxes.length - 1] + 1]);
-  }
-
-  const removeBox = () => {
-    if (boxes.length > 1) {
-      const temp = new Array(...boxes);
-      temp.pop();
-      setBoxes(temp);
-    }
-  }
    
   return (
     <div>
       <div className='NavBar'>
-        <NavBar email={email} addBox={addBox} removeBox={removeBox}/>
+        <NavBar email={email}   />
       </div>
 
       <div className='Grid'>
             {emailGroup.map((box) => 
-                <Box key={box.toString()} id={box} email={email} />
+                <Box key={box.toString()} id={box} email={box} />
             )}
 
             <Upload email={email}/>
