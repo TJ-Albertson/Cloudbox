@@ -39,8 +39,6 @@ export default function CloudBox(props) {
           navigate("../", { replace: true });
         }
       })
-
-    console.log(modalShow)
   }, [])  
 
   //for share settings
@@ -48,9 +46,8 @@ export default function CloudBox(props) {
    
   return (
     <div>
-      <div className='NavBar'>
-        <NavBar email={email} showModal={showModal}/>
-      </div>
+
+      <NavBar email={email} showModal={showModal}/>
 
       <ShareMenuModal
         show={modalShow}

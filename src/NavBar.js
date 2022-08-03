@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap"
+import { Button, Stack, Dropdown } from "react-bootstrap"
 
-import './CSS/NavBar.css'
-import './free.svg'
+import Logo from './free.svg'
 
+//not really a navbar   
 export default function NavBar(props) {
 
     const navigate = useNavigate()
@@ -15,20 +15,18 @@ export default function NavBar(props) {
     }
 
     return (
-        <div>
-            <ul className='List'>
-                <li className='NavLeft'>
-                    <Button variant="primary" size="lg" disabled>{props.email}</Button>{' '}
-                </li>
+        <Stack className="p-3 border-bottom fixed-top bg-light" direction="horizontal" gap={3}>
+            <img src={Logo} width="50" height="50"></img>
+            <h1>CloudBox</h1>
+            <Dropdown className="ms-auto">
+                <Dropdown.Toggle variant="success" id="dropdown-basic">{props.email}</Dropdown.Toggle>
 
-                <li className='NavRight'>
-                    <Button variant="primary" size="lg" onClick={() => logout()}>Logout</Button>
-                </li>
-
-                <li className='NavRight'>
-                    <Button variant="primary" size="lg" onClick={() => props.showModal(true)}>Share Settings</Button>
-                </li>
-            </ul>
-        </div>
-    )
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick="">Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={() => props.showModal(true)}>Share Settings</Dropdown.Item>
+                    <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>            
+        </Stack>
+    );
 }
