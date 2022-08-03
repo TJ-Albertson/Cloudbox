@@ -24,3 +24,7 @@ export default function App() {
     </div>
   )
 }
+
+
+//need profile settings + profile pics in boxes
+//ability to enalrge box like modal
