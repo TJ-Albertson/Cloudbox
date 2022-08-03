@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap"
 
 import NavBar from "./NavBar"
 import Box from "./Box"
 import Upload from "./Upload"
+import ShareMenuModal from "./ShareMenuModal"
 
 import './CSS/App.css'
 import './CSS/CloudBox.css'
@@ -14,6 +16,11 @@ export default function CloudBox(props) {
 
   const [emailGroup, setEmailGroup] = useState([])
   const [email, setEmail] = useState("")
+
+  const [modalShow, setModalShow] = useState(false);
+
+  const showModal = () => { setModalShow(true) }
+
 
   //data fetch + auto logout
   useEffect(() => {
@@ -32,13 +39,23 @@ export default function CloudBox(props) {
           navigate("../", { replace: true });
         }
       })
+
+    console.log(modalShow)
   }, [])  
+
+  //for share settings
+  
    
   return (
     <div>
       <div className='NavBar'>
-        <NavBar email={email}   />
+        <NavBar email={email} showModal={showModal}/>
       </div>
+
+      <ShareMenuModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
 
       <div className='Grid'>
         {emailGroup.map((box) => 

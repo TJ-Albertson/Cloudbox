@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Navbar, Container } from "react-bootstrap"
+import { Button, Modal } from "react-bootstrap"
 
 import './CSS/NavBar.css'
 import './free.svg'
@@ -16,32 +16,17 @@ export default function NavBar(props) {
 
     return (
         <div>
-            <Navbar bg="light">
-                <Container>
-                    <Navbar.Brand href="#home">
-                        <img
-                            src="/free.svg"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
-                        />
-                    </Navbar.Brand>
-                    <Navbar.Brand href="#home">Brand link</Navbar.Brand>
-                </Container>
-            </Navbar>
-   
             <ul className='List'>
                 <li className='NavLeft'>
-                    <a className='Link'>Email: {props.email}</a>
+                    <Button variant="primary" size="lg" disabled>{props.email}</Button>{' '}
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link' onClick={event => logout()}>Logout</a>
+                    <Button variant="primary" size="lg" onClick={() => logout()}>Logout</Button>
                 </li>
 
                 <li className='NavRight'>
-                    <a className='Link'>Share Settings</a>
+                    <Button variant="primary" size="lg" onClick={() => props.showModal(true)}>Share Settings</Button>
                 </li>
             </ul>
         </div>

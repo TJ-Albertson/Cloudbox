@@ -1,57 +1,24 @@
-.Box2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #353535;
-    font-size: 3rem;
-    color: #fff;
-    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
-    height: 100%;
-    width: 100%;
-    border-radius: 4px;
-    transition: all 500ms;
-    overflow: hidden;
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.Box {    
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+  border-radius: 4px;
 }
-
-.Box {
-    
-    background: #353535;
-
-    border-radius: 4px;
-   
-
-   
-}
-
 
 .files-container {
     width: 100%;
     overflow-x: auto;
-  }
-
+}
 
 .files-table {
-    width: 20%;
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-  
-    
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
 }
 
 tr, td, th {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+  border: 1px solid #ccc;
+  padding: 10px;
+}
 
-  .file-title {
-    width: 20%;
-  }
-
-  .file-description {
-    width: 40%;
-  }
+.file-title {
+  width: 50%;
+} 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap'
 import axios from 'axios';
 import download from 'downloadjs';
 
@@ -58,16 +59,21 @@ export default function Box(props) {
   };
    
   return (
-    <div className="Box" onDrop={drop} onDragOver={allowDrop}>
+    <div className="Box">
+
+    <Card>
+      <Card.Header>{props.id}</Card.Header>
+
+    
+
       {/*<img id={props.id} src={props.image} width="150" height="150" draggable="true" onDragStart={drag} />*/}
         <div className="files-container">
           <div id={props.id} width="150" height="150" draggable="true" onDragStart={drag}>
             <table className="files-table">
               <thead>
                 <tr>
-                  <th>Title</th>
+                  <th>Files</th>
                   <th>Download File</th>
-                  <th>ID: {props.id}</th>
                 </tr>
               </thead>
               <tbody>
@@ -91,6 +97,7 @@ export default function Box(props) {
             </table>
           </div>
         </div>
+        </Card> 
       </div>
   )
 }
