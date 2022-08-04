@@ -7,7 +7,7 @@ export default function Login(props) {
   const [message, setMessage] = useState("")
 
   //auto login 
-  useEffect(() => {
+  useEffect((navigate) => {
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
         "x-access-token": localStorage.getItem("token")
@@ -52,7 +52,7 @@ export default function Login(props) {
           .then(res => res.json())
           .then(data => {
             setMessage(data.message)
-            if(data.message == "Success") {
+            if(data.message === "Success") {
               localStorage.setItem("token", data.token)
               navigate("./cloudbox", { replace: true });
             }
@@ -63,13 +63,13 @@ export default function Login(props) {
           .then(
             (data) => {
               setMessage(data.message)
-              if (data.message == "Success") {
+              if (data.message === "Success") {
                 //login after register
                 fetch(loginURL, fetchMethod)
                 .then(res => res.json())
                 .then(data => {
                   setMessage(data.message)
-                  if(data.message == "Success") {
+                  if(data.message === "Success") {
                     localStorage.setItem("token", data.token)
                     navigate("./cloudbox", { replace: true });
                   }

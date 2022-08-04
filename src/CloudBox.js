@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import { React, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap"
+import axios from 'axios';
 
 import NavBar from "./NavBar"
 import Box from "./Box"
@@ -14,9 +14,8 @@ export default function CloudBox(props) {
 
   const navigate = useNavigate()
 
-  const [emailGroup, setEmailGroup] = useState([])
   const [email, setEmail] = useState("")
-
+  const [emailGroups, setEmailGroups] = useState({ boxArray : [], emailArray: [], shareArray : [] })
   const [modalShow, setModalShow] = useState(false);
 
   const showModal = () => { setModalShow(true) }
@@ -24,6 +23,8 @@ export default function CloudBox(props) {
 
   //data fetch + auto logout
   useEffect(() => {
+
+
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
         "x-access-token": localStorage.getItem("token")
@@ -34,28 +35,27 @@ export default function CloudBox(props) {
       (data) => {
         if(data.isLoggedIn) {
           setEmail(data.email)
-          setEmailGroup(data.emailGroups[0].boxArray)
+          setEmailGroups(data.emailGroups[0])
         } else {
           navigate("../", { replace: true });
         }
-      })
+    })
+
   }, [])  
 
-  //for share settings
-  
-   
   return (
     <div>
-
+      
       <NavBar email={email} showModal={showModal}/>
 
       <ShareMenuModal
         show={modalShow}
+        emailgroups={emailGroups}
         onHide={() => setModalShow(false)}
       />
 
-      <div className='Grid'>
-        {emailGroup.map((box) => 
+      <div className='Grid'>  
+        {emailGroups.boxArray.map((box) => 
           <Box key={box.toString()} id={box} email={box} />
         )}
 

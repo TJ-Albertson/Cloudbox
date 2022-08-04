@@ -1,27 +1,12 @@
-import React, { useEffect } from "react"
-import { Button, Modal, Table, ListGroup } from "react-bootstrap"
+import { React } from "react"
+import { Button, Modal, Table, ListGroup, Form, Col, Row } from "react-bootstrap"
 
 export default function ShareMenuModal(props) {
 
-  //need to add get email group arrays in server
-  //probably move this up and pass as arrays as props.
-  useEffect(() => {
-    fetch("http://localhost:5000/isLoggedIn", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    })
-    .then(res => res.json())
-    .then(
-      (data) => {
-
-      })
-  }, [])
-
-    return (
+  return (
       <Modal
         {...props}
-        size="lg"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -34,31 +19,24 @@ export default function ShareMenuModal(props) {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Share</th>
                 <th>Access</th>
+                <th>Share</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <ListGroup>
-                    <ListGroup.Item>email1</ListGroup.Item>
-                    <ListGroup.Item>email2</ListGroup.Item>
-                    <ListGroup.Item>email3</ListGroup.Item>
-                    <ListGroup.Item>email4</ListGroup.Item>
-                    <ListGroup.Item>email5</ListGroup.Item>
-                    <ListGroup.Item>email1</ListGroup.Item>
-                    <ListGroup.Item>email2</ListGroup.Item>
-                    <ListGroup.Item>email3</ListGroup.Item>
-                    <ListGroup.Item>email4</ListGroup.Item>
-                    <ListGroup.Item>email5</ListGroup.Item>
+                    {props.emailgroups.emailArray.map((email) => 
+                      <ListGroup.Item key={email.toString()}>{email}</ListGroup.Item>
+                    )}
                   </ListGroup>
                 </td>
                 <td>
                   <ListGroup>
-                    <ListGroup.Item>email4</ListGroup.Item>
-                    <ListGroup.Item>email5</ListGroup.Item>
-                    <ListGroup.Item>email3</ListGroup.Item>
+                    {props.emailgroups.shareArray.map((email) => 
+                      <ListGroup.Item key={email.toString()}>{email}</ListGroup.Item>
+                    )}
                   </ListGroup>
                 </td>
               </tr>
@@ -67,7 +45,18 @@ export default function ShareMenuModal(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Form>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <Form.Control type="email" placeholder="Email to share" />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Button type="submit">Submit</Button>
+              </Col>
+            </Row>
+          </Form>
         </Modal.Footer>
       </Modal>
     );
