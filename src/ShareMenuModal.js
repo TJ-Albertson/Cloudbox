@@ -1,7 +1,23 @@
+import axios from "axios"
 import { React } from "react"
 import { Button, Modal, Table, ListGroup, Form, Col, Row } from "react-bootstrap"
 
 export default function ShareMenuModal(props) {
+
+  
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addEmail`;
+
+    const form = e.target
+
+    axios.post(url, { 
+      data: form[0].value,
+      headers: {'content-type' : 'multipart/form-data'}
+    })
+  }
+
 
   return (
       <Modal
@@ -20,7 +36,7 @@ export default function ShareMenuModal(props) {
             <thead>
               <tr>
                 <th>Access</th>
-                <th>Share</th>
+                <th className="d-flex"><div className=" flex-grow-1">Share</div><Button>Delete</Button></th>
               </tr>
             </thead>
             <tbody>
@@ -45,14 +61,14 @@ export default function ShareMenuModal(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Form className="flex-fill">
+          <Form className="flex-fill" onSubmit={event => handleSubmit(event)}>
             <Row>
-              <Col xl="9">
+              <Col className="flex-grow-1">
                 <Form.Group>
-                  <Form.Control type="email" placeholder="Email to share" />
+                  <Form.Control type="email" placeholder="Email to share with" />
                 </Form.Group>
               </Col>
-              <Col xl="1">
+              <Col xs="auto">
                 <Button type="submit">Share</Button>
               </Col>
             </Row>

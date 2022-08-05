@@ -8,6 +8,24 @@ export default function Login(props) {
 
   //auto login 
   useEffect((navigate) => {
+
+    /*
+    const url = "http://localhost:5000/isLoggedIn"
+    const config = {
+      headers: {
+        "x-access-token": localStorage.getItem("token")
+      }
+    }
+
+    const { data } = axios.get(url, config)
+    .then(
+      (res.data) =>
+        if(res.data.isLoggedIn) {
+          navigate("./cloudbox", { replace: true })
+        }
+    )
+    */
+
     fetch("http://localhost:5000/isLoggedIn", {
       headers: {
         "x-access-token": localStorage.getItem("token")
