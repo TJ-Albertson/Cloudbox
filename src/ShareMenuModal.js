@@ -45,15 +45,15 @@ export default function ShareMenuModal(props) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Form>
+          <Form className="flex-fill">
             <Row>
-              <Col>
+              <Col xl="9">
                 <Form.Group>
                   <Form.Control type="email" placeholder="Email to share" />
                 </Form.Group>
               </Col>
-              <Col>
-                <Button type="submit">Submit</Button>
+              <Col xl="1">
+                <Button type="submit">Share</Button>
               </Col>
             </Row>
           </Form>
