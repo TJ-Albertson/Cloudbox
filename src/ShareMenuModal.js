@@ -1,10 +1,11 @@
 import axios from "axios"
-import { React } from "react"
-import { Button, Modal, Table, ListGroup, Form, Col, Row } from "react-bootstrap"
+import { React, useState, useRef } from "react"
+import { Button, Modal, Table, ListGroup, Form, Col, Row, Overlay, Alert } from "react-bootstrap"
 
 export default function ShareMenuModal(props) {
 
-  
+  const [emailTaken, setEmailTaken] = useState(false);
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -16,8 +17,12 @@ export default function ShareMenuModal(props) {
       data: form[0].value,
       headers: {'content-type' : 'multipart/form-data'}
     })
+    .then(res => {
+      if(!res.data.emailExist) {
+        setEmailTaken(true)
+      }
+    })
   }
-
 
   return (
       <Modal
@@ -72,6 +77,11 @@ export default function ShareMenuModal(props) {
                 <Button type="submit">Share</Button>
               </Col>
             </Row>
+            {!emailTaken ? null :
+            <Row className="ps-3 pt-3 pe-3">
+              <Alert variant="warning">User does not exist</Alert>
+            </Row>}
+            
           </Form>
         </Modal.Footer>
       </Modal>
