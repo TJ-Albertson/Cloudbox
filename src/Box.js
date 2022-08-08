@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap'
+import { Card, CloseButton } from 'react-bootstrap'
 import axios from 'axios';
 import download from 'downloadjs';
 
@@ -29,7 +29,13 @@ export default function Box(props) {
     <div className="Box">
 
     <Card>
-      <Card.Header>{props.id}</Card.Header>
+      <Card.Header className="d-flex">
+        <div className="flex-grow-1">
+          {props.id}
+        </div>
+        <CloseButton />
+      
+      </Card.Header>
 
     
 

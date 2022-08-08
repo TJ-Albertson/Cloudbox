@@ -20,15 +20,36 @@ export default function CloudBox(props) {
 
   const showModal = () => { setModalShow(true) }
 
+  async function removeFromBox(removeEmailBox) {
+    const url = `http://localhost:5000/removeFromBox/${email}:removeEmailBox`
+
+    axios.post(url, { 
+      data: removeEmailBox
+    })
+  } 
 
   //data fetch + auto logout
   useEffect(() => {
 
+    const url = "http://localhost:5000/isLoggedIn"
+  /*
+    axios.post(url, { 
+      headers: {'x-acess-token' : localStorage.getItem("token")}
+    })
+    .then(
+      (res) => {
+        if(res.data.isLoggedIn) {
+          setEmail(res.data.email)
+          setEmailGroups(res.data.emailGroups[0])
+        } else {
+          navigate("../", { replace: true });
+        }
+      }
+    )
+*/
 
     fetch("http://localhost:5000/isLoggedIn", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
+      headers: { "x-access-token": localStorage.getItem("token")}
     })
     .then(res => res.json())
     .then(
