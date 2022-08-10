@@ -2,8 +2,6 @@ import { React } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Stack, Dropdown } from "react-bootstrap"
 
-import Logo from './free.svg'
-
 //not really a navbar   
 export default function NavBar(props) {
 
@@ -16,7 +14,7 @@ export default function NavBar(props) {
 
     return (
         <Stack className="p-3 border-bottom fixed-top bg-light" direction="horizontal" gap={3}>
-            <img src={Logo} width="50" height="50" alt="placeholder logo"></img>
+            <h1><i class="bi bi-box-seam-fill"></i></h1>
             <h1>CloudBox</h1>
             <Dropdown className="ms-auto">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">{props.email}</Dropdown.Toggle>

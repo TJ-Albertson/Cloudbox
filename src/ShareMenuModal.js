@@ -1,6 +1,6 @@
 import axios from "axios"
-import { React, useState, useRef } from "react"
-import { Button, Modal, Table, ListGroup, Form, Col, Row, Overlay, Alert, Stack, InputGroup, Container } from "react-bootstrap"
+import { React, useState } from "react"
+import { Button, Modal, Form, Alert, Stack, InputGroup } from "react-bootstrap"
 
 export default function ShareMenuModal(props) {
 
@@ -24,6 +24,11 @@ export default function ShareMenuModal(props) {
     })
   }
 
+  async function handleSubmit2(e) {
+    e.preventDefault()
+
+  }
+
   return (
       <Modal
         {...props}
@@ -38,32 +43,25 @@ export default function ShareMenuModal(props) {
         </Modal.Header>
 
         <Modal.Body>
-        <Container fluid>
-          <Row>
-            <Col className="border">
-              <Stack>
-              <div>Access</div>
-              {props.emailgroups.emailArray.map((email) => 
-                <InputGroup className="mb-3" key={email}>
-                  <Form.Control type="text" placeholder={email} readOnly />
-                  <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-                </InputGroup>
-              )}
+          <Form onSubmit={event => handleSubmit2(event)}>
+            <Stack className="border p-3" gap={3} >
+              <Stack direction="horizontal">
+                <div className="me-auto fs-5">Email</div>
+                <Button type="submit">
+                  <i className="bi bi-trash3"></i>
+                </Button>
               </Stack>
-            </Col>
-            <Col className="border">
-              <Stack>
-              <div>Share</div>
+
+              <hr className="m-0"/>
+              
               {props.emailgroups.shareArray.map((email) => 
-                <InputGroup className="mb-3" key={email}>
+                <InputGroup key={email}>
                   <Form.Control type="text" placeholder={email} readOnly />
                   <InputGroup.Checkbox aria-label="Checkbox for following text input" />
                 </InputGroup>
               )}
-              </Stack>
-            </Col>
-          </Row>
-        </Container>
+            </Stack>
+          </Form>
         </Modal.Body>
 
         <Modal.Footer>
