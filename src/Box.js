@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Card, CloseButton } from 'react-bootstrap'
+import { Card, CloseButton, Table } from 'react-bootstrap'
 import axios from 'axios';
 import download from 'downloadjs';
 
@@ -26,51 +26,44 @@ export default function Box(props) {
   };
    
   return (
-    <div className="Box">
-
-    <Card>
+    <Card className="Box">
       <Card.Header className="d-flex">
         <div className="flex-grow-1">
           {props.id}
         </div>
         <CloseButton />
-      
       </Card.Header>
-
-    
-
-      {/*<img id={props.id} src={props.image} width="150" height="150" draggable="true" onDragStart={drag} />*/}
-        <div className="files-container">
-          <div id={props.id} width="150" height="150" draggable="true">
-            <table className="files-table">
-              <thead>
-                <tr>
-                  <th>Files</th>
-                  <th>Download File</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filesList.length > 0 ? (
-                  filesList.map(({ _id, fileName, filePath, fileMimetype }) => (
-                    <tr key={_id}>
-                      <td className="file-title">{fileName}</td>
-                      <td>
-                        <a href="#/" onClick={() => downloadFile(_id, filePath, fileMimetype)}>Download</a>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={3} style={{ fontWeight: '300' }}>
-                      No files found. Please add some.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        </Card> 
-      </div>
+  
+      <Table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filesList.length > 0 ? (
+            filesList.map(({ _id, name, path, mimeType, size, updatedAt }) => (
+              <tr key={_id}>
+                <td>{name}</td>
+                <td>{updatedAt.substring(0,10)}</td>
+                <td>{mimeType}</td>
+                <td>{size} bytes</td>
+                <td><a href="#/" onClick={() => downloadFile(_id, path, mimeType)}>Download</a></td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5} style={{ fontWeight: '300' }}>
+                This user has no files uploaded
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
+    </Card>
   )
 }

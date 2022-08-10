@@ -1,6 +1,6 @@
 import axios from "axios"
 import { React, useState, useRef } from "react"
-import { Button, Modal, Table, ListGroup, Form, Col, Row, Overlay, Alert } from "react-bootstrap"
+import { Button, Modal, Table, ListGroup, Form, Col, Row, Overlay, Alert, Stack, InputGroup, Container } from "react-bootstrap"
 
 export default function ShareMenuModal(props) {
 
@@ -36,52 +36,45 @@ export default function ShareMenuModal(props) {
             Share Settings
           </Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Access</th>
-                <th className="d-flex"><div className=" flex-grow-1">Share</div><Button>Delete</Button></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <ListGroup>
-                    {props.emailgroups.emailArray.map((email) => 
-                      <ListGroup.Item key={email.toString()}>{email}</ListGroup.Item>
-                    )}
-                  </ListGroup>
-                </td>
-                <td>
-                  <ListGroup>
-                    {props.emailgroups.shareArray.map((email) => 
-                      <ListGroup.Item key={email.toString()}>{email}</ListGroup.Item>
-                    )}
-                  </ListGroup>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+        <Container fluid>
+          <Row>
+            <Col className="border">
+              <Stack>
+              <div>Access</div>
+              {props.emailgroups.emailArray.map((email) => 
+                <InputGroup className="mb-3" key={email}>
+                  <Form.Control type="text" placeholder={email} readOnly />
+                  <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                </InputGroup>
+              )}
+              </Stack>
+            </Col>
+            <Col className="border">
+              <Stack>
+              <div>Share</div>
+              {props.emailgroups.shareArray.map((email) => 
+                <InputGroup className="mb-3" key={email}>
+                  <Form.Control type="text" placeholder={email} readOnly />
+                  <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                </InputGroup>
+              )}
+              </Stack>
+            </Col>
+          </Row>
+        </Container>
         </Modal.Body>
 
         <Modal.Footer>
           <Form className="flex-fill" onSubmit={event => handleSubmit(event)}>
-            <Row>
-              <Col className="flex-grow-1">
-                <Form.Group>
-                  <Form.Control type="email" placeholder="Email to share with" />
-                </Form.Group>
-              </Col>
-              <Col xs="auto">
-                <Button type="submit">Share</Button>
-              </Col>
-            </Row>
+            <Stack direction="horizontal" gap={3}>
+              <Form.Control className="me-auto" type="email" placeholder="Email to share with" />
+              <Button variant="primary" type="submit">Submit</Button>
+            </Stack>
             {!emailTaken ? null :
-            <Row className="ps-3 pt-3 pe-3">
-              <Alert variant="warning">User does not exist</Alert>
-            </Row>}
-            
+              <Alert variant="warning" className="mt-3 mb-0">User does not exist</Alert>
+            }
           </Form>
         </Modal.Footer>
       </Modal>

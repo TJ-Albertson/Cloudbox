@@ -16,13 +16,12 @@ export default function Upload(props) {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('ownerEmail', props.email)
-    formData.append('fileName', file.name);
+    formData.append('owner', props.email)
+    formData.append('name', file.name);
+    formData.append('size', file.size); //bytes
 
     const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
+      headers: { 'content-type': 'multipart/form-data' } 
     };
     
     axios.post(url, formData, config)
