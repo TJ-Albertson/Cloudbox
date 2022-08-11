@@ -24,7 +24,7 @@ export default function NavBar(props) {
                     <Dropdown.Item onClick={() => props.showModal(true)}>Share Settings</Dropdown.Item>
                     <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
-            </Dropdown>            
+            </Dropdown>
         </Stack>
     );
 }

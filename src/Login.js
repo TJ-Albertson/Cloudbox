@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
@@ -6,8 +6,9 @@ export default function Login(props) {
   const navigate = useNavigate()
   const [message, setMessage] = useState("")
 
-  //auto login 
-  useEffect((navigate) => {
+  //const navigation = useRef(useNavigate());
+
+  useEffect(() => {
 
     /*
     const url = "http://localhost:5000/isLoggedIn"
@@ -27,15 +28,14 @@ export default function Login(props) {
     */
 
     fetch("http://localhost:5000/isLoggedIn", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
+      headers: { "x-access-token": localStorage.getItem("token") }
     })
     .then(res => res.json())
     .then(
       (data) => {
         if(data.isLoggedIn) {
           navigate("./cloudbox", { replace: true });
+          //navigation.current.navigate("./cloudbox", { replace: true });
         }
       })
   }, [])    

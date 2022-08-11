@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap"
 import axios from 'axios';
 
 import NavBar from "./NavBar"
 import Box from "./Box"
 import Upload from "./Upload"
 import ShareMenuModal from "./ShareMenuModal"
+import AddBoxModal from "./AddBoxModal"
 
-import './CSS/App.css'
 import './CSS/CloudBox.css'
 
 export default function CloudBox(props) {
@@ -17,8 +18,10 @@ export default function CloudBox(props) {
   const [email, setEmail] = useState("")
   const [emailGroups, setEmailGroups] = useState({ boxArray : [], emailArray: [], shareArray : [] })
   const [modalShow, setModalShow] = useState(false);
+  const [boxModalShow, setBoxModalShow] = useState(false);
 
   const showModal = () => { setModalShow(true) }
+  const showBoxModal = () => { setBoxModalShow(true) }
 
   async function removeFromBox(removeEmailBox) {
     const url = `http://localhost:5000/removeFromBox/${email}:removeEmailBox`
@@ -30,23 +33,6 @@ export default function CloudBox(props) {
 
   //data fetch + auto logout
   useEffect(() => {
-
-    const url = "http://localhost:5000/isLoggedIn"
-  /*
-    axios.post(url, { 
-      headers: {'x-acess-token' : localStorage.getItem("token")}
-    })
-    .then(
-      (res) => {
-        if(res.data.isLoggedIn) {
-          setEmail(res.data.email)
-          setEmailGroups(res.data.emailGroups[0])
-        } else {
-          navigate("../", { replace: true });
-        }
-      }
-    )
-*/
 
     fetch("http://localhost:5000/isLoggedIn", {
       headers: { "x-access-token": localStorage.getItem("token")}
@@ -60,8 +46,7 @@ export default function CloudBox(props) {
         } else {
           navigate("../", { replace: true });
         }
-    })
-
+    })  
   }, [])  
 
   return (
@@ -75,6 +60,12 @@ export default function CloudBox(props) {
         onHide={() => setModalShow(false)}
       />
 
+      <AddBoxModal
+        show={boxModalShow}
+        emailgroups={emailGroups}
+        onHide={() => setBoxModalShow(false)}
+      />
+
       <div className='Grid'>  
         {emailGroups.boxArray.map((box) => 
           <Box key={box.toString()} id={box} email={box} />
@@ -82,6 +73,12 @@ export default function CloudBox(props) {
 
         <Upload email={email}/>
       </div>
+
+      <Button onClick={showBoxModal} className="position-fixed bottom-0 end-0 m-5">
+        <h1>
+          <i className="bi bi-plus-circle-fill"></i>
+        </h1>
+      </Button>
     </div>
   )
 }
