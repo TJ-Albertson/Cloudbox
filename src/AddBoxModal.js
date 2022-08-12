@@ -5,7 +5,11 @@ export default function AddBoxModal(props) {
 
     const [emailTaken, setEmailTaken] = useState(false);
 
-    async function handleSubmit(e) {
+    async function requestAccess(e) {
+
+    }
+
+    async function addBoxes(e) {
 
     }
 
@@ -18,18 +22,18 @@ export default function AddBoxModal(props) {
         >
             <Modal.Header closeButton className="pb-1">
                 <Modal.Title id="contained-modal-title-vcenter">
-                    <h4>Add Box</h4>
+                    <h4><i className="bi bi-box-fill"></i> Add Box</h4>
                     <h6 className="text-muted fs-10">These users have granted you access to their files</h6>
                 </Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-                <Form onSubmit={event => handleSubmit(event)}>
-                    <Stack className="border p-3" gap={3} >
+                <Form onSubmit={event => addBoxes(event)}>
+                    <Stack gap={3} >
                         {props.emailgroups.boxArray.map((email) =>
                             <InputGroup key={email}>
                                 <Form.Control type="text" placeholder={email} readOnly />
-                                <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                                <InputGroup.Checkbox aria-label="Checkbox for following text input"/>
                             </InputGroup>
                         )}
 
@@ -47,7 +51,7 @@ export default function AddBoxModal(props) {
             </Modal.Body>
 
             <Modal.Footer>
-                <Form className="flex-fill" onSubmit={event => handleSubmit(event)}>
+                <Form className="flex-fill" onSubmit={event => requestAccess(event)}>
                     <Stack direction="horizontal" gap={3}>
                         <Form.Control className="me-auto" type="email" placeholder="Request access" />
                         <Button variant="primary" type="submit">

@@ -6,7 +6,7 @@ export default function ShareMenuModal(props) {
 
   const [emailTaken, setEmailTaken] = useState(false);
 
-  async function handleSubmit(e) {
+  async function addEmail(e) {
     e.preventDefault()
 
     const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addEmail`;
@@ -24,7 +24,7 @@ export default function ShareMenuModal(props) {
       })
   }
 
-  async function handleSubmit2(e) {
+  async function removeEmail(e) {
     e.preventDefault()
 
   }
@@ -38,13 +38,14 @@ export default function ShareMenuModal(props) {
     >
       <Modal.Header closeButton className="pb-1">
         <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Share Settings</h4>
+          
+          <h4><i className="bi bi-people-fill"></i> Share Settings</h4>
           <h6 className="text-muted fs-10">These users have access to your files</h6>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <Form onSubmit={event => handleSubmit2(event)}>
+        <Form onSubmit={event => removeEmail(event)}>
           <Stack className="bord" gap={3} >
             {props.emailgroups.shareArray.map((email) =>
               <InputGroup key={email}>
@@ -67,10 +68,10 @@ export default function ShareMenuModal(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Form className="flex-fill" onSubmit={event => handleSubmit(event)}>
+        <Form className="flex-fill" onSubmit={event => addEmail(event)}>
           <Stack direction="horizontal" gap={3}>
             <Form.Control className="me-auto" type="email" placeholder="Email to share with" />
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button variant="primary" type="submit"><i className="bi bi-send-plus"></i></Button>
           </Stack>
           {!emailTaken ? null :
             <Alert variant="warning" className="mt-3 mb-0">User does not exist</Alert>
