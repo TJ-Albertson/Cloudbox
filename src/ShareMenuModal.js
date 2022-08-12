@@ -10,7 +10,6 @@ export default function ShareMenuModal(props) {
     e.preventDefault()
 
     const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addEmail`;
-
     const form = e.target
 
     axios.post(url, {
@@ -26,6 +25,21 @@ export default function ShareMenuModal(props) {
 
   async function removeEmail(e) {
     e.preventDefault()
+    const form = e.target
+
+
+    console.log(form)
+
+    const emails = []
+    //json object
+    //object
+
+    /*
+    for (const property in form) {
+      console.log(`${property}: ${form[property]}`);
+    }
+    */
+    
 
   }
 
