@@ -1,6 +1,6 @@
 import { React, useState } from "react"
 import { Button, Modal, Form, Alert, Stack, InputGroup } from "react-bootstrap"
-import { axios } from "axios"
+import axios from "axios"
 
 export default function ShareMenuModal(props) {
 
@@ -9,7 +9,7 @@ export default function ShareMenuModal(props) {
   async function addEmail(e) {
     e.preventDefault()
 
-    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addEmail`;
+    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addShareEmail`;
     const form = e.target
 
     axios.post(url, {
@@ -26,20 +26,21 @@ export default function ShareMenuModal(props) {
   async function removeEmail(e) {
     e.preventDefault()
     const form = e.target
-
-
-    console.log(form)
-
+    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/removeShareEmails`;
     const emails = []
-    //json object
-    //object
-
-    /*
-    for (const property in form) {
-      console.log(`${property}: ${form[property]}`);
+   
+    for(var i = 0; i < props.emailgroups.shareArray.length; i++) {
+      if (form[i].checked) {
+        emails.push(form[i].id)
+      }
     }
-    */
-    
+
+    console.log(emails)
+ 
+    const request = await axios.post(url, {
+      data: emails
+    })
+    .then(req => console.log(req))
 
   }
 
@@ -52,7 +53,6 @@ export default function ShareMenuModal(props) {
     >
       <Modal.Header closeButton className="pb-1">
         <Modal.Title id="contained-modal-title-vcenter">
-          
           <h4><i className="bi bi-people-fill"></i> Share Settings</h4>
           <h6 className="text-muted fs-10">These users have access to your files</h6>
         </Modal.Title>
@@ -62,21 +62,21 @@ export default function ShareMenuModal(props) {
         <Form onSubmit={event => removeEmail(event)}>
           <Stack className="bord" gap={3} >
             {props.emailgroups.shareArray.map((email) =>
-              <InputGroup key={email}>
-                <Form.Control type="text" placeholder={email} readOnly />
-                <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-              </InputGroup>
+              <Form.Check key={email} type="checkbox" label={email} id={email}/>
             )}
-
-            <hr className="m-0" />
-
-            <Stack direction="horizontal">
-              <div className="ms-auto fs-5 pe-2">Delete</div>
-              <div className="vr"></div>
-              <Button type="submit" className="ms-2">
-                <i className="bi bi-trash3"></i>
-              </Button>
-            </Stack>
+            
+            {(props.emailgroups.shareArray.length > 0)
+              ?  <div>
+                    <hr className="" />
+                    <Stack direction="horizontal">
+                      <Button type="submit" className="me-2">
+                      <i className="bi bi-trash3"></i>
+                      </Button>
+                      <div className="me-auto fs-5">Delete</div>             
+                    </Stack>
+                  </div>
+              : <h6 className="text-muted fs-10">No users</h6>
+            }            
           </Stack>
         </Form>
       </Modal.Body>

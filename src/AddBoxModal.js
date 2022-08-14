@@ -1,16 +1,33 @@
 import { React, useState } from "react"
 import { Button, Modal, Form, Alert, Stack, InputGroup } from "react-bootstrap"
+import axios from "axios"
 
 export default function AddBoxModal(props) {
 
     const [emailTaken, setEmailTaken] = useState(false);
 
     async function requestAccess(e) {
-
+        //will require notification/email function
     }
 
     async function addBoxes(e) {
-
+        e.preventDefault()
+        const form = e.target
+        const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addBoxes`;
+        const emails = []
+       
+        for(var i = 0; i < props.emailgroups.emailArray.length; i++) {
+          if (form[i].checked) {
+            emails.push(form[i].id)
+          }
+        }
+    
+        console.log(emails)
+     
+        const request = await axios.post(url, {
+            data: emails
+        })
+        .then(req => console.log(req))
     }
 
     return (
@@ -30,22 +47,22 @@ export default function AddBoxModal(props) {
             <Modal.Body>
                 <Form onSubmit={event => addBoxes(event)}>
                     <Stack gap={3} >
-                        {props.emailgroups.boxArray.map((email) =>
-                            <InputGroup key={email}>
-                                <Form.Control type="text" placeholder={email} readOnly />
-                                <InputGroup.Checkbox aria-label="Checkbox for following text input"/>
-                            </InputGroup>
+                        {props.emailgroups.emailArray.map((email) =>
+                            <Form.Check key={email} type="checkbox" label={email} id={email}/>
                         )}
-
-                        <hr className="m-0" />
-
-                        <Stack direction="horizontal">
-                            <div className="ms-auto fs-5 pe-2">Add</div>
-                            <div className="vr"></div>
-                            <Button type="submit" className="ms-2">
-                                <i className="bi bi-plus-square"></i>
-                            </Button>
-                        </Stack>
+                        
+                        {(props.emailgroups.emailArray.length > 0)
+                            ?   <div>
+                                    <hr className="" />
+                                    <Stack direction="horizontal">
+                                        <Button type="submit" className="me-2">
+                                        <i className="bi bi-plus-square"></i>
+                                        </Button>
+                                        <div className="me-auto fs-5">Add</div>
+                                    </Stack>
+                                </div>
+                            : <h6 className="text-muted fs-10">No users</h6>
+                        }
                     </Stack>
                 </Form>
             </Modal.Body>
