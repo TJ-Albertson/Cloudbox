@@ -28,19 +28,21 @@ export default function ShareMenuModal(props) {
     const form = e.target
     const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/removeShareEmails`;
     const emails = []
-   
-    for(var i = 0; i < props.emailgroups.shareArray.length; i++) {
+
+    for (var i = 0; i < props.emailgroups.shareArray.length; i++) {
       if (form[i].checked) {
         emails.push(form[i].id)
       }
     }
 
     console.log(emails)
- 
+
     await axios.post(url, {
       data: emails
     })
-    .then(req => console.log(req))
+      .then(req => console.log(req))
+
+      //then update state with new email groups
 
   }
 
@@ -62,21 +64,21 @@ export default function ShareMenuModal(props) {
         <Form onSubmit={event => removeEmail(event)}>
           <Stack className="bord" gap={3} >
             {props.emailgroups.shareArray.map((email) =>
-              <Form.Check key={email} type="checkbox" label={email} id={email}/>
+              <Form.Check key={email} type="checkbox" label={email} id={email} />
             )}
-            
+
             {(props.emailgroups.shareArray.length > 0)
-              ?  <div>
-                    <hr className="" />
-                    <Stack direction="horizontal">
-                      <Button type="submit" className="me-2">
-                      <i className="bi bi-trash3"></i>
-                      </Button>
-                      <div className="me-auto fs-5">Delete</div>             
-                    </Stack>
-                  </div>
+              ? <div>
+                <hr className="" />
+                <Stack direction="horizontal">
+                  <Button type="submit" className="me-2">
+                    <i className="bi bi-trash3"></i>
+                  </Button>
+                  <div className="me-auto fs-5">Delete</div>
+                </Stack>
+              </div>
               : <h6 className="text-muted fs-10">No users</h6>
-            }            
+            }
           </Stack>
         </Form>
       </Modal.Body>

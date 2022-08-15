@@ -2,13 +2,15 @@ import { React, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap"
 
+import { useGetLogin } from "../hooks/useGetLogin";
+
 import NavBar from "./NavBar"
 import Box from "./Box"
 import Upload from "./Upload"
 import ShareMenuModal from "./ShareMenuModal"
 import AddBoxModal from "./AddBoxModal"
 
-import './CSS/CloudBox.css'
+import '../CSS/CloudBox.css'
 
 export default function CloudBox(props) {
 
@@ -21,6 +23,8 @@ export default function CloudBox(props) {
 
   const showModal = () => { setModalShow(true) }
   const showBoxModal = () => { setBoxModalShow(true) }
+
+  //const { email, emailGroups } = useGetLogin()
 
   useEffect(() => {
 

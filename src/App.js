@@ -1,8 +1,8 @@
 import { React, useState } from "react"
 import { Route, Routes } from "react-router-dom";
 
-import Login from "./Login"
-import CloudBox from "./CloudBox"
+import Login from "./components/Login"
+import CloudBox from "./components/CloudBox"
 
 import './CSS/App.css'
 

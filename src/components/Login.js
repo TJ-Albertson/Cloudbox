@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
@@ -18,7 +18,7 @@ export default function Login(props) {
       }
     }
 
-    const { data } = axios.get(url, config)
+    axios.get(url, config)
     .then(
       (res.data) =>
         if(res.data.isLoggedIn) {
@@ -38,6 +38,7 @@ export default function Login(props) {
           //navigation.current.navigate("./cloudbox", { replace: true });
         }
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])    
     
   
