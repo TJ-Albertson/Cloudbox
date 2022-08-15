@@ -14,6 +14,7 @@ export default function Box(props) {
       const { data } = await axios.get(`http://localhost:5000/getFiles/${props.email}`);
       setFilesList(data);
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const downloadFile = async (id, path, mimetype) => {
@@ -23,7 +24,16 @@ export default function Box(props) {
     const split = path.split('/');
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
-  };
+  }
+
+  async function removeBox() {
+    const url = `http://localhost:5000/${props.userEmail}/removeBox`;
+
+    axios.post(url, {
+        data: props.id
+    })
+    .then(req => console.log(req))
+}
    
   return (
     <Card className="Box">
@@ -31,7 +41,7 @@ export default function Box(props) {
         <div className="flex-grow-1">
           {props.id}
         </div>
-        <CloseButton />
+        <CloseButton onClick={()=> removeBox()}/>
       </Card.Header>
   
       <Table>

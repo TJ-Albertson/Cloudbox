@@ -14,7 +14,7 @@ export default function NavBar(props) {
 
     return (
         <Stack className="p-3 border-bottom fixed-top bg-light" direction="horizontal" gap={3}>
-            <h1><i class="bi bi-box-seam-fill"></i></h1>
+            <h1><i className="bi bi-box-seam-fill"></i></h1>
             <h1>CloudBox</h1>
             <Dropdown className="ms-auto">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">{props.email}</Dropdown.Toggle>

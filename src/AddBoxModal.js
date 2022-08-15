@@ -1,5 +1,5 @@
 import { React, useState } from "react"
-import { Button, Modal, Form, Alert, Stack, InputGroup } from "react-bootstrap"
+import { Button, Modal, Form, Alert, Stack } from "react-bootstrap"
 import axios from "axios"
 
 export default function AddBoxModal(props) {
@@ -24,7 +24,7 @@ export default function AddBoxModal(props) {
     
         console.log(emails)
      
-        const request = await axios.post(url, {
+        axios.post(url, {
             data: emails
         })
         .then(req => console.log(req))
