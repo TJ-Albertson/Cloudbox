@@ -3,10 +3,14 @@ import { Card, CloseButton, Table } from "react-bootstrap";
 import axios from "axios";
 import download from "downloadjs";
 
+import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
+
 import "../CSS/Box.css";
 
 export default function Box(props) {
   const [filesList, setFilesList] = useState([]);
+
+  const emailGroups = useGetEmailGroups()
 
   useEffect(() => {
     (async () => {
@@ -44,7 +48,7 @@ export default function Box(props) {
     <Card className="Box">
       <Card.Header className="d-flex">
         <div className="flex-grow-1">{props.id}</div>
-        <CloseButton onClick={() => removeBox()} />
+        <CloseButton onClick={() => removeBox() && props.setemailgroups(emailGroups)} />
       </Card.Header>
 
       <Table>

@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getLogin } from "../api/getLogin";
 
 export const useGetLogin = () => {
-
-  const [email, setEmail] = useState("")
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    getLogin()
-    .then(setEmail)
-  }, [])
+    getLogin().then(setEmail);
+  }, []);
 
-  return { email, loggedIn}
+  return email;
 };
