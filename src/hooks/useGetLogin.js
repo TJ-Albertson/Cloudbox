@@ -8,5 +8,5 @@ export const useGetLogin = () => {
     getLogin().then(setEmail);
   }, []);
 
-  return email;
+  return { email, setEmail };
 };

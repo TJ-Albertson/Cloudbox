@@ -17,8 +17,10 @@ export default function CloudBox(props) {
 
   const navigate = useNavigate()
 
-  const email = useGetLogin()
+  const { email, setEmail } = useGetLogin()
   const emailGroups = useGetEmailGroups()
+
+  
 
   //onclick in modal => post group update => get group update to stat
 
@@ -59,7 +61,7 @@ export default function CloudBox(props) {
             
           />
         )}
-
+        <Button onClick={() => setEmail("emasdf")}></Button>
         <Upload email={email}/>
       </div>
 
