@@ -2,52 +2,75 @@ import { React, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap"
 
-import { useGetLogin } from "../hooks/useGetLogin";
+import { useGetEmail } from "../hooks/useGetEmail";
 import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
+import { useGetLogin } from "../hooks/useGetLogin";
 
 import NavBar from "./NavBar"
 import Box from "./Box"
 import Upload from "./Upload"
-import ShareMenuModal from "./ShareMenuModal"
-import AddBoxModal from "./AddBoxModal"
+import CheckListModal from "./CheckListModal"
 
 import '../CSS/CloudBox.css'
 
 export default function CloudBox(props) {
 
-  const navigate = useNavigate()
 
-  const { email, setEmail } = useGetLogin()
+  const { loggedIn } = useGetLogin(false)
+
+
+  const { email, setEmail } = useGetEmail()
   const { emailGroups, setEmailGroups } = useGetEmailGroups()
 
-  //onclick in modal => post group update => get group update to state
-
-  //const [emailGroups, setEmailGroups] = useState({ boxArray : [], emailArray: [], shareArray : [] })
-  const [modalShow, setModalShow] = useState(false);
+  const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
 
-  const showModal = () => { setModalShow(true) }
+  const showShareModal = () => { setShareModalShow(true) }
   const showBoxModal = () => { setBoxModalShow(true) }
-
-  //pass to box, shareModal, boxModal
 
   return (
     <div>
       
-      <NavBar email={email} showModal={showModal}/>
+      <NavBar email={email} showModal={showShareModal}/>
 
-      <ShareMenuModal
-        show={modalShow}
-        emailgroups={emailGroups}
-        onHide={() => setModalShow(false)}
+      <CheckListModal
+        show={boxModalShow}
+        onHide={() => setBoxModalShow(false)}
+        
+        headerimage="bi bi-box-fill"
+        headertext="Add Box"
+        headersubtext="These users have granted you access to their files"
+
+        email={email}
+        emailgroup={emailGroups.emailArray}
         setemailgroups={setEmailGroups}
+
+        buttonimage="bi bi-plus-square"
+        buttontext="Add"
+
+        formtext="Request access"
+        formimage="bi bi-envelope-plus"
+        formfunction="box"
       />
 
-      <AddBoxModal
-        show={boxModalShow}
-        emailgroups={emailGroups}
-        onHide={() => setBoxModalShow(false)}
-        setemailgroups={setEmailGroups} 
+      <CheckListModal
+        show={shareModalShow}
+        onHide={() => setShareModalShow(false)}
+        
+        headerimage="bi bi-people-fill"
+        headertext="Share Setting"
+        headersubtext="These users have access to your files"
+
+        email={email}
+        emailgroup={emailGroups.emailArray}
+        setemailgroups={setEmailGroups}
+
+        buttonimage="bi bi-trash3"
+        buttontext="Delete"
+
+        formtext="Email to share with"
+        formimage="bi bi-send-plus"
+        formfunction="share"
       />
 
       <div className='Grid'>  

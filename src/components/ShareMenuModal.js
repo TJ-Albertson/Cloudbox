@@ -41,9 +41,8 @@ export default function ShareMenuModal(props) {
       data: emails
     })
       .then(req => console.log(req))
-
+      .then(req => props.setemailgroups(req.data[0]));
       //then update state with new email groups
-
   }
 
   return (

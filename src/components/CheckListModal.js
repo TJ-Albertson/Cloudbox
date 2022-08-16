@@ -2,9 +2,49 @@ import { React, useState } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import axios from "axios";
 
-export default function AddBoxModal(props) {
+export default function CheckListModal(props) {
   // eslint-disable-next-line
   const [emailTaken, setEmailTaken] = useState(false);
+
+
+  async function addEmail(e) {
+    e.preventDefault()
+
+    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addShareEmail`;
+    const form = e.target
+
+    axios.post(url, {
+      data: form[0].value,
+      headers: { 'content-type': 'multipart/form-data' }
+    })
+      .then(res => {
+        if (!res.data.emailExist) {
+          setEmailTaken(true)
+        }
+      })
+  }
+
+  async function removeEmail(e) {
+    e.preventDefault()
+    const form = e.target
+    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/removeShareEmails`;
+    const emails = []
+
+    for (var i = 0; i < props.emailgroups.shareArray.length; i++) {
+      if (form[i].checked) {
+        emails.push(form[i].id)
+      }
+    }
+
+    console.log(emails)
+
+    await axios.post(url, {
+      data: emails
+    })
+      .then(req => console.log(req))
+      .then(req => props.setemailgroups(req.data[0]));
+      //then update state with new email groups
+  }
 
   async function requestAccess(e) {
     //will require notification/email function
@@ -13,19 +53,17 @@ export default function AddBoxModal(props) {
   async function addBoxes(e) {
     e.preventDefault();
     const form = e.target;
-    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addBoxes`;
+    const url = `http://localhost:5000/${props.email}/addBoxes`;
     const emails = [];
 
-    for (var i = 0; i < props.emailgroups.emailArray.length; i++) {
+    for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
         emails.push(form[i].id);
       }
     }
 
     axios
-      .post(url, {
-        data: emails,
-      })
+      .post(url, { data: emails })
       .then(req => props.setemailgroups(req.data[0]));
   }
 
@@ -40,18 +78,22 @@ export default function AddBoxModal(props) {
       <Modal.Header closeButton className="pb-1">
         <Modal.Title id="contained-modal-title-vcenter">
           <h4>
-            <i className="bi bi-box-fill"></i> Add Box
+            <i className={props.headerimage}></i> {props.headertext}
           </h4>
           <h6 className="text-muted fs-10">
-            These users have granted you access to their files
+            {props.headersubtext}
           </h6>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <Form onSubmit={(event) => addBoxes(event)}>
+        <Form onSubmit={
+          (props.formfunction == "box") ?
+            event => addBoxes(event) : event => removeEmail(event)
+          }
+        >
           <Stack gap={3}>
-            {props.emailgroups.emailArray.map((email) => (
+            {props.emailgroup.map((email) => (
               <Form.Check
                 key={email}
                 type="checkbox"
@@ -60,14 +102,14 @@ export default function AddBoxModal(props) {
               />
             ))}
 
-            {props.emailgroups.emailArray.length > 0 ? (
+            {props.emailgroup.length > 0 ? (
               <div>
                 <hr className="" />
                 <Stack direction="horizontal">
                   <Button type="submit" className="me-2">
-                    <i className="bi bi-plus-square"></i>
+                    <i className={props.buttonimage}></i>
                   </Button>
-                  <div className="me-auto fs-5">Add</div>
+                  <div className="me-auto fs-5">{props.buttontext}</div>
                 </Stack>
               </div>
             ) : (
@@ -78,15 +120,19 @@ export default function AddBoxModal(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Form className="flex-fill" onSubmit={(event) => requestAccess(event)}>
+        <Form className="flex-fill" onSubmit={
+          (props.formfunction == "box") ?
+            event => requestAccess(event) : event => addEmail(event)
+          }
+          >
           <Stack direction="horizontal" gap={3}>
             <Form.Control
               className="me-auto"
               type="email"
-              placeholder="Request access"
+              placeholder={props.formtext}
             />
             <Button variant="primary" type="submit">
-              <i className="bi bi-envelope-plus"></i>
+              <i className={props.formimage}></i>
             </Button>
           </Stack>
           {!emailTaken ? null : (

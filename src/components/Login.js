@@ -1,46 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import { useGetLogin } from "../hooks/useGetLogin";
 
 export default function Login(props) {
 
   const navigate = useNavigate()
   const [message, setMessage] = useState("")
 
-  //const navigation = useRef(useNavigate());
-
-  useEffect(() => {
-
-    /*
-    const url = "http://localhost:5000/isLoggedIn"
-    const config = {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    }
-
-    axios.get(url, config)
-    .then(
-      (res.data) =>
-        if(res.data.isLoggedIn) {
-          navigate("./cloudbox", { replace: true })
-        }
-    )
-    */
-
-    fetch("http://localhost:5000/isLoggedIn", {
-      headers: { "x-access-token": localStorage.getItem("token") }
-    })
-    .then(res => res.json())
-    .then(
-      (data) => {
-        if(data.isLoggedIn) {
-          navigate("./cloudbox", { replace: true });
-          //navigation.current.navigate("./cloudbox", { replace: true });
-        }
-      })
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])    
-    
+  const { loggedIn } = useGetLogin(true)
   
   async function handleLogin(e) {
     e.preventDefault()
