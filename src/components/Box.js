@@ -8,10 +8,10 @@ import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
 import "../CSS/Box.css";
 
 export default function Box(props) {
+  
+
+
   const [filesList, setFilesList] = useState([]);
-
-  const emailGroups = useGetEmailGroups()
-
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(
@@ -19,8 +19,8 @@ export default function Box(props) {
       );
       setFilesList(data);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await axios.get(
@@ -41,14 +41,14 @@ export default function Box(props) {
       .post(url, {
         data: props.id,
       })
-      .then((req) => console.log(req));
+      .then(req => props.setemailgroups(req.data[0]));
   }
 
   return (
     <Card className="Box">
       <Card.Header className="d-flex">
         <div className="flex-grow-1">{props.id}</div>
-        <CloseButton onClick={() => removeBox() && props.setemailgroups(emailGroups)} />
+        <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
       <Table>

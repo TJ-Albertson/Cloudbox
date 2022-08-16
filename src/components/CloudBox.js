@@ -18,11 +18,9 @@ export default function CloudBox(props) {
   const navigate = useNavigate()
 
   const { email, setEmail } = useGetLogin()
-  const emailGroups = useGetEmailGroups()
+  const { emailGroups, setEmailGroups } = useGetEmailGroups()
 
-  
-
-  //onclick in modal => post group update => get group update to stat
+  //onclick in modal => post group update => get group update to state
 
   //const [emailGroups, setEmailGroups] = useState({ boxArray : [], emailArray: [], shareArray : [] })
   const [modalShow, setModalShow] = useState(false);
@@ -42,26 +40,25 @@ export default function CloudBox(props) {
         show={modalShow}
         emailgroups={emailGroups}
         onHide={() => setModalShow(false)}
-        
+        setemailgroups={setEmailGroups}
       />
 
       <AddBoxModal
         show={boxModalShow}
         emailgroups={emailGroups}
         onHide={() => setBoxModalShow(false)}
-
+        setemailgroups={setEmailGroups} 
       />
 
       <div className='Grid'>  
         {emailGroups.boxArray.map((box) => 
           <Box 
-            key={box.toString()} 
+            key={box.toString()} s
             id={box} email={box} 
-            userEmail={email} 
-            
+            userEmail={email}
+            setemailgroups={setEmailGroups}
           />
         )}
-        <Button onClick={() => setEmail("emasdf")}></Button>
         <Upload email={email}/>
       </div>
 

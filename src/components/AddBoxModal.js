@@ -22,13 +22,11 @@ export default function AddBoxModal(props) {
       }
     }
 
-    console.log(emails);
-
     axios
       .post(url, {
         data: emails,
       })
-      .then((req) => console.log(req));
+      .then(req => props.setemailgroups(req.data[0]));
   }
 
   return (

@@ -12,5 +12,5 @@ export const useGetEmailGroups = () => {
     getEmailGroups().then(setEmailGroups);
   }, []);
 
-  return emailGroups;
+  return { emailGroups, setEmailGroups};
 };
