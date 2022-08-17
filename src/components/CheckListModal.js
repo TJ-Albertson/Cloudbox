@@ -10,7 +10,7 @@ export default function CheckListModal(props) {
   async function addEmail(e) {
     e.preventDefault()
 
-    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/addShareEmail`;
+    const url = `http://localhost:5000/${props.email}/addShareEmail`;
     const form = e.target
 
     axios.post(url, {
@@ -27,7 +27,7 @@ export default function CheckListModal(props) {
   async function removeEmail(e) {
     e.preventDefault()
     const form = e.target
-    const url = `http://localhost:5000/${props.emailgroups.ownerEmail}/removeShareEmails`;
+    const url = `http://localhost:5000/${props.email}/removeShareEmails`;
     const emails = []
 
     for (var i = 0; i < props.emailgroups.shareArray.length; i++) {
@@ -88,7 +88,7 @@ export default function CheckListModal(props) {
 
       <Modal.Body>
         <Form onSubmit={
-          (props.formfunction == "box") ?
+          (props.formfunction === "box") ?
             event => addBoxes(event) : event => removeEmail(event)
           }
         >
@@ -121,7 +121,7 @@ export default function CheckListModal(props) {
 
       <Modal.Footer>
         <Form className="flex-fill" onSubmit={
-          (props.formfunction == "box") ?
+          (props.formfunction === "box") ?
             event => requestAccess(event) : event => addEmail(event)
           }
           >

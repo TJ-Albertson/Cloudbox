@@ -3,8 +3,6 @@ import { Card, CloseButton, Table } from "react-bootstrap";
 import axios from "axios";
 import download from "downloadjs";
 
-import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
-
 import "../CSS/Box.css";
 
 export default function Box(props) {
