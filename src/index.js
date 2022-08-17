@@ -4,6 +4,7 @@ import './CSS/index.css';
 import App from './App';
 import reportWebVitals from './Testing/reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -12,7 +13,15 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Auth0Provider
+        domain="dev-5c9085dy.us.auth0.com"
+        clientId="LMgUk8fLLAaUe05JANs0NpRcjj3DES7q"
+        redirectUri="http://localhost:3000/cloudbox"
+        audience='http://localhost:5000'
+        scopes=""
+      >
+        <App />
+      </Auth0Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

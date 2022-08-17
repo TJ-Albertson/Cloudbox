@@ -9,8 +9,6 @@ export const useGetLogin = (loginPage) => {
   useEffect(() => {
     getLogin().then(setLoggedIn);
 
-    console.log(loggedIn)
-
     if(loginPage && loggedIn) {
       navigate("./cloudbox", { replace: true })
     } else if (!loginPage && loggedIn){

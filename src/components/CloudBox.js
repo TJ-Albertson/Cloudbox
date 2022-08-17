@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useGetEmail } from "../hooks/useGetEmail";
 import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
@@ -13,10 +14,28 @@ import CheckListModal from "./CheckListModal";
 import "../CSS/CloudBox.css";
 
 export default function CloudBox(props) {
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isAuthenticated) {
+    console.log("email: " + user.email)
+    console.log("user: " + user.name)
+
+    fetch('http://localhost/api/private').then(res => res.json())
+    .then(data => console.log(data))
+  }
+
+   
   const { loggedIn } = useGetLogin(false);
   const { email } = useGetEmail();
-  const { emailGroups, setEmailGroups } = useGetEmailGroups();
 
+  //const { emailGroups, setEmailGroups } = useGetEmailGroups();
+  const [emailGroups, setEmailGroups] = useState({
+    boxArray: [],
+    emailArray: [],
+    shareArray: [],
+  });
+  
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
 

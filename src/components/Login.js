@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetLogin } from "../hooks/useGetLogin";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Login(props) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
   const { loggedIn } = useGetLogin(true);
+
+  const LoginButton = () => {
+    const { loginWithRedirect } = useAuth0();
+  
+    return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  };
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -71,6 +78,7 @@ export default function Login(props) {
         <input type="submit" value="Submit" />
       </form>
       <h1>Message: {message}</h1>
+      <LoginButton/>
     </div>
   );
 }
