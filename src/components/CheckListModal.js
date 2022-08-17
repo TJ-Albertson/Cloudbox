@@ -21,6 +21,7 @@ export default function CheckListModal(props) {
         if (!res.data.emailExist) {
           setEmailTaken(true)
         }
+        props.setemailgroups(res.data[0])
       })
   }
 
@@ -30,24 +31,20 @@ export default function CheckListModal(props) {
     const url = `http://localhost:5000/${props.email}/removeShareEmails`;
     const emails = []
 
-    for (var i = 0; i < props.emailgroups.shareArray.length; i++) {
+    for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
         emails.push(form[i].id)
       }
     }
 
-    console.log(emails)
-
     await axios.post(url, {
       data: emails
     })
-      .then(req => console.log(req))
-      .then(req => props.setemailgroups(req.data[0]));
-      //then update state with new email groups
+      .then(res => props.setemailgroups(res.data[0]));
   }
 
   async function requestAccess(e) {
-    //will require notification/email function
+    //will require notification/email
   }
 
   async function addBoxes(e) {

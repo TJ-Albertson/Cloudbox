@@ -54,7 +54,7 @@ export default function CloudBox(props) {
         headertext="Share Setting"
         headersubtext="These users have access to your files"
         email={email}
-        emailgroup={emailGroups.emailArray}
+        emailgroup={emailGroups.shareArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-trash3"
         buttontext="Delete"
