@@ -1,32 +1,23 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import { Card, CloseButton, Table } from "react-bootstrap";
 import axios from "axios";
 import download from "downloadjs";
 
+import { useGetFileList } from "../hooks/useGetFileList";
+
+import { getFile } from "../api/file/getFile";
+
 import "../CSS/Box.css";
 
 export default function Box(props) {
-  
-
-
-  const [filesList, setFilesList] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `http://localhost:5000/getFiles/${props.email}`
-      );
-      setFilesList(data);
-    })();
-  }, []);
-
+  const { fileList } = useGetFileList(props.email);
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await axios.get(
       `http://localhost:5000/download/${props.email}/${id}`,
-      {
-        responseType: "blob",
-      }
+      { responseType: "blob" }
     );
+
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
@@ -36,10 +27,8 @@ export default function Box(props) {
     const url = `http://localhost:5000/${props.userEmail}/removeBox`;
 
     axios
-      .post(url, {
-        data: props.id,
-      })
-      .then(req => props.setemailgroups(req.data[0]));
+      .post(url, { data: props.id })
+      .then((req) => props.setemailgroups(req.data[0]));
   }
 
   return (
@@ -60,8 +49,8 @@ export default function Box(props) {
           </tr>
         </thead>
         <tbody>
-          {filesList.length > 0 ? (
-            filesList.map(({ _id, name, path, mimeType, size, updatedAt }) => (
+          {fileList.length > 0 ? (
+            fileList.map(({ _id, name, path, mimeType, size, updatedAt }) => (
               <tr key={_id}>
                 <td>{name}</td>
                 <td>{updatedAt.substring(0, 10)}</td>

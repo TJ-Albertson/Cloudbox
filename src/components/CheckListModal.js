@@ -6,45 +6,42 @@ export default function CheckListModal(props) {
   // eslint-disable-next-line
   const [emailTaken, setEmailTaken] = useState(false);
 
-
   async function addEmail(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     const url = `http://localhost:5000/${props.email}/addShareEmail`;
-    const form = e.target
+    const form = e.target;
 
-    axios.post(url, {
-      data: form[0].value,
-      headers: { 'content-type': 'multipart/form-data' }
-    })
-      .then(res => {
-        if (!res.data.emailExist) {
-          setEmailTaken(true)
-        }
-        props.setemailgroups(res.data[0])
+    axios
+      .post(url, {
+        data: form[0].value,
+        headers: { "content-type": "multipart/form-data" },
       })
+      .then((res) => {
+        if (!res.data.emailExist) {
+          setEmailTaken(true);
+        }
+        props.setemailgroups(res.data[0]);
+      });
   }
 
   async function removeEmail(e) {
-    e.preventDefault()
-    const form = e.target
+    e.preventDefault();
+    const form = e.target;
     const url = `http://localhost:5000/${props.email}/removeShareEmails`;
-    const emails = []
+    const emails = [];
 
     for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
-        emails.push(form[i].id)
+        emails.push(form[i].id);
       }
     }
 
-    await axios.post(url, {
-      data: emails
-    })
-      .then(res => props.setemailgroups(res.data[0]));
-  }
-
-  async function requestAccess(e) {
-    //will require notification/email
+    await axios
+      .post(url, {
+        data: emails,
+      })
+      .then((res) => props.setemailgroups(res.data[0]));
   }
 
   async function addBoxes(e) {
@@ -61,7 +58,11 @@ export default function CheckListModal(props) {
 
     axios
       .post(url, { data: emails })
-      .then(req => props.setemailgroups(req.data[0]));
+      .then((req) => props.setemailgroups(req.data[0]));
+  }
+
+  async function requestAccess(e) {
+    //will require notification/email
   }
 
   return (
@@ -77,16 +78,16 @@ export default function CheckListModal(props) {
           <h4>
             <i className={props.headerimage}></i> {props.headertext}
           </h4>
-          <h6 className="text-muted fs-10">
-            {props.headersubtext}
-          </h6>
+          <h6 className="text-muted fs-10">{props.headersubtext}</h6>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <Form onSubmit={
-          (props.formfunction === "box") ?
-            event => addBoxes(event) : event => removeEmail(event)
+        <Form
+          onSubmit={
+            props.formfunction === "box"
+              ? (event) => addBoxes(event)
+              : (event) => removeEmail(event)
           }
         >
           <Stack gap={3}>
@@ -117,11 +118,14 @@ export default function CheckListModal(props) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Form className="flex-fill" onSubmit={
-          (props.formfunction === "box") ?
-            event => requestAccess(event) : event => addEmail(event)
+        <Form
+          className="flex-fill"
+          onSubmit={
+            props.formfunction === "box"
+              ? (event) => requestAccess(event)
+              : (event) => addEmail(event)
           }
-          >
+        >
           <Stack direction="horizontal" gap={3}>
             <Form.Control
               className="me-auto"
