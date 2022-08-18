@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -21,9 +21,27 @@ export default function CloudBox(props) {
     console.log("email: " + user.email)
     console.log("user: " + user.name)
 
-    fetch('http://localhost/api/private').then(res => res.json())
-    .then(data => console.log(data))
   }
+
+  const { getAccessTokenSilently } = useAuth0();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = await getAccessTokenSilently({
+          audience: 'http://localhost:5000'
+        });
+        const response = await fetch('http://localhost:5000/api/private', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+        })
+        .then(res => res.json()).then(data => console.log(data))
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [getAccessTokenSilently]);
 
    
   const { loggedIn } = useGetLogin(false);
