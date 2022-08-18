@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import { useApi } from "../hooks/useApi"
 import { useGetEmail } from "../hooks/useGetEmail";
 import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
 import { useGetLogin } from "../hooks/useGetLogin";
@@ -17,33 +18,10 @@ export default function CloudBox(props) {
 
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  if (isAuthenticated) {
-    console.log("email: " + user.email)
-    console.log("user: " + user.name)
+  const { data, loading } = useApi("http://localhost:5000/api/public")
+  
+  console.log(data)
 
-  }
-
-  const { getAccessTokenSilently } = useAuth0();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const token = await getAccessTokenSilently({
-          audience: 'http://localhost:5000'
-        });
-        const response = await fetch('http://localhost:5000/api/private', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-        })
-        .then(res => res.json()).then(data => console.log(data))
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, [getAccessTokenSilently]);
-
-   
   const { loggedIn } = useGetLogin(false);
   const { email } = useGetEmail();
 
