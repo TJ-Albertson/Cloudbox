@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { useApi } from "../hooks/useApi"
@@ -18,12 +18,9 @@ export default function CloudBox(props) {
 
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  const { data, loading } = useApi("http://localhost:5000/api/public")
+  const { data, loading } = useApi("http://localhost:5000/getGroup")
   
   console.log(data)
-
-  const { loggedIn } = useGetLogin(false);
-  const { email } = useGetEmail();
 
   //const { emailGroups, setEmailGroups } = useGetEmailGroups();
   const [emailGroups, setEmailGroups] = useState({
@@ -42,9 +39,19 @@ export default function CloudBox(props) {
     setBoxModalShow(true);
   };
 
+  if (isLoading) {
+    return (
+      <div className="position-absolute top-50 start-50 translate-middle">
+        <Spinner animation="border" style={{width: "10em", height: "10em"}} role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    )
+  }
+
   return (
     <div>
-      <NavBar email={email} showModal={showShareModal} />
+      <NavBar email={user.name} showModal={showShareModal} />
 
       <CheckListModal
         show={boxModalShow}
@@ -52,7 +59,7 @@ export default function CloudBox(props) {
         headerimage="bi bi-box-fill"
         headertext="Add Box"
         headersubtext="These users have granted you access to their files"
-        email={email}
+        email={user.email}
         emailgroup={emailGroups.emailArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-plus-square"
@@ -68,7 +75,7 @@ export default function CloudBox(props) {
         headerimage="bi bi-people-fill"
         headertext="Share Setting"
         headersubtext="These users have access to your files"
-        email={email}
+        email={user.email}
         emailgroup={emailGroups.shareArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-trash3"
@@ -85,11 +92,11 @@ export default function CloudBox(props) {
             s
             id={box}
             email={box}
-            userEmail={email}
+            userEmail={user.email}
             setemailgroups={setEmailGroups}
           />
         ))}
-        <Upload email={email} />
+        <Upload email={user.email} />
       </div>
 
       <Button
