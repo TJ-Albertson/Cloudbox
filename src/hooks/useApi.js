@@ -5,12 +5,14 @@ const API_URL = process.env.REACT_APP_API_URL || `http://localhost:5000`
 export const useApi = (url) => {
 
   const { getAccessTokenSilently } = useAuth0();
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-  })
 
   const [refreshIndex, setRefreshIndex] = useState(0)
+
+  const [emailGroups, setEmailGroups] = useState({
+    boxArray: [],
+    emailArray: [],
+    shareArray: [],
+  });
 
   useEffect(() => {
     (async () => {
@@ -20,15 +22,14 @@ export const useApi = (url) => {
             Authorization: `Bearer ${token}`,
           },
         })
-        setState({
-            data: await res.json(),
-            loading: false
-        })
+        .then(res => res.json())
+        .then(setEmailGroups)
     })();
   }, [refreshIndex]);
 
   return {
-    ...state,
+    emailGroups,
+    setEmailGroups,
     refresh: () => setRefreshIndex(refreshIndex + 1)
   }
 };

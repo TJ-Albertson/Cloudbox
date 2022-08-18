@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEmailGroups } from "../api/group/getEmailGroups";
+import { useApi } from "./useApi";
 
 export const useGetEmailGroups = () => {
   const [emailGroups, setEmailGroups] = useState({
@@ -7,10 +8,6 @@ export const useGetEmailGroups = () => {
     emailArray: [],
     shareArray: [],
   });
-
-  useEffect(() => {
-    getEmailGroups().then(setEmailGroups);
-  }, []);
 
   return { emailGroups, setEmailGroups};
 };

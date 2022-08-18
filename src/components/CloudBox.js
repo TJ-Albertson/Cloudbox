@@ -18,16 +18,9 @@ export default function CloudBox(props) {
 
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  const { data, loading } = useApi("http://localhost:5000/getGroup")
-  
-  console.log(data)
+  const { emailGroups, setEmailGroups, loading } = useApi("http://localhost:5000/getGroup")
 
-  //const { emailGroups, setEmailGroups } = useGetEmailGroups();
-  const [emailGroups, setEmailGroups] = useState({
-    boxArray: [],
-    emailArray: [],
-    shareArray: [],
-  });
+  console.log(emailGroups)
   
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
@@ -52,7 +45,7 @@ export default function CloudBox(props) {
   return (
     <div>
       <NavBar email={user.name} showModal={showShareModal} />
-
+      {/*
       <CheckListModal
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
@@ -60,7 +53,7 @@ export default function CloudBox(props) {
         headertext="Add Box"
         headersubtext="These users have granted you access to their files"
         email={user.email}
-        emailgroup={emailGroups.emailArray}
+        emailgroup={emailGroups.accessArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-plus-square"
         buttontext="Add"
@@ -69,6 +62,7 @@ export default function CloudBox(props) {
         formfunction="box"
       />
 
+      
       <CheckListModal
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
@@ -84,6 +78,7 @@ export default function CloudBox(props) {
         formimage="bi bi-send-plus"
         formfunction="share"
       />
+  */}
 
       <div className="Grid">
         {emailGroups.boxArray.map((box) => (
