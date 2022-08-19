@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEmailGroups } from "../api/group/getEmailGroups";
-import { useApi } from "./useApi";
+import { useApi } from "./useApiEmailGroup";
 
 export const useGetEmailGroups = () => {
   const [emailGroups, setEmailGroups] = useState({

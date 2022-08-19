@@ -3,14 +3,12 @@ import { Card, CloseButton, Table } from "react-bootstrap";
 import axios from "axios";
 import download from "downloadjs";
 
-import { useGetFileList } from "../hooks/useGetFileList";
-
-import { getFile } from "../api/file/getFile";
-
 import "../CSS/Box.css";
 
+import { useApiFileList } from "../hooks/useApiFileList";
+
 export default function Box(props) {
-  const { fileList } = useGetFileList(props.email);
+  const { fileList } = useApiFileList();
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await axios.get(

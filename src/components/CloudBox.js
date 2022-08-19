@@ -2,8 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { useApi } from "../hooks/useApi"
-import { useGetEmail } from "../hooks/useGetEmail";
+import { useApi, useApiEmailGroup } from "../hooks/useApiEmailGroup"
 import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
 import { useGetLogin } from "../hooks/useGetLogin";
 
@@ -17,10 +16,7 @@ import "../CSS/CloudBox.css";
 export default function CloudBox(props) {
 
   const { user, isAuthenticated, isLoading } = useAuth0();
-
-  const { emailGroups, setEmailGroups, loading } = useApi("http://localhost:5000/getGroup")
-
-  console.log(emailGroups)
+  const { emailGroups, setEmailGroups } = useApiEmailGroup()
   
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
@@ -45,7 +41,7 @@ export default function CloudBox(props) {
   return (
     <div>
       <NavBar email={user.name} showModal={showShareModal} />
-      {/*
+      
       <CheckListModal
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
@@ -62,7 +58,6 @@ export default function CloudBox(props) {
         formfunction="box"
       />
 
-      
       <CheckListModal
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
@@ -78,7 +73,6 @@ export default function CloudBox(props) {
         formimage="bi bi-send-plus"
         formfunction="share"
       />
-  */}
 
       <div className="Grid">
         {emailGroups.boxArray.map((box) => (
