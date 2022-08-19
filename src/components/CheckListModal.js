@@ -1,42 +1,31 @@
 import { React, useEffect, useState } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import axios from "axios";
-import { usePostList } from "../hooks/usePostList";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useApi } from "../hooks/useApi"
 
 export default function CheckListModal(props) {
 
   const [emailTaken, setEmailTaken] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
-  const [token, setToken] = useState(null)
-
-  useEffect(() => {
-    (async () => {
-      const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000' });
-      setToken(accessToken)
-      console.log(accessToken)
-    })();
-  }, []);
 
   async function addEmail(e) {
     e.preventDefault();
 
-    const url = `http://localhost:5000/addShareEmail`;
     const form = e.target;
 
-    await fetch(url, {
-        data: form[0].value,
-        headers: { "content-type": "multipart/form-data" },
-        Authorization : `Bearer ${token}`
-      })
-      .then(res => res.json())
-      .then((res) => {
-        if (!res.data.emailExist) {
-          setEmailTaken(true);
-        }
-        props.setemailgroups(res.data[0]);
-      });
+    console.log(form[0].value)
+
+    const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
+      const res = await fetch(`http://localhost:5000/addShareEmail`, {
+        method: 'POST',
+        body: { email: form[0].value },
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then(res => res.json()).then(data => console.log(data))
   }
 
   //adding boxes and removing share emails
@@ -55,6 +44,7 @@ export default function CheckListModal(props) {
       }
     }
 
+    const token = await getAccessTokenSilently({ audience: "http://localhost:5000/" })
     axios
       .post(url, { 
         data: emails,

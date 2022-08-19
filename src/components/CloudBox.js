@@ -15,7 +15,7 @@ import "../CSS/CloudBox.css";
 
 export default function CloudBox(props) {
 
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const { emailGroups, setEmailGroups, refreshEmailGroups } = useApiEmailGroup()
 
   const opts = {
