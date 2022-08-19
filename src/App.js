@@ -1,4 +1,5 @@
-import { React, useState } from "react"
+import { React } from "react"
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 import { Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login"
@@ -6,20 +7,17 @@ import CloudBox from "./components/CloudBox"
 
 import './CSS/App.css'
 
+const ProtectedRoute = ({ component, ...args }) => {
+  const Component = withAuthenticationRequired(component, args);
+  return <Component />;
+};
+
 export default function App() {
-
-  const [email, setEmail] = useState("")
-
-  const addEmail = (data) => {
-    console.log(data)
-    setEmail(data)
-  }
-
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login addEmail={addEmail}/>} />
-        <Route path="/cloudbox" element={<CloudBox email={email}/>} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/cloudbox" element={<ProtectedRoute component={CloudBox}/>} />
       </Routes>
     </div>
   )

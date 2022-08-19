@@ -25,6 +25,6 @@ export const useApiFileList = () => {
   return {
     fileList,
     setFileList,
-    refresh: () => setRefreshIndex(refreshIndex + 1)
+    refreshFileList: () => setRefreshIndex(refreshIndex + 1)
   }
 };

@@ -17,6 +17,7 @@ root.render(
         domain="dev-5c9085dy.us.auth0.com"
         clientId="LMgUk8fLLAaUe05JANs0NpRcjj3DES7q"
         redirectUri="http://localhost:3000/cloudbox"
+        audience="http://localhost:5000"
       >
         <App />
       </Auth0Provider>

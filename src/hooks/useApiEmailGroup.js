@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 const API_URL = process.env.REACT_APP_API_URL || `http://localhost:5000`
 
-export const useApiEmailGroup = (url) => {
+export const useApiEmailGroup = (url, token) => {
 
   const { getAccessTokenSilently } = useAuth0();
   const [refreshIndex, setRefreshIndex] = useState(0)
@@ -29,6 +29,6 @@ export const useApiEmailGroup = (url) => {
   return {
     emailGroups,
     setEmailGroups,
-    refresh: () => setRefreshIndex(refreshIndex + 1)
+    refreshEmailGroups: () => setRefreshIndex(refreshIndex + 1)
   }
 };

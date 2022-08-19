@@ -1,22 +1,36 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import axios from "axios";
+import { usePostList } from "../hooks/usePostList";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CheckListModal(props) {
-  // eslint-disable-next-line
+
   const [emailTaken, setEmailTaken] = useState(false);
+  const { getAccessTokenSilently } = useAuth0();
+
+  const [token, setToken] = useState(null)
+
+  useEffect(() => {
+    (async () => {
+      const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000' });
+      setToken(accessToken)
+      console.log(accessToken)
+    })();
+  }, []);
 
   async function addEmail(e) {
     e.preventDefault();
 
-    const url = `http://localhost:5000/${props.email}/addShareEmail`;
+    const url = `http://localhost:5000/addShareEmail`;
     const form = e.target;
 
-    axios
-      .post(url, {
+    await fetch(url, {
         data: form[0].value,
         headers: { "content-type": "multipart/form-data" },
+        Authorization : `Bearer ${token}`
       })
+      .then(res => res.json())
       .then((res) => {
         if (!res.data.emailExist) {
           setEmailTaken(true);
@@ -25,30 +39,15 @@ export default function CheckListModal(props) {
       });
   }
 
-  async function removeEmail(e) {
+  //adding boxes and removing share emails
+  async function postList(e, route) {
+    
     e.preventDefault();
     const form = e.target;
-    const url = `http://localhost:5000/${props.email}/removeShareEmails`;
+    const url = `http://localhost:5000/${props.email}${route}`;
     const emails = [];
 
-    for (var i = 0; i < props.emailgroup.length; i++) {
-      if (form[i].checked) {
-        emails.push(form[i].id);
-      }
-    }
-
-    await axios
-      .post(url, {
-        data: emails,
-      })
-      .then((res) => props.setemailgroups(res.data[0]));
-  }
-
-  async function addBoxes(e) {
-    e.preventDefault();
-    const form = e.target;
-    const url = `http://localhost:5000/${props.email}/addBoxes`;
-    const emails = [];
+    
 
     for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
@@ -57,8 +56,11 @@ export default function CheckListModal(props) {
     }
 
     axios
-      .post(url, { data: emails })
-      .then((req) => props.setemailgroups(req.data[0]));
+      .post(url, { 
+        data: emails,
+        Authorization : `Bearer ${token}`,  
+      })
+      .then((res) => props.setemailgroups(res.data[0]));
   }
 
   async function requestAccess(e) {
@@ -86,8 +88,8 @@ export default function CheckListModal(props) {
         <Form
           onSubmit={
             props.formfunction === "box"
-              ? (event) => addBoxes(event)
-              : (event) => removeEmail(event)
+              ? (event) => postList(event, "/addBox")
+              : (event) => postList(event, "/removeShareEmail")
           }
         >
           <Stack gap={3}>

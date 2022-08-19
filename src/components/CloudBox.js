@@ -2,9 +2,9 @@ import { React, useState, useEffect } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { useApi, useApiEmailGroup } from "../hooks/useApiEmailGroup"
-import { useGetEmailGroups } from "../hooks/useGetEmailGroups";
-import { useGetLogin } from "../hooks/useGetLogin";
+import { useApiEmailGroup } from "../hooks/useApiEmailGroup"
+
+import { useApi } from "../hooks/useApi"
 
 import NavBar from "./NavBar";
 import Box from "./Box";
@@ -15,8 +15,19 @@ import "../CSS/CloudBox.css";
 
 export default function CloudBox(props) {
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { emailGroups, setEmailGroups } = useApiEmailGroup()
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { emailGroups, setEmailGroups, refreshEmailGroups } = useApiEmailGroup()
+
+  const opts = {
+    audience: 'http://localhost:5000',
+  };
+
+  const {
+    loading,
+    error,
+    refresh,
+    data
+  } = useApi('http://localhost:5000/getGroup', opts);
   
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
@@ -27,6 +38,8 @@ export default function CloudBox(props) {
   const showBoxModal = () => {
     setBoxModalShow(true);
   };
+
+
 
   if (isLoading) {
     return (
@@ -49,7 +62,7 @@ export default function CloudBox(props) {
         headertext="Add Box"
         headersubtext="These users have granted you access to their files"
         email={user.email}
-        emailgroup={emailGroups.accessArray}
+        emailgroup={data.accessArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-plus-square"
         buttontext="Add"
@@ -65,7 +78,7 @@ export default function CloudBox(props) {
         headertext="Share Setting"
         headersubtext="These users have access to your files"
         email={user.email}
-        emailgroup={emailGroups.shareArray}
+        emailgroup={data.shareArray}
         setemailgroups={setEmailGroups}
         buttonimage="bi bi-trash3"
         buttontext="Delete"
@@ -75,7 +88,7 @@ export default function CloudBox(props) {
       />
 
       <div className="Grid">
-        {emailGroups.boxArray.map((box) => (
+        {data.boxArray.map((box) => (
           <Box
             key={box.toString()}
             s

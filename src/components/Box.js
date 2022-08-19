@@ -6,9 +6,23 @@ import download from "downloadjs";
 import "../CSS/Box.css";
 
 import { useApiFileList } from "../hooks/useApiFileList";
+import { useApi } from "../hooks/useApi";
+
 
 export default function Box(props) {
   const { fileList } = useApiFileList();
+
+  const opts = {
+    audience: 'http://localhost:5000',
+  };
+
+  const {
+    loading,
+    error,
+    refresh,
+    data
+  } = useApi('http://localhost:5000/getFileList', opts);
+  console.log(data)
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await axios.get(
@@ -47,8 +61,8 @@ export default function Box(props) {
           </tr>
         </thead>
         <tbody>
-          {fileList.length > 0 ? (
-            fileList.map(({ _id, name, path, mimeType, size, updatedAt }) => (
+          {data.length > 0 ? (
+            data.map(({ _id, name, path, mimeType, size, updatedAt }) => (
               <tr key={_id}>
                 <td>{name}</td>
                 <td>{updatedAt.substring(0, 10)}</td>
