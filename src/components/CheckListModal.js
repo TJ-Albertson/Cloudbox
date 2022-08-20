@@ -9,23 +9,21 @@ export default function CheckListModal(props) {
   const [emailTaken, setEmailTaken] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
-
   async function addEmail(e) {
     e.preventDefault();
-
     const form = e.target;
-
-    console.log(form[0].value)
 
     const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
       const res = await fetch(`http://localhost:5000/addShareEmail`, {
-        method: 'POST',
-        body: { email: form[0].value },
+        method: "POST",
         headers: {
-          "content-type": "multipart/form-data",
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Bearer ${accessToken}`,
         },
-      }).then(res => res.json()).then(data => console.log(data))
+        body: new URLSearchParams({
+          'shareEmail': form[0].value
+        })
+    })
   }
 
   //adding boxes and removing share emails
@@ -34,7 +32,7 @@ export default function CheckListModal(props) {
     e.preventDefault();
     const form = e.target;
     const url = `http://localhost:5000/${props.email}${route}`;
-    const emails = [];
+    const emails = ["email1", "email2"];
 
     
 
@@ -44,13 +42,17 @@ export default function CheckListModal(props) {
       }
     }
 
-    const token = await getAccessTokenSilently({ audience: "http://localhost:5000/" })
-    axios
-      .post(url, { 
-        data: emails,
-        Authorization : `Bearer ${token}`,  
-      })
-      .then((res) => props.setemailgroups(res.data[0]));
+    const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
+      const res = await fetch(`http://localhost:5000/addShareEmail`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: new URLSearchParams({
+          'shareEmail': emails
+        })
+    })
   }
 
   async function requestAccess(e) {
