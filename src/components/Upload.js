@@ -2,6 +2,8 @@ import { React, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 
+import { postApi } from "../api/postApi";
+
 export default function Upload(props) {
 
   const [file, setFile] = useState()
@@ -22,13 +24,9 @@ export default function Upload(props) {
     formData.append('name', file.name);
     formData.append('size', file.size); //bytes
 
-    const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-    const config = {
-      
-      headers: { 'content-type': 'multipart/form-data', Authorization: `Bearer ${accessToken}`,} 
-    };
-    
-    axios.post(url, formData, config)
+
+    const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
+    postApi(formData, "/upload", "multipart/form-data", token).then(props.refresh())
   }
 
   return (

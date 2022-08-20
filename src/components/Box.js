@@ -50,7 +50,8 @@ export default function Box(props) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-      <Table>
+      <div className="overflow-auto">
+      <Table >
         <thead>
           <tr>
             <th>File</th>
@@ -60,7 +61,7 @@ export default function Box(props) {
             <th>Download</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {data.length > 0 ? (
             data.map(({ _id, name, path, mimeType, size, updatedAt }) => (
               <tr key={_id}>
@@ -87,6 +88,7 @@ export default function Box(props) {
           )}
         </tbody>
       </Table>
+      </div>
     </Card>
   );
 }

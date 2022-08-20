@@ -79,7 +79,7 @@ export default function CloudBox(props) {
         headersubtext="These users have access to your files"
         email={user.email}
         emailgroup={data.shareArray}
-        setemailgroups={setEmailGroups}
+        refreshgroups={refreshEmailGroups}
         buttonimage="bi bi-trash3"
         buttontext="Delete"
         formtext="Email to share with"
@@ -98,7 +98,7 @@ export default function CloudBox(props) {
             setemailgroups={setEmailGroups}
           />
         ))}
-        <Upload email={user.email} />
+        <Upload email={user.email} refresh={refresh}/>
       </div>
 
       <Button

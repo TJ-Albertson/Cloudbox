@@ -2,28 +2,26 @@ import { React, useEffect, useState } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+
 import { useApi } from "../hooks/useApi"
+import { postApi } from "../api/postApi";
 
 export default function CheckListModal(props) {
 
   const [emailTaken, setEmailTaken] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
-  async function addEmail(e) {
+  async function shareEmail(e) {
     e.preventDefault();
     const form = e.target;
 
-    const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-      const res = await fetch(`http://localhost:5000/addShareEmail`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: new URLSearchParams({
-          'shareEmail': form[0].value
-        })
+    const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
+
+    const data = new URLSearchParams({
+      'shareEmail': form[0].value
     })
+
+    postApi(data, "/addShareEmail", 'application/x-www-form-urlencoded', token).then(props.refreshgroups())
   }
 
   //adding boxes and removing share emails
@@ -34,25 +32,18 @@ export default function CheckListModal(props) {
     const url = `http://localhost:5000/${props.email}${route}`;
     const emails = ["email1", "email2"];
 
-    
+    const formData = new FormData();
 
+  
     for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
-        emails.push(form[i].id);
+        formData.append(i, form[i].id)
       }
-    }
+    } 
 
-    const accessToken = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-      const res = await fetch(`http://localhost:5000/addShareEmail`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: new URLSearchParams({
-          'shareEmail': emails
-        })
-    })
+    const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
+    postApi(formData, "/addShareEmail", 'multipart/form-data', token)
+    //postApi(new URLSearchParams({'shareEmail': emails}))
   }
 
   async function requestAccess(e) {
@@ -117,7 +108,7 @@ export default function CheckListModal(props) {
           onSubmit={
             props.formfunction === "box"
               ? (event) => requestAccess(event)
-              : (event) => addEmail(event)
+              : (event) => shareEmail(event)
           }
         >
           <Stack direction="horizontal" gap={3}>

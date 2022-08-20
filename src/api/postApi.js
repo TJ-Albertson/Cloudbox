@@ -1,21 +1,22 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL || `http://localhost:5000`;
 
-export const postApi = (data, route, contentType) => {
+export const postApi = (data, route, contentType, token) => {
 
-    const { getAccessTokenSilently } = useAuth0();
+        return axios.post(`${API_URL}${route}`, data, {
+            headers: {
+                'Content-Type': contentType, Authorization: `Bearer ${token}`,  
+            },
+        })
 
-    (async () => {
-        const accessToken = await getAccessTokenSilently({ audience: `${API_URL}`});
         return fetch(`${API_URL}${route}`, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': contentType,
+                Authorization: `Bearer ${token}`,
             },
-            body: new URLSearchParams({
-                'shareEmail': form[0].value
-            })
+            body: data
         })
-    })
+
 }
