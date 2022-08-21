@@ -21,29 +21,25 @@ export default function CheckListModal(props) {
       'shareEmail': form[0].value
     })
 
-    postApi(data, "/addShareEmail", 'application/x-www-form-urlencoded', token).then(props.refreshgroups())
+    postApi(data, "/addShareEmail", 'application/x-www-form-urlencoded', token)
+    props.refresh()
   }
 
   //adding boxes and removing share emails
-  async function postList(e, route) {
+  async function postList(e) {
     
     e.preventDefault();
     const form = e.target;
-    const url = `http://localhost:5000/${props.email}${route}`;
-    const emails = ["email1", "email2"];
+    const emails = [];
 
-    const formData = new FormData();
-
-  
     for (var i = 0; i < props.emailgroup.length; i++) {
       if (form[i].checked) {
-        formData.append(i, form[i].id)
+        emails.push(form[i].id);
       }
     } 
 
     const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-    postApi(formData, "/addShareEmail", 'multipart/form-data', token)
-    //postApi(new URLSearchParams({'shareEmail': emails}))
+    postApi(JSON.stringify(emails), "/removeShareEmail", token)
   }
 
   async function requestAccess(e) {

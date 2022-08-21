@@ -26,7 +26,9 @@ export default function Upload(props) {
 
 
     const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-    postApi(formData, "/upload", "multipart/form-data", token).then(props.refresh())
+
+
+    postApi(formData, "/upload", token)
   }
 
   return (

@@ -63,7 +63,7 @@ export default function CloudBox(props) {
         headersubtext="These users have granted you access to their files"
         email={user.email}
         emailgroup={data.accessArray}
-        setemailgroups={setEmailGroups}
+        refresh={refresh}
         buttonimage="bi bi-plus-square"
         buttontext="Add"
         formtext="Request access"
@@ -79,7 +79,7 @@ export default function CloudBox(props) {
         headersubtext="These users have access to your files"
         email={user.email}
         emailgroup={data.shareArray}
-        refreshgroups={refreshEmailGroups}
+        refresh={refresh}
         buttonimage="bi bi-trash3"
         buttontext="Delete"
         formtext="Email to share with"
