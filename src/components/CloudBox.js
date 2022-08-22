@@ -8,9 +8,12 @@ import Upload from "./Upload";
 import CheckListModal from "./CheckListModal";
 
 import "../CSS/CloudBox.css";
+import "../CSS/TestDrag.css";
 
 import { useApi } from "../hooks/useApi";
 import TestDrag from "./TestDrag";
+
+
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
@@ -81,10 +84,13 @@ export default function CloudBox() {
         token={token}
       />
 
-      <div className="Grid">
+      
+      <div className="container Grid">
         {data.boxArray.map((email) => (
           <Box
             key={email.toString()}
+            className="draggable"
+            draggable="true"
             id={email}
             email={email}
             refresh={refresh}
@@ -92,8 +98,9 @@ export default function CloudBox() {
           />
         ))}
         <Upload email={user.email} refresh={refresh} token={token}/>
-        <TestDrag></TestDrag>
       </div>
+      
+      <TestDrag></TestDrag>
 
       <Button
         onClick={showBoxModal}
