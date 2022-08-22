@@ -1,10 +1,6 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
-
-import { useApiEmailGroup } from "../hooks/useApiEmailGroup"
-
-import { useApi } from "../hooks/useApi"
 
 import NavBar from "./NavBar";
 import Box from "./Box";
@@ -13,22 +9,16 @@ import CheckListModal from "./CheckListModal";
 
 import "../CSS/CloudBox.css";
 
-export default function CloudBox(props) {
+import { useApi } from "../hooks/useApi";
+import TestDrag from "./TestDrag";
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { emailGroups, setEmailGroups, refreshEmailGroups } = useApiEmailGroup()
+export default function CloudBox() {
+  const { user, isLoading } = useAuth0();
 
-  const opts = {
-    audience: 'http://localhost:5000',
-  };
+  const { loading, token, refresh, data } = useApi(
+    "http://localhost:5000/getGroup"
+  );
 
-  const {
-    loading,
-    error,
-    refresh,
-    data
-  } = useApi('http://localhost:5000/getGroup', opts);
-  
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
 
@@ -39,22 +29,24 @@ export default function CloudBox(props) {
     setBoxModalShow(true);
   };
 
-
-
-  if (isLoading) {
+  if (isLoading && loading) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
-        <Spinner animation="border" style={{width: "10em", height: "10em"}} role="status">
+        <Spinner
+          animation="border"
+          style={{ width: "10em", height: "10em" }}
+          role="status"
+        >
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       </div>
-    )
+    );
   }
 
   return (
     <div>
       <NavBar email={user.name} showModal={showShareModal} />
-      
+
       <CheckListModal
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
@@ -69,6 +61,7 @@ export default function CloudBox(props) {
         formtext="Request access"
         formimage="bi bi-envelope-plus"
         formfunction="box"
+        token={token}
       />
 
       <CheckListModal
@@ -85,20 +78,21 @@ export default function CloudBox(props) {
         formtext="Email to share with"
         formimage="bi bi-send-plus"
         formfunction="share"
+        token={token}
       />
 
       <div className="Grid">
-        {data.boxArray.map((box) => (
+        {data.boxArray.map((email) => (
           <Box
-            key={box.toString()}
-            s
-            id={box}
-            email={box}
-            userEmail={user.email}
-            setemailgroups={setEmailGroups}
+            key={email.toString()}
+            id={email}
+            email={email}
+            refresh={refresh}
+            token={token}
           />
         ))}
-        <Upload email={user.email} refresh={refresh}/>
+        <Upload email={user.email} refresh={refresh} token={token}/>
+        <TestDrag></TestDrag>
       </div>
 
       <Button

@@ -1,34 +1,20 @@
 import { React } from "react";
 import { Card, CloseButton, Table } from "react-bootstrap";
-import axios from "axios";
 import download from "downloadjs";
 
 import "../CSS/Box.css";
 
-import { useApiFileList } from "../hooks/useApiFileList";
+import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
-
+import { postApi } from "../api/postApi";
 
 export default function Box(props) {
-  const { fileList } = useApiFileList();
-
-  const opts = {
-    audience: 'http://localhost:5000',
-  };
-
-  const {
-    loading,
-    error,
-    refresh,
-    data
-  } = useApi('http://localhost:5000/getFileList', opts);
-  console.log(data)
+  const { loading, error, refresh, data, } = useApi(
+    `http://localhost:5000/getFileList/${props.id}`
+  );
 
   const downloadFile = async (id, path, mimetype) => {
-    const result = await axios.get(
-      `http://localhost:5000/download/${props.email}/${id}`,
-      { responseType: "blob" }
-    );
+    const result = await getApi(`/downloadFile/${id}`, props.token);
 
     const split = path.split("/");
     const filename = split[split.length - 1];
@@ -36,11 +22,11 @@ export default function Box(props) {
   };
 
   async function removeBox() {
-    const url = `http://localhost:5000/${props.userEmail}/removeBox`;
+    const data = new URLSearchParams({
+      removeEmail: props.email,
+    });
 
-    axios
-      .post(url, { data: props.id })
-      .then((req) => props.setemailgroups(req.data[0]));
+    postApi("/removeBox", data, props.token).then(props.refresh);
   }
 
   return (
@@ -51,43 +37,43 @@ export default function Box(props) {
       </Card.Header>
 
       <div className="overflow-auto">
-      <Table >
-        <thead>
-          <tr>
-            <th>File</th>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Size</th>
-            <th>Download</th>
-          </tr>
-        </thead>
-        <tbody >
-          {data.length > 0 ? (
-            data.map(({ _id, name, path, mimeType, size, updatedAt }) => (
-              <tr key={_id}>
-                <td>{name}</td>
-                <td>{updatedAt.substring(0, 10)}</td>
-                <td>{mimeType}</td>
-                <td>{size} bytes</td>
-                <td>
-                  <a
-                    href="#/"
-                    onClick={() => downloadFile(_id, path, mimeType)}
-                  >
-                    Download
-                  </a>
+        <Table>
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.length > 0 ? (
+              data.map(({ _id, name, path, mimeType, size, updatedAt }) => (
+                <tr key={_id}>
+                  <td>{name}</td>
+                  <td>{updatedAt.substring(0, 10)}</td>
+                  <td>{mimeType}</td>
+                  <td>{size} bytes</td>
+                  <td>
+                    <a
+                      href="#/"
+                      onClick={() => downloadFile(_id, path, mimeType)}
+                    >
+                      Download
+                    </a>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5} style={{ fontWeight: "300" }}>
+                  This user has no files uploaded
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={5} style={{ fontWeight: "300" }}>
-                This user has no files uploaded
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+            )}
+          </tbody>
+        </Table>
       </div>
     </Card>
   );

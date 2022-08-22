@@ -1,32 +1,26 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 
-import { useApi } from "../hooks/useApi"
 import { postApi } from "../api/postApi";
 
 export default function CheckListModal(props) {
 
   const [emailTaken, setEmailTaken] = useState(false);
-  const { getAccessTokenSilently } = useAuth0();
 
   async function shareEmail(e) {
     e.preventDefault();
     const form = e.target;
 
-    const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-
     const data = new URLSearchParams({
       'shareEmail': form[0].value
     })
 
-    postApi(data, "/addShareEmail", 'application/x-www-form-urlencoded', token)
-    props.refresh()
+    postApi("/addShareEmail", data, props.token, 'application/x-www-form-urlencoded')
+    .then(props.refresh)
   }
 
   //adding boxes and removing share emails
-  async function postList(e) {
+  async function postList(e, route) {
     
     e.preventDefault();
     const form = e.target;
@@ -37,9 +31,9 @@ export default function CheckListModal(props) {
         emails.push(form[i].id);
       }
     } 
-
-    const token = await getAccessTokenSilently({ audience: 'http://localhost:5000'});
-    postApi(JSON.stringify(emails), "/removeShareEmail", token)
+    
+    postApi(route, JSON.stringify(emails), props.token, {'Content-Type': 'application/json'})
+    .then(props.refresh)
   }
 
   async function requestAccess(e) {
