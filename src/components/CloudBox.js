@@ -95,7 +95,7 @@ export default function CloudBox() {
       <div className="grid" ref={ref}>
         {data.boxArray.map((email) => (
           <div className="item" key={email.toString()}>
-            <Box 
+            <Box
               id={email} 
               email={email} 
               token={token} 

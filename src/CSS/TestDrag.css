@@ -1,11 +1,11 @@
 .grid {
-    margin-top: 70px;
+  margin-top: 70px;
   position: relative;
 }
 .item {
   position: absolute;
-  width: 550px;
-  height: 550px;
+  width: 35rem;
+  height: 35rem;
   line-height: 20px;
   margin: 50px;
   gap: 3rem;
@@ -35,4 +35,8 @@
 }
 .item.muuri-item-releasing .item-content {
   background: blueViolet;
+}
+
+.item.muuri-item-placeholder .card {
+  border-style: dashed;
 }
