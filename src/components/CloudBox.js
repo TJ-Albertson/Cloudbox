@@ -1,17 +1,19 @@
 import { React, useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
+import Muuri from "muuri";
 
 import NavBar from "./NavBar";
 import Box from "./Box";
 import Upload from "./Upload";
 import CheckListModal from "./CheckListModal";
 
-import "../CSS/CloudBox.css";
+import { boxModalOptions, shareModalOptions } from "./utils";
+
+//import "../CSS/CloudBox.css";
 import "../CSS/TestDrag.css";
 
 import { useApi } from "../hooks/useApi";
-import Muuri from "muuri";
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
@@ -21,11 +23,9 @@ export default function CloudBox() {
 
   const ref = useRef(null);
 
-  let grid = null;
-
   useEffect(() => {
     if (!isLoading && !loading) {
-      grid = new Muuri(ref.current, { dragEnabled: true });
+      let grid = new Muuri(ref.current, { dragEnabled: true });
       return () => grid.destroy();
     }
   }, [data]);
@@ -59,47 +59,31 @@ export default function CloudBox() {
       <NavBar email={user.name} showModal={showShareModal} />
 
       <CheckListModal
+        {...boxModalOptions}
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
-        headerimage="bi bi-box-fill"
-        headertext="Add Box"
-        headersubtext="These users have granted you access to their files"
         email={user.email}
         emailgroup={data.accessArray}
         refresh={refresh}
-        buttonimage="bi bi-plus-square"
-        buttontext="Add"
-        formtext="Request access"
-        formimage="bi bi-envelope-plus"
-        formfunction="box"
         token={token}
       />
 
       <CheckListModal
+        {...shareModalOptions}
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
-        headerimage="bi bi-people-fill"
-        headertext="Share Setting"
-        headersubtext="These users have access to your files"
         email={user.email}
         emailgroup={data.shareArray}
         refresh={refresh}
-        buttonimage="bi bi-trash3"
-        buttontext="Delete"
-        formtext="Email to share with"
-        formimage="bi bi-send-plus"
-        formfunction="share"
         token={token}
       />
 
       <div className="grid" ref={ref}>
         {data.boxArray.map((email) => (
-          <div className="item" key={email.toString()}>
-            <Box
-              id={email} 
-              email={email} 
-              token={token} 
-              refresh={refresh} />
+          <div className="item">
+            <div className="item-content">
+              <Box id={email} email={email} token={token} refresh={refresh} key={email.toString()} style={{width: "40rem", height: "40rem"}}/>
+            </div>  
           </div>
         ))}
         <div className="item">

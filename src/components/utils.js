@@ -1,48 +1,21 @@
-let uuid = 3;
-
-export function generateBoxes() {
-  const items = [];
-
-    const id = uuid++;
-    const title = "email" + id
-
-    items.push({ id, title });
-
-  return items;
+export const boxModalOptions = {
+  headerimage: "bi bi-box-fill",
+  headertext: "Add Box",
+  headersubtext: "These users have granted you access to their files",
+  buttonimage: "bi bi-plus-square",
+  buttontext: "Add",
+  formtext: "Request access",
+  formimage: "bi bi-envelope-plus",
+  formfunction: "box"
 }
 
-export function generateItems() {
-  const items = [];
-
-    const color = "blue"
-    const width = 2
-    const height = 2
-    const id = uuid++;
-    const title = id
-
-    items.push({ id, color, width, height, title });
-
-  return items;
+export const shareModalOptions = {
+  headerimage: "bi bi-people-fill",
+  headertext: "Share Setting",
+  headersubtext: "These users have access to your files",
+  buttonimage: "bi bi-trash3",
+  buttontext: "Delete",
+  formtext: "Email to share with",
+  formimage: "bi bi-send-plus",
+  formfunction: "share"
 }
-
-
-export const options = {
-  dragSortHeuristics: {
-    sortInterval: 70
-  },
-  layoutDuration: 400,
-  dragRelease: {
-    duration: 400,
-    easing: "ease-out"
-  },
-  dragEnabled: true,
-  dragContainer: document.body,
-  // The placeholder of an item that is being dragged.
-  dragPlaceholder: {
-    enabled: true,
-    createElement: function(item) {
-      // The element will have the Css class ".muuri-item-placeholder".
-      return item.getElement().cloneNode(true);
-    }
-  }
-};

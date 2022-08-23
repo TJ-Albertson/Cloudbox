@@ -30,7 +30,7 @@ export default function Box(props) {
   }
 
   return (
-    <Card className="Box">
+    <Card className="Box" style={{width: "40rem", height: "40rem"}}>
       <Card.Header className="d-flex">
         <div className="flex-grow-1">{props.id}</div>
         <CloseButton onClick={() => removeBox()} />
