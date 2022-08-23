@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import Muuri from "muuri";
@@ -14,6 +14,8 @@ import { boxModalOptions, shareModalOptions } from "./utils";
 import "../CSS/TestDrag.css";
 
 import { useApi } from "../hooks/useApi";
+
+const UserContext = React.createContext()
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
@@ -40,6 +42,13 @@ export default function CloudBox() {
     setBoxModalShow(true);
   };
 
+  const contextObject = {
+    userEmail: user.email,
+    userName: user.name,
+    token: token
+  }
+  
+
   if (isLoading && loading) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
@@ -55,7 +64,7 @@ export default function CloudBox() {
   }
 
   return (
-    <div>
+    <UserContext.Provider value={contextObject}>
       <NavBar email={user.name} showModal={showShareModal} />
 
       <CheckListModal
@@ -80,9 +89,9 @@ export default function CloudBox() {
 
       <div className="grid" ref={ref}>
         {data.boxArray.map((email) => (
-          <div className="item">
+          <div className="item" key={email.toString()}>
             <div className="item-content">
-              <Box id={email} email={email} token={token} refresh={refresh} key={email.toString()} style={{width: "40rem", height: "40rem"}}/>
+              <Box id={email} email={email} token={token} refresh={refresh} style={{width: "40rem", height: "40rem"}}/>
             </div>  
           </div>
         ))}
@@ -99,6 +108,6 @@ export default function CloudBox() {
           <i className="bi bi-plus-circle-fill"></i>
         </h1>
       </Button>
-    </div>
+    </UserContext.Provider>
   );
 }

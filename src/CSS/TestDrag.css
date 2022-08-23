@@ -3,12 +3,11 @@
   position: relative;
 }
 .item {
-
   display: block;
   position: absolute;
   width: 40rem;
   height: 40rem;
-  margin: 5px;
+  margin: 25px;
   z-index: 1;
   color: "black";
 }

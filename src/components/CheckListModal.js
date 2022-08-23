@@ -1,11 +1,11 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 
 import { postApi } from "../api/postApi";
 
 export default function CheckListModal(props) {
-
   const [emailTaken, setEmailTaken] = useState(false);
+  //const user = useContext(UserContext)
 
   async function shareEmail(e) {
     e.preventDefault();
