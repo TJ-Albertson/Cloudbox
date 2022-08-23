@@ -1,12 +1,14 @@
 .grid {
+    margin-top: 70px;
   position: relative;
 }
 .item {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  line-height: 200px;
-  margin: 5px;
+  width: 550px;
+  height: 550px;
+  line-height: 20px;
+  margin: 50px;
+  gap: 3rem;
   z-index: 1;
 }
 .item.muuri-item-hidden {

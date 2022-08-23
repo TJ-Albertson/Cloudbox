@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -11,16 +11,24 @@ import "../CSS/CloudBox.css";
 import "../CSS/TestDrag.css";
 
 import { useApi } from "../hooks/useApi";
-import TestDrag from "./TestDrag";
-
-
+import Muuri from "muuri";
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
-
   const { loading, token, refresh, data } = useApi(
     "http://localhost:5000/getGroup"
   );
+
+  const ref = useRef(null);
+
+  let grid = null;
+
+  useEffect(() => {
+    if (!isLoading && !loading) {
+      grid = new Muuri(ref.current, { dragEnabled: true });
+      return () => grid.destroy();
+    }
+  }, [data]);
 
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
@@ -84,23 +92,20 @@ export default function CloudBox() {
         token={token}
       />
 
-      
-      <div className="container Grid">
+      <div className="grid" ref={ref}>
         {data.boxArray.map((email) => (
-          <Box
-            key={email.toString()}
-            className="draggable"
-            draggable="true"
-            id={email}
-            email={email}
-            refresh={refresh}
-            token={token}
-          />
+          <div className="item" key={email.toString()}>
+            <Box 
+              id={email} 
+              email={email} 
+              token={token} 
+              refresh={refresh} />
+          </div>
         ))}
-        <Upload email={user.email} refresh={refresh} token={token}/>
+        <div className="item">
+          <Upload email={user.email} refresh={refresh} token={token} />
+        </div>
       </div>
-      
-      <TestDrag></TestDrag>
 
       <Button
         onClick={showBoxModal}

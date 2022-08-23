@@ -4,8 +4,9 @@ import "../CSS/TestDrag.css";
 import "../CSS/CloudBox.css";
 
 import Muuri from "muuri";
+import Box from "./Box";
 
-export default function TestDrag() {
+export default function TestDrag(props) {
   const ref = useRef(null)
   
   useEffect(() => {
@@ -14,15 +15,15 @@ export default function TestDrag() {
 
   return (
     <div className="grid" ref={ref}>
-      <div class="item">
-        <div class="item-content">This can be anything.</div>
-      </div>
 
-      <div class="item">
-        <div class="item-content">
-          <div class="my-custom-content">Yippee!</div>
-        </div>
-      </div>
+        {props.emailgroup.map((email) => (
+            <div className="item" key={email.toString()}>
+                <Box
+                    id={email}
+                    email={email}
+                />
+            </div> 
+        ))}
     </div>
   );
 }
