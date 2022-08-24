@@ -3,20 +3,9 @@
   border-radius: 4px;
 }
 
-.files-container {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.files-table {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-}
 
 tbody {
-  display: block;
-  height:40rem;
+  height: 40rem;
   overflow: auto;
 }
 
@@ -24,7 +13,3 @@ tr, td, th {
   border: 1px solid #ccc;
   padding: 10px;
 }
-
-.file-title {
-  width: 50%;
-} 

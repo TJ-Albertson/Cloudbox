@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 import Box from "./Box";
 import Upload from "./Upload";
 import CheckListModal from "./CheckListModal";
+import SortableTable from "./SortableTable";
 
 import { boxModalOptions, shareModalOptions } from "./utils";
 
@@ -20,7 +21,11 @@ const UserContext = React.createContext()
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
   const { loading, token, refresh, data } = useApi(
-    "http://localhost:5000/getGroup"
+    "http://localhost:5000/getGroup", {dummyData: {
+      boxArray: [],
+      accessArray: [],
+      shareArray: [],
+    }}
   );
 
   const ref = useRef(null);
@@ -88,16 +93,18 @@ export default function CloudBox() {
       />
 
       <div className="grid" ref={ref}>
-        {data.boxArray.map((email) => (
-          <div className="item" key={email.toString()}>
+        {data.boxArray.map((boxEmail) => (
+          <div className="item" key={boxEmail.toString()}>
             <div className="item-content">
-              <Box id={email} email={email} token={token} refresh={refresh} style={{width: "40rem", height: "40rem"}}/>
+              <Box 
+                id={boxEmail} 
+                email={boxEmail} 
+                userEmail={user.email} 
+                token={token} refresh={refresh} 
+                style={{width: "40rem", height: "40rem"}}/>
             </div>  
           </div>
         ))}
-        <div className="item">
-          <Upload email={user.email} refresh={refresh} token={token} />
-        </div>
       </div>
 
       <Button

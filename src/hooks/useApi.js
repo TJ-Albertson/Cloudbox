@@ -6,18 +6,14 @@ export const useApi = (url, options = {}) => {
   const [state, setState] = useState({
     token: null,
     loading: true,
-    data: {
-        boxArray: [],
-        accessArray: [],
-        shareArray: [],
-      },
+    data: options.dummyData
   });
   const [refreshIndex, setRefreshIndex] = useState(0);
 
   useEffect(() => {
     (async () => {
         const audience = 'http://localhost:5000'
-        const { scope, ...fetchOptions } = options;
+        const { scope, boxEmail, ...fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience });
         const res = await fetch(url, {
           ...fetchOptions,
