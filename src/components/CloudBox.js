@@ -7,14 +7,10 @@ import NavBar from "./NavBar";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
 
-import { boxModalOptions, shareModalOptions } from "./utils";
-
-//import "../CSS/CloudBox.css";
 import "../CSS/TestDrag.css";
 
+import { boxModalOptions, shareModalOptions } from "./utils";
 import { useApi } from "../hooks/useApi";
-
-const UserContext = React.createContext()
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
@@ -44,14 +40,7 @@ export default function CloudBox() {
   const showBoxModal = () => {
     setBoxModalShow(true);
   };
-
-  const contextObject = {
-    userEmail: user.email,
-    userName: user.name,
-    token: token
-  }
   
-
   if (isLoading && loading) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
@@ -67,7 +56,7 @@ export default function CloudBox() {
   }
 
   return (
-    <UserContext.Provider value={contextObject}>
+    <div>
       <NavBar email={user.name} showModal={showShareModal} />
 
       <CheckListModal
@@ -113,6 +102,6 @@ export default function CloudBox() {
           <i className="bi bi-plus-circle-fill"></i>
         </h1>
       </Button>
-    </UserContext.Provider>
+    </div>
   );
 }

@@ -5,7 +5,6 @@ import { postApi } from "../api/postApi";
 
 export default function CheckListModal(props) {
   const [emailTaken, setEmailTaken] = useState(false);
-  //const user = useContext(UserContext)
 
   async function shareEmail(e) {
     e.preventDefault();
