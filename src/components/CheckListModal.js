@@ -12,16 +12,19 @@ export default function CheckListModal(props) {
     const form = e.target;
 
     const data = new URLSearchParams({
-      'shareEmail': form[0].value
-    })
+      shareEmail: form[0].value,
+    });
 
-    postApi("/addShareEmail", data, props.token, 'application/x-www-form-urlencoded')
-    .then(props.refresh)
+    postApi(
+      "/addShareEmail",
+      data,
+      props.token,
+      "application/x-www-form-urlencoded"
+    ).then(props.refresh);
   }
 
-  //adding boxes and removing share emails
+  //for adding boxes and removing share emails
   async function postList(e, route) {
-    
     e.preventDefault();
     const form = e.target;
     const emails = [];
@@ -30,10 +33,11 @@ export default function CheckListModal(props) {
       if (form[i].checked) {
         emails.push(form[i].id);
       }
-    } 
-    
-    postApi(route, JSON.stringify(emails), props.token, {'Content-Type': 'application/json'})
-    .then(props.refresh)
+    }
+
+    postApi(route, JSON.stringify(emails), props.token, {
+      "Content-Type": "application/json",
+    }).then(props.refresh);
   }
 
   async function requestAccess(e) {

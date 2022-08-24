@@ -1,47 +1,14 @@
 import React from "react";
-import { Card, CloseButton, Table, Form, Stack } from "react-bootstrap";
+import { Card, CloseButton, Dropdown, DropdownButton } from "react-bootstrap";
 import download from "downloadjs";
+import { useSortableData } from "./utils";
 
-import "../CSS/Box.css";
 import "./styles.css";
 import Upload from "./Upload";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
 import { postApi } from "../api/postApi";
-
-const useSortableData = (items, config = null) => {
-  const [sortConfig, setSortConfig] = React.useState(config);
-  const sortedItems = React.useMemo(() => {
-    let sortableItems = [...items];
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [items, sortConfig]);
-
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "ascending"
-    ) {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
-
-  return { items: sortedItems, requestSort, sortConfig };
-};
 
 export default function Box(props) {
   const { loading, error, refresh, data } = useApi(
@@ -66,7 +33,6 @@ export default function Box(props) {
   }
 
   const { items, requestSort, sortConfig } = useSortableData(data);
-
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -74,57 +40,39 @@ export default function Box(props) {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
+  const headerArray = [
+    { text: "Name", sortBy: "name" },
+    { text: "Date", sortBy: "updatedAt" },
+    { text: "Type", sortBy: "mimeType" },
+    { text: "Size", sortBy: "size" },
+  ];
+
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
       <Card.Header className="d-flex">
-            <div className="flex-grow-1">{props.id}</div>
-            <CloseButton onClick={() => removeBox()} />
+        <div className="flex-grow-1">{props.id}</div>
+        <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
       <div className="overflow-auto">
-        <table>
-          <thead>
+        <table className="table">
+          <thead className="bg-light">
             <tr>
-              <th>
-                <button
-                  type="button"
-                  onClick={() => requestSort("name")}
-                  className={getClassNamesFor("name")}
-                >
-                  Name
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  onClick={() => requestSort("updatedAt")}
-                  className={getClassNamesFor("updatedAt")}
-                >
-                  Date
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  onClick={() => requestSort("mimeType")}
-                  className={getClassNamesFor("mimeType")}
-                >
-                  Type
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  onClick={() => requestSort("size")}
-                  className={getClassNamesFor("size")}
-                >
-                  Size
-                </button>
-              </th>
-              <th>Download</th>
+              {headerArray.map(({ text, sortBy }) => (
+                <th key={text}>
+                  <button
+                    type="button"
+                    onClick={() => requestSort(sortBy)}
+                    className={getClassNamesFor(sortBy)}
+                  >
+                    {text}
+                  </button>
+                </th>
+              ))}
+              <th></th>
             </tr>
           </thead>
-          <tbody className="overflow-auto">
+          <tbody className="">
             {items.length > 0 ? (
               items.map(({ _id, name, path, mimeType, size, updatedAt }) => (
                 <tr key={_id}>
@@ -133,12 +81,11 @@ export default function Box(props) {
                   <td>{mimeType}</td>
                   <td>{size} bytes</td>
                   <td>
-                    <a
-                      href="#/"
-                      onClick={() => downloadFile(_id, path, mimeType)}
-                    >
-                      Download
-                    </a>
+                    <DropdownButton drop="top" title="">
+                      <Dropdown.Item eventKey="1" onClick={() => downloadFile(_id, path, mimeType)}  className="drop">Download</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item eventKey="2">Delete</Dropdown.Item>
+                    </DropdownButton>
                   </td>
                 </tr>
               ))
@@ -153,8 +100,12 @@ export default function Box(props) {
         </table>
       </div>
 
+      <div className="flex-fill"></div>
+
       <Card.Footer>
-        {props.email == props.userEmail ? <Upload token={props.token} email={props.userEmail}></Upload> : null}
+        {props.email == props.userEmail ? (
+          <Upload token={props.token} email={props.userEmail}></Upload>
+        ) : null}
       </Card.Footer>
     </Card>
   );

@@ -5,8 +5,6 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login"
 import CloudBox from "./components/CloudBox"
 
-import './CSS/App.css'
-
 const ProtectedRoute = ({ component, ...args }) => {
   const Component = withAuthenticationRequired(component, args);
   return <Component />;

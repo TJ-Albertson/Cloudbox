@@ -8,7 +8,6 @@ export default function Upload(props) {
 
   function handleChange(event) {
     setFile(event.target.files[0]);
-    console.log(event.target.files[0]);
   }
 
   async function handleSubmit(event) {

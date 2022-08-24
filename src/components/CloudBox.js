@@ -5,9 +5,7 @@ import Muuri from "muuri";
 
 import NavBar from "./NavBar";
 import Box from "./Box";
-import Upload from "./Upload";
 import CheckListModal from "./CheckListModal";
-import SortableTable from "./SortableTable";
 
 import { boxModalOptions, shareModalOptions } from "./utils";
 
