@@ -1,10 +1,12 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
 
 import { postApi } from "../api/postApi";
+import { UserContext } from "./CloudBox"
 
-export default function Upload(props) {
+export default function Upload() {
   const [file, setFile] = useState();
+  const signedInUser = useContext(UserContext)
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -15,11 +17,11 @@ export default function Upload(props) {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("owner", props.email);
+    formData.append("owner", signedInUser.email);
     formData.append("name", file.name);
     formData.append("size", file.size); //bytes
 
-    await postApi("/upload", formData, props.token);
+    await postApi("/upload", formData, signedInUser.token);
   }
 
   return (

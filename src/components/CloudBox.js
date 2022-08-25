@@ -1,35 +1,35 @@
-import React, { useState, useEffect, useRef, createContext, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
-import Muuri from "muuri";
 
 import NavBar from "./NavBar";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
+import Menu from "./Menu"
 
 import "../CSS/TestDrag.css";
 
 import { boxModalOptions, shareModalOptions } from "./utils";
 import { useApi } from "../hooks/useApi";
+import { useMuuri } from "../hooks/useMuuri";
+
+export const UserContext = React.createContext();
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
+
   const { loading, token, refresh, data } = useApi(
-    "http://localhost:5000/getGroup", {dummyData: {
-      boxArray: [],
-      accessArray: [],
-      shareArray: [],
-    }}
+    "http://localhost:5000/getGroup",
+    {
+      dummyData: {
+        boxArray: [],
+        accessArray: [],
+        shareArray: [],
+      },
+    }
   );
 
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!isLoading && !loading) {
-      let grid = new Muuri(ref.current, { dragEnabled: true });
-      return () => grid.destroy();
-    }
-  }, [data]);
+  const { ref } = useMuuri(data);
 
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
@@ -40,7 +40,7 @@ export default function CloudBox() {
   const showBoxModal = () => {
     setBoxModalShow(true);
   };
-  
+
   if (isLoading && loading) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
@@ -56,40 +56,33 @@ export default function CloudBox() {
   }
 
   return (
-    <div>
-      <NavBar email={user.name} showModal={showShareModal} />
+    <UserContext.Provider
+      value={{ username: user.name, email: user.email, token: token }}
+    >
+      <NavBar showModal={showShareModal} />
 
       <CheckListModal
         {...boxModalOptions}
+        emailgroup={data.accessArray}
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
-        email={user.email}
-        emailgroup={data.accessArray}
         refresh={refresh}
-        token={token}
       />
 
       <CheckListModal
         {...shareModalOptions}
+        emailgroup={data.shareArray}
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
-        email={user.email}
-        emailgroup={data.shareArray}
         refresh={refresh}
-        token={token}
       />
 
       <div className="grid" ref={ref}>
         {data.boxArray.map((boxEmail) => (
           <div className="item" key={boxEmail.toString()}>
             <div className="item-content">
-              <Box 
-                id={boxEmail} 
-                email={boxEmail} 
-                userEmail={user.email} 
-                token={token} refresh={refresh} 
-                style={{width: "40rem", height: "40rem"}}/>
-            </div>  
+              <Box id={boxEmail} boxEmail={boxEmail} refresh={refresh} />
+            </div>
           </div>
         ))}
       </div>
@@ -102,6 +95,7 @@ export default function CloudBox() {
           <i className="bi bi-plus-circle-fill"></i>
         </h1>
       </Button>
-    </div>
+      <Menu />
+    </UserContext.Provider>
   );
 }

@@ -2,9 +2,11 @@ import { React, useState, useContext } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 
 import { postApi } from "../api/postApi";
+import { UserContext } from "./CloudBox";
 
 export default function CheckListModal(props) {
   const [emailTaken, setEmailTaken] = useState(false);
+  const signedInUser = useContext(UserContext);
 
   async function shareEmail(e) {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function CheckListModal(props) {
     postApi(
       "/addShareEmail",
       data,
-      props.token,
+      signedInUser.token,
       "application/x-www-form-urlencoded"
     ).then(props.refresh);
   }
@@ -34,7 +36,7 @@ export default function CheckListModal(props) {
       }
     }
 
-    postApi(route, JSON.stringify(emails), props.token, {
+    postApi(route, JSON.stringify(emails), signedInUser.token, {
       "Content-Type": "application/json",
     }).then(props.refresh);
   }

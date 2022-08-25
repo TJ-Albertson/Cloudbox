@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CloseButton, Dropdown, DropdownButton } from "react-bootstrap";
 import download from "downloadjs";
 import { useSortableData } from "./utils";
 
-import "./styles.css";
 import Upload from "./Upload";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
 import { postApi } from "../api/postApi";
+import { UserContext } from "./CloudBox"
+
+import "../CSS/Box.css";
 
 export default function Box(props) {
   const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList/${props.id}`,
     { dummyData: [] }
   );
+  const signedInUser = useContext(UserContext)
+  const { items, requestSort, sortConfig } = useSortableData(data);
 
   const downloadFile = async (id, path, mimetype) => {
-    const result = await getApi(`/downloadFile/${id}`, props.token);
-
+    const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
@@ -26,13 +29,12 @@ export default function Box(props) {
 
   async function removeBox() {
     const data = new URLSearchParams({
-      removeEmail: props.email,
+      removeEmail: props.boxEmail,
     });
-
-    postApi("/removeBox", data, props.token).then(props.refresh);
+    postApi("/removeBox", data, signedInUser.token).then(props.refresh);
   }
 
-  const { items, requestSort, sortConfig } = useSortableData(data);
+  
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -103,8 +105,8 @@ export default function Box(props) {
       <div className="flex-fill"></div>
 
       <Card.Footer>
-        {props.email == props.userEmail ? (
-          <Upload token={props.token} email={props.userEmail}></Upload>
+        {props.boxEmail == signedInUser.email ? (
+          <Upload></Upload>
         ) : null}
       </Card.Footer>
     </Card>

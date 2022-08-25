@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const useApi = (url, options = {}) => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const [state, setState] = useState({
     token: null,
     loading: true,
