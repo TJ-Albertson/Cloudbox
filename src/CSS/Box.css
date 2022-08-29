@@ -45,3 +45,13 @@ thead {
 .drop {
   z-index: 1000;
 }
+
+.muuri-item-placeholder {
+  display: flex;
+  position: absolute;
+  background: rgba(152, 203, 254, 0.559);
+  z-index: 1;
+  margin: 0;
+  opacity: 0.5;
+  border-style: dashed;
+}
