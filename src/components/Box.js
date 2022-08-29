@@ -4,6 +4,7 @@ import download from "downloadjs";
 import { useSortableData } from "./utils";
 
 import Upload from "./Upload";
+import Menu from "./Menu"
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
@@ -13,6 +14,7 @@ import { UserContext } from "./CloudBox"
 import "../CSS/Box.css";
 
 export default function Box(props) {
+
   const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList/${props.id}`,
     { dummyData: [] }
@@ -89,6 +91,7 @@ export default function Box(props) {
                       <Dropdown.Item eventKey="2">Delete</Dropdown.Item>
                     </DropdownButton>
                   </td>
+                  <Menu></Menu>
                 </tr>
               ))
             ) : (
@@ -100,6 +103,7 @@ export default function Box(props) {
             )}
           </tbody>
         </table>
+        
       </div>
 
       <div className="flex-fill"></div>

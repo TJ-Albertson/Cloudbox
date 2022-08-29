@@ -94,8 +94,9 @@ export default function CloudBox() {
         <h1>
           <i className="bi bi-plus-circle-fill"></i>
         </h1>
+        
       </Button>
-      <Menu />
+      
     </UserContext.Provider>
   );
 }
