@@ -4,7 +4,6 @@ import download from "downloadjs";
 import { useSortableData } from "./utils";
 
 import Upload from "./Upload";
-import Menu from "./Menu"
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
@@ -92,7 +91,6 @@ export default function Box(props) {
                       <Dropdown.Item eventKey="2">Delete</Dropdown.Item>
                     </DropdownButton>
                   </td>
-                  <Menu></Menu>
                 </tr>
               ))
             ) : (
