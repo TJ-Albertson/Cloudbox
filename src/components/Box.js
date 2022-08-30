@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Card, CloseButton, Dropdown, DropdownButton } from "react-bootstrap";
+import { Card, CloseButton, Dropdown, DropdownButton, Image } from "react-bootstrap";
 import download from "downloadjs";
 import { useSortableData } from "./utils";
 
@@ -54,6 +54,7 @@ export default function Box(props) {
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
       <Card.Header className="d-flex">
+      <Image src={props.picture} roundedCircle="true" style={{ width: "2rem", height: "2rem", marginRight: "10px" }}/>
         <div className="flex-grow-1">{props.id}</div>
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>

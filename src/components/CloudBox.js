@@ -81,7 +81,7 @@ export default function CloudBox() {
         {data.boxArray.map((boxEmail) => (
           <div className="item" key={boxEmail.toString()}>
             <div className="item-content">
-              <Box id={boxEmail} boxEmail={boxEmail} refresh={refresh} />
+              <Box id={boxEmail} boxEmail={boxEmail} refresh={refresh} picture={user.picture}/>
             </div>
           </div>
         ))}
