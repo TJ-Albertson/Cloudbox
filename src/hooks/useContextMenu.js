@@ -1,7 +1,9 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
+import ContextMenu from "../scripts/ContextMenu"
+import "../CSS/ContextMenu.css"
 
 export const useContextMenu = () => {
-  const ref = useRef([]);
+  const refArray = useRef([null]);;
 
   useEffect(() => {
     //need to absract icons
@@ -29,14 +31,18 @@ export const useContextMenu = () => {
       },
     ];
 
-    const light = new ContextMenu({
-      target: ".target-light",
-      mode: "light", // default: "dark"
-      menuItems,
-    });
+    console.log(refArray.current)
 
-    light.init();
+
+    const array = [".item-1", ".item-2"]
+
+    array.forEach(val =>
+      new ContextMenu({
+        target: val,
+        menuItems
+      }).init()
+    )
   });
 
-  return { ref };
+  return { refArray };
 };

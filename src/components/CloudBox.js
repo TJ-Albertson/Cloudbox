@@ -5,7 +5,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./NavBar";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
-import Menu from "./Menu"
 
 import "../CSS/TestDrag.css";
 

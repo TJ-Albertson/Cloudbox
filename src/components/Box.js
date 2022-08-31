@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Card, CloseButton, Dropdown, DropdownButton, Image } from "react-bootstrap";
 import download from "downloadjs";
 import { useSortableData } from "./utils";
@@ -7,10 +7,12 @@ import Upload from "./Upload";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
+import { useContextMenu } from "../hooks/useContextMenu"
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox"
 
 import "../CSS/Box.css";
+import "../CSS/ContextMenu.css"
 
 export default function Box(props) {
 
@@ -50,6 +52,20 @@ export default function Box(props) {
     { text: "Size", sortBy: "size" },
   ];
 
+
+
+
+
+  //const refArray = useRef([]);;
+
+  const { refArray } = useContextMenu()
+
+
+
+
+
+
+
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
       <Card.Header className="d-flex">
@@ -78,8 +94,8 @@ export default function Box(props) {
           </thead>
           <tbody className="">
             {items.length > 0 ? (
-              items.map(({ _id, name, path, mimeType, size, updatedAt }) => (
-                <tr key={_id}>
+              items.map(({ _id, name, path, mimeType, size, updatedAt }, i) => (
+                <tr key={_id} className={"item-" + i}>
                   <td>{name}</td>
                   <td>{updatedAt.substring(0, 10)}</td>
                   <td>{mimeType}</td>
