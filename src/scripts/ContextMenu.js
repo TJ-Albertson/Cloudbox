@@ -1,3 +1,5 @@
+import "../CSS/ContextMenu.css"
+
 export default class ContextMenu {
     constructor({ target = null, menuItems = [], mode = "dark" }) {
       this.target = target;
