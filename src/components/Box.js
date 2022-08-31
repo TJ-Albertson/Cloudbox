@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { Card, CloseButton, Dropdown, DropdownButton, Image } from "react-bootstrap";
+import { Card, CloseButton, Container, Dropdown, DropdownButton, Image, Row, Col } from "react-bootstrap";
 import download from "downloadjs";
 import { useSortableData } from "./utils";
 
@@ -13,6 +13,7 @@ import { UserContext } from "./CloudBox"
 
 import "../CSS/Box.css";
 import "../CSS/ContextMenu.css"
+import { Collapse } from "bootstrap";
 
 export default function Box(props) {
 
@@ -58,7 +59,7 @@ export default function Box(props) {
 
   //const refArray = useRef([]);;
 
-  const { refArray } = useContextMenu()
+  const { refArray } = useContextMenu(items)
 
 
 
@@ -74,12 +75,10 @@ export default function Box(props) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-      <div className="overflow-auto">
-        <table className="table">
-          <thead className="bg-light">
-            <tr>
+      <Container className="overflow-auto" style={{ fontSize: "10px" }}>
+          <Row>
               {headerArray.map(({ text, sortBy }) => (
-                <th key={text}>
+                <Col key={text}>
                   <button
                     type="button"
                     onClick={() => requestSort(sortBy)}
@@ -87,40 +86,34 @@ export default function Box(props) {
                   >
                     {text}
                   </button>
-                </th>
+                </Col>
               ))}
-              <th></th>
-            </tr>
-          </thead>
-          <tbody className="">
+            </Row>
+            
             {items.length > 0 ? (
               items.map(({ _id, name, path, mimeType, size, updatedAt }, i) => (
-                <tr key={_id} className={"item-" + i}>
-                  <td>{name}</td>
-                  <td>{updatedAt.substring(0, 10)}</td>
-                  <td>{mimeType}</td>
-                  <td>{size} bytes</td>
-                  <td>
-                    <DropdownButton drop="top" title="">
-                      <Dropdown.Item eventKey="1" onClick={() => downloadFile(_id, path, mimeType)}  className="drop">Download</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item eventKey="2">Delete</Dropdown.Item>
-                    </DropdownButton>
-                  </td>
-                </tr>
+                <Row key={_id} >
+                  <Col><i className="bi bi-folder"></i> {name}</Col>
+                  <Col>{updatedAt.substring(0, 10)}</Col>
+                  <Col>{mimeType}</Col>
+                  <Col>{size} bytes</Col>
+                </Row>
               ))
             ) : (
-              <tr>
-                <td colSpan={5} style={{ fontWeight: "300" }}>
+                <div colSpan={5} style={{ fontWeight: "300" }}>
                   This user has no files uploaded
-                </td>
-              </tr>
+                </div>
             )}
-          </tbody>
-        </table>
-        
-      </div>
+      {["item-1"].map((item, i) => (
+        <div  key={i}>
+          <div className={item}>Test</div>
+          <div>Test2</div>
+        </div>
+      ))}
 
+      
+
+    </Container>          
       <div className="flex-fill"></div>
 
       <Card.Footer>

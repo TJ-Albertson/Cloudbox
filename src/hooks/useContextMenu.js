@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState, useRef } from "react";
 import ContextMenu from "../scripts/ContextMenu"
 import "../CSS/ContextMenu.css"
 
-export const useContextMenu = () => {
+export const useContextMenu = (data) => {
   const refArray = useRef([null]);;
 
   useEffect(() => {
@@ -39,10 +39,11 @@ export const useContextMenu = () => {
     array.forEach(val =>
       new ContextMenu({
         target: val,
+        mode: "light",
         menuItems
       }).init()
     )
-  });
+  }, [data])
 
   return { refArray };
 };
