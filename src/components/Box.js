@@ -7,18 +7,16 @@ import Upload from "./Upload";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
-import { useContextMenu } from "../hooks/useContextMenu";
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
 import "../CSS/Box.css";
 import "../CSS/ContextMenu.css";
-import { Collapse } from "bootstrap";
 
 export default function Box(props) {
   const [show, setShow] = useState(false);
   const [points, setPoints] = useState({ x: 0, y: 0 });
-  const [selectedFile, setSelectedFile] = useState({})
+  const [selectedFile, setSelectedFile] = useState({});
 
   const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList/${props.id}`,
@@ -74,8 +72,8 @@ export default function Box(props) {
 
       <Container className="overflow-auto" style={{ fontSize: "10px" }}>
         <Row>
-          {headerArray.map(({ text, sortBy }) => (
-            <Col key={text}>
+          {headerArray.map(({ text, sortBy }, i) => (
+            <Col key={i}>
               <button
                 type="button"
                 onClick={() => requestSort(sortBy)}
@@ -95,7 +93,7 @@ export default function Box(props) {
               onContextMenu={(e) => {
                 e.preventDefault();
                 setShow(true);
-                setSelectedFile({ _id, path, mimeType})
+                setSelectedFile({ _id, path, mimeType });
                 setPoints({ x: e.pageX, y: e.pageY });
               }}
             >
@@ -118,15 +116,10 @@ export default function Box(props) {
             style={{ top: points.y - 125, left: points.x - 25 }}
           >
             <ul>
-              <li>
-                <input
-                  type="button"
-                  value="delete"
-                  onClick={() => console.log(selectedFile)}
-                />
-              </li>
-              <li>Pin Message</li>
-              <li>Edit Message</li>
+              <li>Download</li>
+              <li>Rename</li>
+              <hr></hr>
+              <li onClick={() => console.log(selectedFile)}>Delete</li>
             </ul>
           </div>
         )}
