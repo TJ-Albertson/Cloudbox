@@ -5,7 +5,7 @@
 }
 
 .test:hover {
-  background-color: black;
+  background-color: rgba(128, 128, 128, 0.244);
 }
 
 .drop {
@@ -22,3 +22,39 @@
   border-style: dashed;
 }
 
+
+.message {
+  border: 1px solid #ffffff2d;
+  border-radius: 4px;
+  padding: 18px;
+  box-sizing: border-box;
+  margin: 5px 0;
+}
+
+.menu {
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  background-color: #383838;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  top: var(--top);
+  left: var(--left);
+}
+
+ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+}
+
+ul li {
+  padding: 18px 12px;
+  border-radius: 4px;
+}
+
+ul li:hover {
+  cursor: pointer;
+  background-color: #4b4b4b;
+}
