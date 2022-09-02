@@ -8,8 +8,8 @@ export const boxModalOptions = {
   buttontext: "Add",
   formtext: "Request access",
   formimage: "bi bi-envelope-plus",
-  formfunction: "box"
-}
+  formfunction: "box",
+};
 
 export const shareModalOptions = {
   headerimage: "bi bi-people-fill",
@@ -19,8 +19,8 @@ export const shareModalOptions = {
   buttontext: "Delete",
   formtext: "Email to share with",
   formimage: "bi bi-send-plus",
-  formfunction: "share"
-}
+  formfunction: "share",
+};
 
 export const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
