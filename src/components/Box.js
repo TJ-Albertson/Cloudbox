@@ -59,7 +59,7 @@ export default function Box(props) {
 
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
-      <Card.Header className="handle d-flex">
+      <Card.Header className=".handle d-flex">
         <Image
           src={props.picture}
           roundedCircle="true"
