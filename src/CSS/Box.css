@@ -8,12 +8,25 @@
   background-color: rgba(128, 128, 128, 0.244);
 }
 
-.test:focus {
+.test:active {
   background-color: rgba(128, 128, 128, 0.244);
 }
 
 .drop {
   z-index: 1000;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+.headerColumn {
+  padding: 0px;
+}
+
+.headerColumn:hover {
+  background-color: rgba(128, 128, 128, 0.26);
 }
 
 .muuri-item-placeholder {
@@ -28,26 +41,26 @@
 
 .menu {
   border-radius: 4px;
-  box-sizing: border-box;
   position: absolute;
-  width: 100px;
-  background-color: #383838;
   box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
 }
 
-ul {
-  padding: 0;
+.bootstrap-overrides {
+  padding: 7px;
   list-style-type: none;
-  box-sizing: border-box;
   margin: 0;
 }
 
+.hr-override {
+  margin: 7px;
+}
+
 ul li {
-  padding: 9px 6px;
+  padding: 5px;
   border-radius: 4px;
 }
 
 ul li:hover {
   cursor: pointer;
-  background-color: #4b4b4b;
+  background-color: rgba(128, 128, 128, 0.244);
 }

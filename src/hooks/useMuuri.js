@@ -7,6 +7,7 @@ export const useMuuri = (data) => {
   useEffect(() => {
     let grid = new Muuri(ref.current, { 
       dragEnabled: true,
+      dragHandle: '.handle',
       dragPlaceholder: {
         enabled: true,
         createElement(item) {

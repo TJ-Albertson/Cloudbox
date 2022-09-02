@@ -7,6 +7,7 @@ import Box from "./Box";
 import CheckListModal from "./CheckListModal";
 
 import "../CSS/TestDrag.css";
+import "../CSS/Box.css";
 
 import { boxModalOptions, shareModalOptions } from "./utils";
 import { useApi } from "../hooks/useApi";
@@ -32,6 +33,16 @@ export default function CloudBox() {
 
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
+
+  useEffect(() => {
+    const handleClick = () => setShowContextMenu(false);
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
+
+  const [points, setPoints] = useState({ x: 0, y: 0 });
+  const [selectedFile, setSelectedFile] = useState({});
+  const [showContextMenu, setShowContextMenu] = useState(false);
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -80,7 +91,15 @@ export default function CloudBox() {
         {data.boxArray.map((boxEmail) => (
           <div className="item" key={boxEmail.toString()}>
             <div className="item-content">
-              <Box id={boxEmail} boxEmail={boxEmail} refresh={refresh} picture={user.picture}/>
+              <Box
+                id={boxEmail}
+                boxEmail={boxEmail}
+                refresh={refresh}
+                picture={user.picture}
+                setPoints={setPoints}
+                setSelectedFile={setSelectedFile}
+                setShowContextMenu={setShowContextMenu}
+              />
             </div>
           </div>
         ))}
@@ -93,9 +112,21 @@ export default function CloudBox() {
         <h1>
           <i className="bi bi-plus-circle-fill"></i>
         </h1>
-        
       </Button>
-      
+
+      {showContextMenu && (
+        <div
+          className="menu"
+          style={{ top: points.y, left: points.x, zIndex: 4}}
+        >
+          <ul className="bootstrap-overrides">
+            <li><i className="bi bi-download"></i> Download</li>
+            <li><i className="bi bi-pencil-square"></i> Rename</li>
+            <hr className="hr-override"></hr>
+            <li onClick={() => console.log(selectedFile)}><i className="bi bi-trash"></i> Delete</li>
+          </ul>
+        </div>
+      )}
     </UserContext.Provider>
   );
 }

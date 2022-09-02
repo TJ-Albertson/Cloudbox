@@ -1,5 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, CloseButton, Container, Image, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  CloseButton,
+  Container,
+  Image,
+  Row,
+  Col,
+  ListGroup,
+} from "react-bootstrap";
 import download from "downloadjs";
 import { useSortableData } from "./utils";
 
@@ -11,24 +19,15 @@ import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
 import "../CSS/Box.css";
-import "../CSS/ContextMenu.css";
+//import "../CSS/ContextMenu.css";
 
 export default function Box(props) {
-  const [show, setShow] = useState(false);
-  const [points, setPoints] = useState({ x: 0, y: 0 });
-  const [selectedFile, setSelectedFile] = useState({});
-
   const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList/${props.id}`,
     { dummyData: [] }
   );
   const signedInUser = useContext(UserContext);
   const { items, requestSort, sortConfig } = useSortableData(data);
-  useEffect(() => {
-    const handleClick = () => setShow(false);
-    window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("click", handleClick);
-  }, []);
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
@@ -60,7 +59,7 @@ export default function Box(props) {
 
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
-      <Card.Header className="d-flex">
+      <Card.Header className="handle d-flex">
         <Image
           src={props.picture}
           roundedCircle="true"
@@ -70,17 +69,16 @@ export default function Box(props) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-      <Container className="overflow-auto" style={{ fontSize: "10px" }}>
-        <Row>
+      <Container className="overflow-auto" style={{ fontSize: "15px" }}>
+        <Row className="mb-1">
           {headerArray.map(({ text, sortBy }, i) => (
-            <Col key={i}>
-              <button
-                type="button"
-                onClick={() => requestSort(sortBy)}
-                className={getClassNamesFor(sortBy)}
-              >
-                {text}
-              </button>
+            <Col
+              key={i}
+              className="headerColumn d-flex p-0"
+              onClick={() => requestSort(sortBy)}
+            >
+              <div className="flex-fill ps-2">{text}</div>
+              <div className="vr"></div>
             </Col>
           ))}
         </Row>
@@ -92,35 +90,22 @@ export default function Box(props) {
               className="test"
               onContextMenu={(e) => {
                 e.preventDefault();
-                setShow(true);
-                setSelectedFile({ _id, path, mimeType });
-                setPoints({ x: e.pageX, y: e.pageY });
+                props.setShowContextMenu(true);
+                props.setSelectedFile({ _id, path, mimeType });
+                props.setPoints({ x: e.pageX, y: e.pageY });
               }}
             >
-              <Col>
+              <Col className="text-truncate">
                 <i className="bi bi-folder"></i> {name}
               </Col>
               <Col>{updatedAt.substring(0, 10)}</Col>
               <Col>{mimeType}</Col>
-              <Col>{size} bytes</Col>
+              <Col className="text-end">{size} bytes</Col>
             </Row>
           ))
         ) : (
           <div colSpan={5} style={{ fontWeight: "300" }}>
             This user has no files uploaded
-          </div>
-        )}
-        {show && (
-          <div
-            className="menu"
-            style={{ top: points.y - 125, left: points.x - 25 }}
-          >
-            <ul>
-              <li>Download</li>
-              <li>Rename</li>
-              <hr></hr>
-              <li onClick={() => console.log(selectedFile)}>Delete</li>
-            </ul>
           </div>
         )}
       </Container>
