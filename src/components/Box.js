@@ -27,7 +27,12 @@ export default function Box(props) {
     { dummyData: [] }
   );
   const signedInUser = useContext(UserContext);
+
+  console.log(data)
+
   const { items, requestSort, sortConfig } = useSortableData(data);
+
+  const [path, setPath] = useState()
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
@@ -69,7 +74,7 @@ export default function Box(props) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-      <Container className="overflow-auto" style={{ fontSize: "15px" }}>
+      <Container style={{ fontSize: "15px" }}>
         <Row className="mb-1">
           {headerArray.map(({ text, sortBy }, i) => (
             <Col
@@ -82,7 +87,9 @@ export default function Box(props) {
             </Col>
           ))}
         </Row>
-
+      </Container>
+      
+      <Container className="overflow-auto">
         {items.length > 0 ? (
           items.map(({ _id, name, path, mimeType, size, updatedAt }, i) => (
             <Row
@@ -96,7 +103,7 @@ export default function Box(props) {
               }}
             >
               <Col className="text-truncate">
-                <i className="bi bi-folder"></i> {name}
+                <i className="bi bi-file-earmark-text"></i> {name}
               </Col>
               <Col>{updatedAt.substring(0, 10)}</Col>
               <Col>{mimeType}</Col>
