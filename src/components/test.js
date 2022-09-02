@@ -61,12 +61,15 @@ const obj = {[
     return (
       <div className="App">
         <h1>Hello CodeSandbox</h1>
-        <div className="file" onClick={() => setLocation(fileObject)}>
-          Back to Start
-        </div>
-  
         {history.map((val, i) => (
-          <div key={i} className="nav" onClick={() => setLocation(val)}>
+          <div
+            key={i}
+            className="nav"
+            onClick={() => {
+              setLocation(val);
+              setHistory([...history.slice(0, i + 1)]);
+            }}
+          >
             /{val.name}
           </div>
         ))}
@@ -93,4 +96,3 @@ const obj = {[
       </div>
     );
   }
-  
