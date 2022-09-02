@@ -29,60 +29,68 @@ const obj = {[
 
 
   import React, { useEffect, useState } from "react";
-import "./styles.css";
-
-const fileObject = {
-  folders: [
-    {
-      name: "movies",
-      folders: [
-        {
-          name: "harry potter",
-          folders: [],
-          files: [{ name: "harrypotter.mkv" }]
-        }
-      ],
-      files: []
-    },
-    {
-      name: "pictures",
-      folders: [],
-      files: [{ name: "image.png" }]
-    }
-  ],
-  files: [{ name: "picture.jpg" }, { name: "words.txt" }, { name: "movie.mp4" }]
-};
-
-export default function App() {
-  const [location, setLocation] = useState(fileObject);
-  const [history, setHistory] = useState([])
-
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <div className="file" onClick={() => setLocation(fileObject)}>
-        Back to Start
-      </div>
-      <div style={{ width: "150px" }}>
-        {location.folders.map(({ name }, i) => (
-          <div
-            key={i}
-            className="file"
-            onClick={() => {
-              setHistory(history.push(location))
-              console.log(history)
-              setLocation(location.folders[i])
-            }}
-          >
-            folder: {name}
+  import "./styles.css";
+  
+  const fileObject = {
+    name: "main",
+    folders: [
+      {
+        name: "movies",
+        folders: [
+          {
+            name: "harry potter",
+            folders: [],
+            files: [{ name: "harrypotter.mkv" }]
+          }
+        ],
+        files: []
+      },
+      {
+        name: "pictures",
+        folders: [],
+        files: [{ name: "image.png" }]
+      }
+    ],
+    files: [{ name: "picture.jpg" }, { name: "words.txt" }, { name: "movie.mp4" }]
+  };
+  
+  export default function App() {
+    const [location, setLocation] = useState(fileObject);
+    const [history, setHistory] = useState([fileObject]);
+  
+    return (
+      <div className="App">
+        <h1>Hello CodeSandbox</h1>
+        <div className="file" onClick={() => setLocation(fileObject)}>
+          Back to Start
+        </div>
+  
+        {history.map((val, i) => (
+          <div key={i} className="nav" onClick={() => setLocation(val)}>
+            /{val.name}
           </div>
         ))}
-        {location.files.map(({ name }, i) => (
-          <div key={i} className="file">
-            file: {name}
-          </div>
-        ))}
+  
+        <div style={{ width: "150px" }}>
+          {location.folders.map(({ name }, i) => (
+            <div
+              key={i}
+              className="file"
+              onClick={() => {
+                setLocation(location.folders[i]);
+                setHistory((history) => [...history, location.folders[i]]);
+              }}
+            >
+              folder: {name}
+            </div>
+          ))}
+          {location.files.map(({ name }, i) => (
+            <div key={i} className="file">
+              file: {name}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+  
