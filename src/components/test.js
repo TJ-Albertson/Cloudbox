@@ -1,16 +1,30 @@
-const obj = {[
-    "picture.jpg": {
-      type:"file"
-    },
-    misc: {
-      "words.txt": "123456",
-      movies: {
-        "madmax.mp4": "09823",
-        "harrypotter.mkv": "75623",
-      },
-    },
-  ]};
-  
+const fileObject = {
+  name: "main",
+  folders: [],
+  files: []
+};
+
+const folderObject = {
+  name: folderName,
+  folders: [],
+  files: []
+}
+
+function newFolder(folderName) {
+  location.folders.push({
+    name: folderName,
+    folders: [],
+    files: []
+  })
+}
+
+function newFile(fileName) {
+  location.files.push({
+    name: fileName
+  })
+}
+
+
   setPath(fileObj.folders[0].folders[0].files[0])
   
   navback = () => {
@@ -25,6 +39,8 @@ const obj = {[
   {fileObj.files.map(({name}, i) => (
     <div key={i}>{name}</div>
   ))}
+
+
 
 
 
@@ -96,3 +112,6 @@ const obj = {[
       </div>
     );
   }
+
+
+
