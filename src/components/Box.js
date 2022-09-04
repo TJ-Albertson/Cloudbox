@@ -73,8 +73,6 @@ export default function Box(props) {
 
   //console.log(data)
 
-  
-
   const downloadFile = async (id, path, mimetype) => {
     const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
     const split = path.split("/");
@@ -89,13 +87,6 @@ export default function Box(props) {
     postApi("/removeBox", data, signedInUser.token).then(props.refresh);
   }
 
-  const getClassNamesFor = (name) => {
-    if (!sortConfig) {
-      return;
-    }
-    return sortConfig.key === name ? sortConfig.direction : undefined;
-  };
-
   const headerArray = [
     { text: "Name", sortBy: "name" },
     { text: "Date", sortBy: "updatedAt" },
@@ -106,8 +97,24 @@ export default function Box(props) {
   const [location, setLocation] = useState(fileObject);
   const [history, setHistory] = useState([fileObject]);
 
-  //const { items, requestSort, sortConfig } = useSortableData(location.folders);
-  const { items, requestSort, sortConfig } = useSortableData(location.files);
+  //const { items, requestSort, sortConfig } = useSortableData(location.files);
+
+  function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+function nameSort(string) {
+  location.files.sort(dynamicSort(string))
+  location.folders.sort(dynamicSort(string))
+}
 
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
@@ -135,13 +142,14 @@ export default function Box(props) {
           </div>
         ))}
       </div>
+
       <Container style={{ fontSize: "15px" }}>
         <Row className="mb-1">
           {headerArray.map(({ text, sortBy }, i) => (
             <Col
               key={i}
               className="headerColumn d-flex p-0"
-              onClick={() => requestSort(sortBy)}
+              onClick={() => nameSort(sortBy)}
             >
               <div className="flex-fill ps-2">{text}</div>
               <div className="vr"></div>
@@ -163,39 +171,35 @@ export default function Box(props) {
             <Col>
               <i className="bi bi-folder"></i> {name}
             </Col>
-            <Col>
-              {mimeType}
-            </Col>
+            <Col>{mimeType}</Col>
           </Row>
         ))}
-        {items.length > 0 ? (
-          items.map(
-            ({ _id, name, path, mimeType, size, updatedAt }, i) => (
-              <Row
-                key={i}
-                className="test"
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                  props.setShowContextMenu(true);
-                  props.setSelectedFile({ _id, path, mimeType });
-                  props.setPoints({ x: e.pageX, y: e.pageY });
-                }}
-              >
-                <Col className="text-truncate">
-                  <i className="bi bi-file-earmark-text"></i> {name}
-                </Col>
-                <Col>{updatedAt /*.substring(0, 10)*/}</Col>
-                <Col>{mimeType}</Col>
-                <Col className="text-end">{size} bytes</Col>
-              </Row>
-            )
-          )
+
+        {location.files.length > 0 ? (
+          location.files.map(({ _id, name, path, mimeType, size, updatedAt }, i) => (
+            <Row
+              key={i}
+              className="test"
+              onContextMenu={(e) => {
+                e.preventDefault();
+                props.setShowContextMenu(true);
+                props.setSelectedFile({ _id, path, mimeType });
+                props.setPoints({ x: e.pageX, y: e.pageY });
+              }}
+            >
+              <Col className="text-truncate">
+                <i className="bi bi-file-earmark-text"></i> {name}
+              </Col>
+              <Col>{updatedAt /*.substring(0, 10)*/}</Col>
+              <Col>{mimeType}</Col>
+              <Col className="text-end">{size} bytes</Col>
+            </Row>
+          ))
         ) : (
-          <div colSpan={5} style={{ fontWeight: "300" }}>
-            This user has no files uploaded
-          </div>
+          <div>no files</div>
         )}
       </Container>
+
       <div className="flex-fill"></div>
 
       <Card.Footer>
