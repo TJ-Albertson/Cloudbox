@@ -131,3 +131,50 @@ function dynamicSort(property) {
 function nameSort() {
   setLocation(location.sort(dynamicSort("name")))
 }
+
+
+
+const fileObject = {
+  name: "main",
+  folders: [
+    {
+      name: "movies",
+      mimeType: "File folder",
+      folders: [
+        {
+          name: "harry potter",
+          folders: [],
+          files: [
+            {
+              name: "harrypotter.mp4",
+              updatedAt: "today",
+              mimeType: "mp4",
+              size: "10MB",
+            },
+          ],
+        },
+      ],
+      files: [],
+    },
+    {
+      name: "pictures",
+      mimeType: "File folder",
+      folders: [],
+      files: [
+        {
+          name: "image.jpg",
+          updatedAt: "today",
+          mimeType: "jpg",
+          size: "10MB",
+        },
+      ],
+    },
+  ],
+  files: [
+    { name: "picture.jpg", updatedAt: "today", mimeType: "jpg", size: "10MB" },
+    { name: "words.txt", updatedAt: "today", mimeType: "txt", size: "10MB" },
+    { name: "movie.mp4", updatedAt: "today", mimeType: "mp4", size: "10MB" },
+    { name: "movie2.mp4", updatedAt: "today", mimeType: "mp4", size: "10MB" },
+    { name: "video.mkv", updatedAt: "today", mimeType: "mkv", size: "10MB" },
+  ],
+};
