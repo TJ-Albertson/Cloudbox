@@ -28,6 +28,15 @@ export default function FileList(props) {
     }
   }
 
+  function newFolder() {
+    location.folders.push({
+      name: "New Folder",
+      folders: [],
+      files: []
+    })
+    console.log(history[0])
+  }
+
   return (
     <div>
       <div className="d-flex flex-row ps-1 border-bottom border-grey">
@@ -69,6 +78,12 @@ export default function FileList(props) {
               setLocation(location.folders[i]);
               setHistory((history) => [...history, location.folders[i]]);
             }}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              props.setShowContextMenu(true);
+              props.setContextMenuType("folder");
+              props.setPoints({ x: e.pageX, y: e.pageY });
+            }}
           >
             <Col>
               <i className="bi bi-folder"></i> {name}
@@ -85,6 +100,7 @@ export default function FileList(props) {
               onContextMenu={(e) => {
                 e.preventDefault();
                 props.setShowContextMenu(true);
+                props.setContextMenuType("file")
                 props.setSelectedFile({ _id, path, mimeType });
                 props.setPoints({ x: e.pageX, y: e.pageY });
               }}
@@ -101,6 +117,7 @@ export default function FileList(props) {
           <div>no files</div>
         )}
       </Container>
+      <input type="button" value="new folder" onClick={newFolder}/>
     </div>
   );
 }

@@ -178,3 +178,86 @@ const fileObject = {
     { name: "video.mkv", updatedAt: "today", mimeType: "mkv", size: "10MB" },
   ],
 };
+
+
+
+
+{location.folders.map(({ name, mimeType }, i) => (
+  <Row
+    key={i}
+    className="test"
+    onClick={() => {
+      setLocation(location.folders[i]);
+      setHistory((history) => [...history, location.folders[i]]);
+    }}
+  >
+    <Col>
+      <i className="bi bi-folder"></i> {name}
+    </Col>
+    <Col>{mimeType}</Col>
+  </Row>
+))}
+
+{location.files.map(({ _id, name, path, mimeType, size, updatedAt }, i) => {
+
+
+}}
+      <Row
+        key={i}
+        className="test"
+        onContextMenu={(e) => {
+          e.preventDefault();
+          props.setShowContextMenu(true);
+          props.setSelectedFile({ _id, path, mimeType });
+          props.setPoints({ x: e.pageX, y: e.pageY });
+        }}
+      >
+        <Col className="text-truncate">
+          <FileImage value={mimeType} /> {name}
+        </Col>
+        <Col>{updatedAt /*.substring(0, 10)*/}</Col>
+        <Col>{mimeType}</Col>
+        <Col className="text-end">{size} bytes</Col>
+      </Row>
+    )
+  )
+) : (
+  <div>no files</div>
+)}
+
+
+{location.files.map(({ _id, name, path, mimeType, size, updatedAt }, i) => {
+  if (mimeType == "File folder") {
+    return <Row
+    key={i}
+    className="test"
+    onClick={() => {
+      setLocation(location.folders[i]);
+      setHistory((history) => [...history, location.folders[i]]);
+    }}
+  >
+    <Col>
+      <i className="bi bi-folder"></i> {name}
+    </Col>
+    <Col>{mimeType}</Col>
+  </Row>;
+  }
+
+  return <Row
+  key={i}
+  className="test"
+  onContextMenu={(e) => {
+    e.preventDefault();
+    props.setShowContextMenu(true);
+    props.setSelectedFile({ _id, path, mimeType });
+    props.setPoints({ x: e.pageX, y: e.pageY });
+  }}
+>
+  <Col className="text-truncate">
+    <FileImage value={mimeType} /> {name}
+  </Col>
+  <Col>{updatedAt /*.substring(0, 10)*/}</Col>
+  <Col>{mimeType}</Col>
+  <Col className="text-end">{size} bytes</Col>
+</Row>;
+})}

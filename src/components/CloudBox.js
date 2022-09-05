@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./NavBar";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
+import ContextMenu from "./ContextMenu"
 
 import "../CSS/TestDrag.css";
 import "../CSS/Box.css";
@@ -43,6 +44,7 @@ export default function CloudBox() {
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [selectedFile, setSelectedFile] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
+  const [contextMenuType, setContextMenuType] = useState("file")
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -99,6 +101,7 @@ export default function CloudBox() {
                 setPoints={setPoints}
                 setSelectedFile={setSelectedFile}
                 setShowContextMenu={setShowContextMenu}
+                setContextMenuType={setContextMenuType}
               />
             </div>
           </div>
@@ -115,17 +118,7 @@ export default function CloudBox() {
       </Button>
 
       {showContextMenu && (
-        <div
-          className="menu"
-          style={{ top: points.y, left: points.x, zIndex: 4}}
-        >
-          <ul className="bootstrap-overrides">
-            <li><i className="bi bi-download"></i> Download</li>
-            <li><i className="bi bi-pencil-square"></i> Rename</li>
-            <hr className="hr-override"></hr>
-            <li onClick={() => console.log(selectedFile)}><i className="bi bi-trash"></i> Delete</li>
-          </ul>
-        </div>
+        <ContextMenu type={contextMenuType} points={points} selectedfile={selectedFile}/>
       )}
     </UserContext.Provider>
   );

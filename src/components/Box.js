@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
-import {
-  Card,
-  CloseButton,
-  Image,
-} from "react-bootstrap";
+import { Card, CloseButton, Image } from "react-bootstrap";
 import download from "downloadjs";
 
 import Upload from "./Upload";
-import FileList from "./FileList"
+import FileList from "./FileList";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
@@ -16,8 +12,10 @@ import { UserContext } from "./CloudBox";
 
 import "../CSS/Box.css";
 
+
+
 export default function Box(props) {
-  const { loading, error, refresh, data, state } = useApi(
+  const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList`,
     {
       dummyData: {
@@ -58,9 +56,23 @@ export default function Box(props) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-      <FileList fileObject={JSON.parse(data.fileTree)}></FileList>
+      <FileList
+        fileObject={JSON.parse(data.fileTree)}
+        setShowContextMenu={props.setShowContextMenu}
+        setPoints={props.setPoints}
+        setSelectedFile={props.setSelectedFile}
+        setContextMenuType={props.setContextMenuType}
+      ></FileList>
 
-      <div className="flex-fill"></div>
+      <div
+        className="flex-fill"
+        onContextMenu={(e) => {
+          e.preventDefault();
+          props.setShowContextMenu(true);
+          props.setContextMenuType("default");
+          props.setPoints({ x: e.pageX, y: e.pageY });
+        }}
+      ></div>
 
       <Card.Footer>
         {props.boxEmail == signedInUser.email ? <Upload></Upload> : null}
