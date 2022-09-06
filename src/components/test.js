@@ -10,9 +10,9 @@ const folderObject = {
   files: []
 }
 
-function newFolder(folderName) {
+function newFolder() {
   location.folders.push({
-    name: folderName,
+    name: "New Folder",
     folders: [],
     files: []
   })

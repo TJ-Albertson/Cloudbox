@@ -13,7 +13,6 @@ import { UserContext } from "./CloudBox";
 import "../CSS/Box.css";
 
 
-
 export default function Box(props) {
   const { loading, error, refresh, data } = useApi(
     `http://localhost:5000/getFileList`,
@@ -25,7 +24,7 @@ export default function Box(props) {
   );
 
   const signedInUser = useContext(UserContext);
-
+  
   const downloadFile = async (id, path, mimetype) => {
     const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
     const split = path.split("/");
@@ -63,17 +62,7 @@ export default function Box(props) {
         setSelectedFile={props.setSelectedFile}
         setContextMenuType={props.setContextMenuType}
       ></FileList>
-
-      <div
-        className="flex-fill"
-        onContextMenu={(e) => {
-          e.preventDefault();
-          props.setShowContextMenu(true);
-          props.setContextMenuType("default");
-          props.setPoints({ x: e.pageX, y: e.pageY });
-        }}
-      ></div>
-
+      
       <Card.Footer>
         {props.boxEmail == signedInUser.email ? <Upload></Upload> : null}
       </Card.Footer>

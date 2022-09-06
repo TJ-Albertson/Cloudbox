@@ -1,4 +1,4 @@
-export default function onContextMenu(props) {
+export default function ContextMenu(props) {
   switch (props.type) {
     case "file":
       return (
@@ -44,7 +44,7 @@ export default function onContextMenu(props) {
           style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
         >
           <ul className="bootstrap-overrides">
-            <li>
+            <li onClick={() => console.log(props.selectedfile)}>
               <i className="bi bi-folder-plus"></i> New Folder
             </li>
           </ul>
