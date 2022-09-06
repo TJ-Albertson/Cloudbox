@@ -4,7 +4,7 @@ import { Button, Form, Stack } from "react-bootstrap";
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox"
 
-export default function Upload() {
+export default function Upload(props) {
   const [file, setFile] = useState();
   const signedInUser = useContext(UserContext)
 
@@ -20,6 +20,7 @@ export default function Upload() {
     formData.append("owner", signedInUser.email);
     formData.append("name", file.name);
     formData.append("size", file.size); //bytes
+    formData.append("directory", props.directory)
 
     await postApi("/upload", formData, signedInUser.token);
   }

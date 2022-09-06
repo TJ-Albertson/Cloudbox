@@ -1,29 +1,18 @@
-import { useState, useImperativeHandle, useRef } from "react";
+import { useState, useContext } from "react";
 import { useSortableData } from "./utils";
 import { Container, Row, Col } from "react-bootstrap";
 
-const fileObject = {
-  folders: {
-    movies: {
-      folders: {},
-      files: {},
-    },
-  },
-  files: {
-    "picture.mp4": {
-      mimeType: "bruh",
-      id: "11234",
-    },
-  },
-};
+import Upload from "./Upload"
 
-export default function FileList(props, ref) {
-  const [location, setLocation] = useState(props.fileObject);
-  const [history, setHistory] = useState([props.fileObject]);
+import { UserContext } from "./CloudBox";
 
-  const { items, requestSort } = useSortableData(location.files);
+export default function FileList(props) {
+  const [history, setHistory] = useState(["main"]);
+  const [currentDirectory, setCurrentDirectory] = useState("main");
 
-  console.log(fileObject)
+  const { items, requestSort } = useSortableData(["list"]);
+  const signedInUser = useContext(UserContext);
+  console.log(props.data)
 
   const headerArray = [
     { text: "Name", sortBy: "name" },
@@ -45,60 +34,6 @@ export default function FileList(props, ref) {
     }
   }
 
-  function ListFiles(props) {
-    for (var object in props.objectList) {
-      return (
-        <Row
-          className="test"
-          onContextMenu={(e) => {
-            e.preventDefault();
-            props.setShowContextMenu(true);
-            props.setContextMenuType("file");
-            props.setSelectedFile({ object });
-            props.setPoints({ x: e.pageX, y: e.pageY });
-          }}
-        >
-          <Col className="text-truncate">
-            <FileImage value={object.mimeType} /> {object.name}
-          </Col>
-          <Col>{object.updatedAt /*.substring(0, 10)*/}</Col>
-          <Col>{object.mimeType}</Col>
-          <Col className="text-end">{object.size} bytes</Col>
-        </Row>
-      );
-    }
-  }
-
-  function newFolder() {
-    location.folders.push({
-      name: "New Folder",
-      folders: [],
-      files: [],
-    });
-    //await post api, then refresh data
-    console.log(history[0]);
-  }
-
-  function newFolder2() {
-    location.folders.push({
-      name: "New Folder",
-      folders: [],
-      files: [],
-    });
-    props.setSelectedFile(history[0]);
-  }
-
-  //history 0 send to server after change then reffresh
-
-  //make change, send history0 in selected file, send to server in higher component then regresh
-  function newFile() {}
-
-  function deleteFolder() {}
-
-  function deleteFile() {}
-
-  function rename() {}
-
   return (
     <div className="d-flex flex-column flex-fill">
       <div className="d-flex flex-row ps-1 border-bottom border-grey">
@@ -107,11 +42,11 @@ export default function FileList(props, ref) {
             key={i}
             className="navMenu"
             onClick={() => {
-              setLocation(backLink);
+              setCurrentDirectory(backLink);
               setHistory([...history.slice(0, i + 1)]);
             }}
           >
-            /{backLink.name}
+            /{backLink}
           </div>
         ))}
       </div>
@@ -132,56 +67,59 @@ export default function FileList(props, ref) {
       </Container>
 
       <Container className="overflow-auto">
-        {location.folders.map(({ name, mimeType }, i) => (
-          <Row
-            key={i}
-            className="test"
-            onClick={() => {
-              setLocation(location.folders[i]);
-              setHistory((history) => [...history, location.folders[i]]);
-            }}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              props.setShowContextMenu(true);
-              props.setContextMenuType("folder");
-              props.setPoints({ x: e.pageX, y: e.pageY });
-            }}
-          >
-            <Col>
-              <i className="bi bi-folder"></i> {name}
-            </Col>
-            <Col>{mimeType}</Col>
-          </Row>
-        ))}
-
-        {items.length > 0 ? (
-          items.map(({ _id, name, path, mimeType, size, updatedAt }, i) => (
-            <Row
-              key={i}
-              className="test"
-              onContextMenu={(e) => {
-                e.preventDefault();
-                props.setShowContextMenu(true);
-                props.setContextMenuType("file");
-                props.setSelectedFile({ _id, path, mimeType, location, name });
-                props.setPoints({ x: e.pageX, y: e.pageY });
-              }}
-            >
-              <Col className="text-truncate">
-                <FileImage value={mimeType} /> {name}
-              </Col>
-              <Col>{updatedAt /*.substring(0, 10)*/}</Col>
-              <Col>{mimeType}</Col>
-              <Col className="text-end">{size} bytes</Col>
-            </Row>
-          ))
-        ) : (
-          <div>no files</div>
-        )}
-        <ListFiles objectList={fileObject}></ListFiles>
+        {props.data?.map(({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
+          if (directory === currentDirectory) {
+            if (mimeType === "folder") {
+              return (
+                <Row
+                  key={i}
+                  className="test"
+                  onClick={() => {
+                    setCurrentDirectory(name);
+                    setHistory([...history, name]);
+                  }}
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                    props.setShowContextMenu(true);
+                    props.setContextMenuType("folder");
+                    props.setPoints({ x: e.pageX, y: e.pageY });
+                  }}
+                >
+                  <Col>
+                    <i className="bi bi-folder"></i> {name}
+                  </Col>
+                  <Col>{mimeType}</Col>
+                </Row>
+              );
+            }
+            return (
+              <Row
+                key={i}
+                className="test"
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  props.setShowContextMenu(true);
+                  props.setContextMenuType("file");
+                  props.setSelectedFile({
+                    _id,
+                    path,
+                    mimeType,
+                    name,
+                  });
+                  props.setPoints({ x: e.pageX, y: e.pageY });
+                }}
+              >
+                <Col className="text-truncate">
+                  <FileImage value={mimeType} /> {name}
+                </Col>
+                <Col>{updatedAt /*.substring(0, 10)*/}</Col>
+                <Col>{mimeType}</Col>
+                <Col className="text-end">{size} bytes</Col>
+              </Row>
+            );
+          }
+        })}
       </Container>
-
-      
 
       <div
         className="flex-fill"
@@ -189,11 +127,12 @@ export default function FileList(props, ref) {
           e.preventDefault();
           props.setShowContextMenu(true);
           props.setContextMenuType("default");
-          props.setSelectedFile({ location });
+          props.setSelectedFile();
           props.setPoints({ x: e.pageX, y: e.pageY });
         }}
       ></div>
-      <input type="button" value="new folder" onClick={newFolder} />
+
+        {props.boxEmail == signedInUser.email ? <Upload directory={currentDirectory}></Upload> : null}
     </div>
   );
 }
