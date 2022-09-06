@@ -261,3 +261,46 @@ const fileObject = {
   <Col className="text-end">{size} bytes</Col>
 </Row>;
 })}
+
+
+function deleteFile(name, location) {
+  tempObject = location;
+  tempObject.files.forEach(file => {
+    if(file.name == name) {
+      delete tempObject.files.file
+    }
+  })
+  return tempObject
+}
+
+function newFolder(location) {
+  location.folders.push({
+    name: "New Folder",
+    folders: [],
+    files: [],
+  });
+  postapi ()
+}
+
+
+const fileList = [{
+  name: "file",
+  type: "file",
+  parent: "folder"
+},
+{
+  name: "folder",
+  type: "folder",
+  parent: "none"
+}]
+
+const [currentDirectory, setCurrentDirectory] = useState("main")
+
+{fileList.map(({ name, parent, type }, i) => {
+  if(parent == currentDirectory) {
+    if(type == file) {
+      
+    }
+  }
+
+})}

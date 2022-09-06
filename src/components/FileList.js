@@ -2,11 +2,28 @@ import { useState, useImperativeHandle, useRef } from "react";
 import { useSortableData } from "./utils";
 import { Container, Row, Col } from "react-bootstrap";
 
+const fileObject = {
+  folders: {
+    movies: {
+      folders: {},
+      files: {},
+    },
+  },
+  files: {
+    "picture.mp4": {
+      mimeType: "bruh",
+      id: "11234",
+    },
+  },
+};
+
 export default function FileList(props, ref) {
   const [location, setLocation] = useState(props.fileObject);
   const [history, setHistory] = useState([props.fileObject]);
 
   const { items, requestSort } = useSortableData(location.files);
+
+  console.log(fileObject)
 
   const headerArray = [
     { text: "Name", sortBy: "name" },
@@ -28,18 +45,29 @@ export default function FileList(props, ref) {
     }
   }
 
-  const inputRef = useRef();
-
-  useImperativeHandle(ref, () => ({
-    newFolder1: () => {
-      location.folders.push({
-        name: "New Folder",
-        folders: [],
-        files: [],
-      });
-      console.log(history[0]);
-    },
-  }));
+  function ListFiles(props) {
+    for (var object in props.objectList) {
+      return (
+        <Row
+          className="test"
+          onContextMenu={(e) => {
+            e.preventDefault();
+            props.setShowContextMenu(true);
+            props.setContextMenuType("file");
+            props.setSelectedFile({ object });
+            props.setPoints({ x: e.pageX, y: e.pageY });
+          }}
+        >
+          <Col className="text-truncate">
+            <FileImage value={object.mimeType} /> {object.name}
+          </Col>
+          <Col>{object.updatedAt /*.substring(0, 10)*/}</Col>
+          <Col>{object.mimeType}</Col>
+          <Col className="text-end">{object.size} bytes</Col>
+        </Row>
+      );
+    }
+  }
 
   function newFolder() {
     location.folders.push({
@@ -47,6 +75,7 @@ export default function FileList(props, ref) {
       folders: [],
       files: [],
     });
+    //await post api, then refresh data
     console.log(history[0]);
   }
 
@@ -149,7 +178,10 @@ export default function FileList(props, ref) {
         ) : (
           <div>no files</div>
         )}
+        <ListFiles objectList={fileObject}></ListFiles>
       </Container>
+
+      
 
       <div
         className="flex-fill"
