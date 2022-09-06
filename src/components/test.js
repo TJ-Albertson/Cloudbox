@@ -284,12 +284,12 @@ function newFolder(location) {
 
 
 const fileList = [{
-  name: "file",
+  name: "movie.mp4",
   type: "file",
   parent: "folder"
 },
 {
-  name: "folder",
+  name: "movies",
   type: "folder",
   parent: "none"
 }]
@@ -298,9 +298,112 @@ const [currentDirectory, setCurrentDirectory] = useState("main")
 
 {fileList.map(({ name, parent, type }, i) => {
   if(parent == currentDirectory) {
-    if(type == file) {
-      
+    if(type == "folder") {
+      <div onClick={setCurrentDirectory(name)}>{name}</div>
     }
+    <div>{name}</div>
   }
 
 })}
+
+
+import { useState } from "react";
+import "./styles.css";
+
+const fileList = [
+  {
+    name: "movie1.mp4",
+    type: "file",
+    directory: "movies"
+  },
+  {
+    name: "movies",
+    type: "folder",
+    directory: "main"
+  },
+  {
+    name: "movie2.mp4",
+    type: "file",
+    directory: "movies"
+  },
+  {
+    name: "movie3.mp4",
+    type: "file",
+    directory: "movies"
+  },
+  {
+    name: "image.png",
+    type: "file",
+    directory: "main"
+  },
+  {
+    name: "image.png",
+    type: "file",
+    directory: "main"
+  },
+  {
+    name: "folder1",
+    type: "folder",
+    directory: "movies"
+  },
+  {
+    name: "folder2",
+    type: "folder",
+    directory: "folder1"
+  },
+  {
+    name: "nested file",
+    type: "file",
+    directory: "folder2"
+  }
+];
+
+export default function App() {
+  const [history, setHistory] = useState(["main"]);
+  const [currentDirectory, setCurrentDirectory] = useState("main");
+
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      {history.map((backLink, i) => (
+        <div
+          key={i}
+          className="nav"
+          onClick={() => {
+            setCurrentDirectory(backLink);
+            setHistory([...history.slice(0, i + 1)]);
+          }}
+        >
+          /{backLink}
+        </div>
+      ))}
+
+      <div style={{ width: "150px" }}>
+        {fileList.map(({ name, directory, type }, i) => {
+          if (directory === currentDirectory) {
+            if (type === "folder") {
+              return (
+                <div
+                  key={i}
+                  className="file"
+                  onClick={() => {
+                    setCurrentDirectory(name);
+                    setHistory([...history, name]);
+                  }}
+                >
+                  folder: {name}
+                </div>
+              );
+            }
+            return (
+              <div key={i} className="file">
+                file: {name}
+              </div>
+            );
+          }
+          //return <div className="file">{name}</div>;
+        })}
+      </div>
+    </div>
+  );
+}
