@@ -112,7 +112,7 @@ export default function FileList(props) {
                 <Col className="text-truncate">
                   <FileImage value={mimeType} /> {name}
                 </Col>
-                <Col>{updatedAt /*.substring(0, 10)*/}</Col>
+                <Col>{updatedAt}</Col>
                 <Col>{mimeType}</Col>
                 <Col className="text-end">{size} bytes</Col>
               </Row>
