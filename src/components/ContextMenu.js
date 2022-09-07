@@ -1,4 +1,9 @@
 export default function ContextMenu(props) {
+
+  function newFolder() {
+    
+  }
+
   switch (props.type) {
     case "file":
       return (

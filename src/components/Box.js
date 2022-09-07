@@ -3,7 +3,6 @@ import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 import download from "downloadjs";
 
 import Upload from "./Upload";
-import FileList from "./FileList";
 
 import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
@@ -25,7 +24,7 @@ export default function Box(props) {
 
   const signedInUser = useContext(UserContext);
 
-  const { items, requestSort } = useSortableData(["list"]);
+  const { items, requestSort } = useSortableData(data);
 
   const downloadFile = async (id, path, mimetype) => {
     const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
@@ -115,7 +114,7 @@ export default function Box(props) {
         </Container>
 
         <Container className="overflow-auto">
-          {data?.map(
+          {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
               if (directory === currentDirectory) {
                 if (mimeType === "folder") {
