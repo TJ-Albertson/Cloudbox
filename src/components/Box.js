@@ -26,13 +26,6 @@ export default function Box(props) {
 
   const { items, requestSort } = useSortableData(data);
 
-  const downloadFile = async (id, path, mimetype) => {
-    const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
-    const split = path.split("/");
-    const filename = split[split.length - 1];
-    return download(result.data, filename, mimetype);
-  };
-
   async function removeBox() {
     const data = new URLSearchParams({
       removeEmail: props.boxEmail,

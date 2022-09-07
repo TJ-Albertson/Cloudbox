@@ -6,6 +6,15 @@ export default function ContextMenu(props) {
   function newFolder() {
     const { directory } = props.selection
     console.log(directory)
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("owner", signedInUser.email);
+    formData.append("name", "New Folder";
+    formData.append("size", "");
+    formData.append("directory", directory)
+
+    await postApi("/upload", formData, signedInUser.token);
   }
 
   function deleteFile() {
