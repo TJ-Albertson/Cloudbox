@@ -3,6 +3,7 @@ import Muuri from "muuri";
 
 export const useMuuri = (data) => {
   const ref = useRef(null);
+  const handleRef = useRef(null);
 
   useEffect(() => {
     let grid = new Muuri(ref.current, { 

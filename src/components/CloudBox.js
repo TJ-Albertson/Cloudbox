@@ -13,7 +13,6 @@ import "../CSS/Box.css";
 import { boxModalOptions, shareModalOptions } from "./utils";
 import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 export const UserContext = React.createContext();
 
@@ -44,11 +43,9 @@ export default function CloudBox() {
   }, []);
 
   const [points, setPoints] = useState({ x: 0, y: 0 });
-  const [selectedFile, setSelectedFile] = useState({});
+  const [selection, setSelection] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuType, setContextMenuType] = useState("file")
-  
-  const [selectedItem, setSelectedIem] = useState({})
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -103,7 +100,7 @@ export default function CloudBox() {
                 refresh={refresh}
                 picture={user.picture}
                 setPoints={setPoints}
-                setSelectedFile={setSelectedFile}
+                setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
                 setContextMenuType={setContextMenuType}
               />
@@ -122,7 +119,7 @@ export default function CloudBox() {
       </Button>
 
       {showContextMenu && (
-        <ContextMenu type={contextMenuType} points={points} selectedfile={selectedFile}/>
+        <ContextMenu type={contextMenuType} points={points} selection={selection}/>
       )}
     </UserContext.Provider>
   );

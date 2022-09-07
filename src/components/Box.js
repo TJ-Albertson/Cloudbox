@@ -148,7 +148,7 @@ export default function Box(props) {
                       e.preventDefault();
                       props.setShowContextMenu(true);
                       props.setContextMenuType("file");
-                      props.setSelectedFile({
+                      props.setSelection({
                         _id,
                         path,
                         mimeType,
@@ -176,7 +176,7 @@ export default function Box(props) {
             e.preventDefault();
             props.setShowContextMenu(true);
             props.setContextMenuType("default");
-            props.setSelectedFile();
+            props.setSelection({ directory: currentDirectory });
             props.setPoints({ x: e.pageX, y: e.pageY });
           }}
         ></div>
