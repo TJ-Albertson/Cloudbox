@@ -1,25 +1,38 @@
 import download from "downloadjs";
 import { getApi } from "../api/getApi";
+import { postApi } from "../api/postApi";
+
+import { useContext } from "react";
+import { UserContext } from "./CloudBox";
 
 export default function ContextMenu(props) {
+  const signedInUser = useContext(UserContext);
 
-  function newFolder() {
+  async function newFolder(event) {
+    event.preventDefault();
+
     const { directory } = props.selection
-    console.log(directory)
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("owner", signedInUser.email);
-    formData.append("name", "New Folder";
-    formData.append("size", "");
-    formData.append("directory", directory)
+    const data = new URLSearchParams({
+      "owner": signedInUser.email,
+      "name": "New Folder",
+      "mimeType": "File folder",
+      "directory": directory
+    });
 
-    await postApi("/upload", formData, signedInUser.token);
+    await postApi("/uploadFolder", data, signedInUser.token,
+    "application/x-www-form-urlencoded");
   }
 
-  function deleteFile() {
+  async function deleteFile() {
     const { id, path, mimetype } = props.selection
 
+    const data = new URLSearchParams({
+      "id": id,
+    });
+
+    await postApi("/uploadFolder", data, signedInUser.token,
+    "application/x-www-form-urlencoded");
   }
 
   function renameFile() {
@@ -27,7 +40,7 @@ export default function ContextMenu(props) {
   }
 
   const downloadFile = async (id, path, mimetype) => {
-    const result = await getApi(`/downloadFile/${id}`, /*signedInUser.token*/);
+    const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
@@ -78,7 +91,7 @@ export default function ContextMenu(props) {
           style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
         >
           <ul className="bootstrap-overrides">
-            <li onClick={() => newFolder()}>
+            <li onClick={(e) => newFolder(e)}>
               <i className="bi bi-folder-plus"></i> New Folder
             </li>
           </ul>

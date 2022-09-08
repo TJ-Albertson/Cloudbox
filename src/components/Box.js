@@ -9,6 +9,7 @@ import { useApi } from "../hooks/useApi";
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
+
 import { useSortableData } from "./utils";
 
 import "../CSS/Box.css";
@@ -77,16 +78,16 @@ export default function Box(props) {
 
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
-          {history.map((backLink, i) => (
+          {history.map(({name, _id}, i) => (
             <div
               key={i}
               className="navMenu"
               onClick={() => {
-                setCurrentDirectory(backLink);
+                setCurrentDirectory(_id);
                 setHistory([...history.slice(0, i + 1)]);
               }}
             >
-              /{backLink}
+              /{name}
             </div>
           ))}
         </div>
@@ -110,19 +111,26 @@ export default function Box(props) {
           {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
               if (directory === currentDirectory) {
-                if (mimeType === "folder") {
+                if (mimeType === "File folder") {
                   return (
                     <Row
                       key={i}
                       className="test"
                       onClick={() => {
-                        setCurrentDirectory(name);
+                        //setasdfas
+                        setCurrentDirectory({name, _id});
                         setHistory([...history, name]);
                       }}
                       onContextMenu={(e) => {
                         e.preventDefault();
                         props.setShowContextMenu(true);
                         props.setContextMenuType("folder");
+                        props.setSelection({
+                          id: _id,
+                          path,
+                          mimeType,
+                          name,
+                        })
                         props.setPoints({ x: e.pageX, y: e.pageY });
                       }}
                     >
@@ -142,7 +150,7 @@ export default function Box(props) {
                       props.setShowContextMenu(true);
                       props.setContextMenuType("file");
                       props.setSelection({
-                        _id,
+                        id: _id,
                         path,
                         mimeType,
                         name,

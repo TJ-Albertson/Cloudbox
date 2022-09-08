@@ -4,10 +4,10 @@ export const postApi = (route, data, token, header) => {
 
     return fetch(`${API_URL}${route}`, {
         method: "POST",
+        body: data,
         headers: {
             ...header,
             Authorization: `Bearer ${token}`,
         },
-        body: data
     }).then(res => res.json())
 }
