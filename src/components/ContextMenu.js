@@ -20,7 +20,7 @@ export default function ContextMenu(props) {
       "directory": directory
     });
 
-    await postApi("/uploadFolder", data, signedInUser.token,
+    await postApi("/files/uploadFolder", data, signedInUser.token,
     "application/x-www-form-urlencoded");
   }
 
@@ -46,7 +46,7 @@ export default function ContextMenu(props) {
     return download(result.data, filename, mimetype);
   };
 
-  switch (props.type) {
+  switch (props.selection.type) {
     case "file":
       return (
         <div

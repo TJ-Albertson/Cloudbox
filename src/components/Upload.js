@@ -22,6 +22,10 @@ export default function Upload(props) {
     formData.append("size", file.size); //bytes
     formData.append("directory", props.directory)
 
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+
     await postApi("/upload", formData, signedInUser.token);
   }
 

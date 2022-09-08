@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./NavBar";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
-import ContextMenu from "./ContextMenu"
+import ContextMenu from "./ContextMenu";
 
 import "../CSS/TestDrag.css";
 import "../CSS/Box.css";
@@ -19,17 +19,17 @@ export const UserContext = React.createContext();
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
 
-  const { loading, token, refresh, data } = useApi(
-    "http://localhost:5000/getGroup",
-    {
-      dummyData: {
-        boxArray: [],
-        accessArray: [],
-        shareArray: [],
-      },
-    }
-  );
+  const options = {
+    dummyData: {
+      boxArray: [],
+      accessArray: [],
+      shareArray: [],
+    },
+  };
 
+  const { loading, token, refresh, data } = useApi(
+    "http://localhost:5000/getGroup", options
+  );
 
   const { ref } = useMuuri(data);
 
@@ -45,7 +45,7 @@ export default function CloudBox() {
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [selection, setSelection] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [contextMenuType, setContextMenuType] = useState("file")
+  const [contextMenuType, setContextMenuType] = useState("file");
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -119,7 +119,11 @@ export default function CloudBox() {
       </Button>
 
       {showContextMenu && (
-        <ContextMenu type={contextMenuType} points={points} selection={selection}/>
+        <ContextMenu
+          type={contextMenuType}
+          points={points}
+          selection={selection}
+        />
       )}
     </UserContext.Provider>
   );

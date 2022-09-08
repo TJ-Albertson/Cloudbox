@@ -1,26 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
-import download from "downloadjs";
 
 import Upload from "./Upload";
 
-import { getApi } from "../api/getApi";
 import { useApi } from "../hooks/useApi";
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
 
-import { useSortableData } from "./utils";
+import { useSortableData, FileImage, localDate } from "../utilities/functions";
 
 import "../CSS/Box.css";
 
 export default function Box(props) {
-  const { loading, error, refresh, data } = useApi(
-    `http://localhost:5000/getFileList/${props.id}`,
+  const { loading, refresh, data } = useApi(
+    `http://localhost:5000/files/${props.id}`,
     { dummyData: [] }
   );
-
-  const [history, setHistory] = useState(["main"]);
+ 
+  //need to create main folder
+  const [history, setHistory] = useState([{name: "main", _id: "main"}]);
   const [currentDirectory, setCurrentDirectory] = useState("main");
 
   const signedInUser = useContext(UserContext);
@@ -44,25 +43,6 @@ export default function Box(props) {
     { text: "Type", sortBy: "mimeType" },
     { text: "Size", sortBy: "size" },
   ];
-
-  function FileImage(props) {
-    switch (props.value) {
-      case "txt":
-        return <i className="bi bi-filetype-txt"></i>;
-      case "mp4":
-        return <i className="bi bi-filetype-mp4"></i>;
-      case "jpg":
-        return <i className="bi bi-file-earmark-image"></i>;
-      default:
-        return <i className="bi bi-file-earmark-text"></i>;
-    }
-  }
-
-  function localDate(dateString) {
-    const date = new Date(dateString);
-    let regex = /:\d\d\s/i;
-    return date.toLocaleString().replace(",", "").replace(regex, " ");
-  }
 
   return (
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
@@ -117,15 +97,15 @@ export default function Box(props) {
                       key={i}
                       className="test"
                       onClick={() => {
-                        //setasdfas
-                        setCurrentDirectory({name, _id});
-                        setHistory([...history, name]);
+                        setCurrentDirectory(_id);
+                        setHistory([...history, {name, _id}]);
                       }}
                       onContextMenu={(e) => {
                         e.preventDefault();
                         props.setShowContextMenu(true);
                         props.setContextMenuType("folder");
                         props.setSelection({
+                          type: "folder",
                           id: _id,
                           path,
                           mimeType,
@@ -150,6 +130,7 @@ export default function Box(props) {
                       props.setShowContextMenu(true);
                       props.setContextMenuType("file");
                       props.setSelection({
+                        type: "file",
                         id: _id,
                         path,
                         mimeType,
@@ -177,7 +158,7 @@ export default function Box(props) {
             e.preventDefault();
             props.setShowContextMenu(true);
             props.setContextMenuType("default");
-            props.setSelection({ directory: currentDirectory });
+            props.setSelection({ type: "default", directory: currentDirectory });
             props.setPoints({ x: e.pageX, y: e.pageY });
           }}
         ></div>

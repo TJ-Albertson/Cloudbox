@@ -13,6 +13,13 @@ export function FileImage(props) {
   }
 }
 
+export function localDate(dateString) {
+  const date = new Date(dateString);
+  let regex = /:\d\d\s/i;
+  return date.toLocaleString().replace(",", "").replace(regex, " ");
+}
+
+
 export const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
   const sortedItems = React.useMemo(() => {
