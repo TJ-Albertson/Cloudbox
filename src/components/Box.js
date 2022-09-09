@@ -4,22 +4,21 @@ import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 import Upload from "./Upload";
 
 import { useApi } from "../hooks/useApi";
-import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
+import { fetchApi } from "../api/fetchApi";
 
 import { useSortableData, FileImage, localDate } from "../utilities/functions";
 
 import "../CSS/Box.css";
-import { fetchApi } from "../api/fetchApi";
 
 export default function Box(props) {
   const { loading, refresh, data } = useApi(
     `http://localhost:5000/files/${props.id}`,
     { dummyData: [] }
   );
- 
+
   //need to create main folder
-  const [history, setHistory] = useState([{name: "main", _id: "main"}]);
+  const [history, setHistory] = useState([{ name: "main", _id: "main" }]);
   const [currentDirectory, setCurrentDirectory] = useState("main");
 
   const signedInUser = useContext(UserContext);
@@ -27,22 +26,18 @@ export default function Box(props) {
   const { items, requestSort } = useSortableData(data);
 
   async function removeBox() {
-
-    const data = new URLSearchParams({
-      type: "box",
-      desire: "delete",
-      targetEmail: props.boxEmail
-    });
-
     const options = {
       method: "PATCH",
-      body: data,
-      token: signedInUser.token
-    }
+      body: JSON.stringify({
+        array: "box",
+        desire: "delete",
+        targetEmail: props.boxEmail,
+      }),
+      token: signedInUser.token,
+      headers: { "Content-Type": "application/json" },
+    };
 
-    await fetchApi("user/groups", options).then(props.refresh)
-
-    //postApi("/removeBox", data, signedInUser.token).then(props.refresh);
+    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   if (loading) {
@@ -70,7 +65,7 @@ export default function Box(props) {
 
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
-          {history.map(({name, _id}, i) => (
+          {history.map(({ name, _id }, i) => (
             <div
               key={i}
               className="navMenu"
@@ -109,7 +104,7 @@ export default function Box(props) {
                       className="test"
                       onClick={() => {
                         setCurrentDirectory(_id);
-                        setHistory([...history, {name, _id}]);
+                        setHistory([...history, { name, _id }]);
                       }}
                       onContextMenu={(e) => {
                         e.preventDefault();
@@ -120,7 +115,7 @@ export default function Box(props) {
                           path,
                           mimeType,
                           name,
-                        })
+                        });
                         props.setPoints({ x: e.pageX, y: e.pageY });
                       }}
                     >
@@ -155,7 +150,7 @@ export default function Box(props) {
                     </Col>
                     <Col>{localDate(updatedAt)}</Col>
                     <Col>{mimeType}</Col>
-                    <Col className="text-end">{Math.ceil(size/1000)} KB</Col>
+                    <Col className="text-end">{Math.ceil(size / 1000)} KB</Col>
                   </Row>
                 );
               }
@@ -168,7 +163,10 @@ export default function Box(props) {
           onContextMenu={(e) => {
             e.preventDefault();
             props.setShowContextMenu(true);
-            props.setSelection({ type: "default", directory: currentDirectory });
+            props.setSelection({
+              type: "default",
+              directory: currentDirectory,
+            });
             props.setPoints({ x: e.pageX, y: e.pageY });
           }}
         ></div>

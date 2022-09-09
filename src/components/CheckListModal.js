@@ -2,7 +2,6 @@ import { React, useState, useContext } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import { fetchApi } from "../api/fetchApi";
 
-import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
 export default function CheckListModal(props) {
@@ -12,31 +11,23 @@ export default function CheckListModal(props) {
   async function shareEmail(e) {
     e.preventDefault();
     const form = e.target;
-    
-    const data = new URLSearchParams({
-      type: "share",
-      desire: "add",
-      targetEmail: form[0].value
-    });
 
     const options = {
-      Method: "PATCH",
-      body: data,
-      token: signedInUser.token
-    }
+      method: "PATCH",
+      body: JSON.stringify({
+        array: "share",
+        desire: "add",
+        targetEmail: form[0].value,
+      }),
+      token: signedInUser.token,
+      headers: { "Content-Type": "application/json" },
+    };
 
-    await fetchApi("/user/groups", options).then(props.refresh)
-  /*
-    postApi(
-      "/addShareEmail",
-      data,
-      signedInUser.token,
-      "application/x-www-form-urlencoded"
-    ).then(props.refresh);*/
+    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   //for adding boxes and removing share emails
-  async function postList(e, route) {
+  async function postList(e, array, desire) {
     e.preventDefault();
     const form = e.target;
     const emails = [];
@@ -47,31 +38,14 @@ export default function CheckListModal(props) {
       }
     }
 
-    const formData = new FormData();
-    formData.append("type", "box");
-    formData.append("desire", "add");
-    formData.append("targetEmail", emails);
-
-
-    const data = new URLSearchParams({
-      type: "box",
-      desire: "add",
-      targetEmail: emails
-    });
-
     const options = {
       method: "PATCH",
-      body: formData,
-      token: signedInUser.token
-    }
+      body: JSON.stringify({ array, desire, targetEmail: emails }),
+      token: signedInUser.token,
+      headers: { "Content-Type": "application/json" },
+    };
 
-    await fetchApi("/user/groups", options).then(props.refresh)
-
-    /*
-    postApi(route, JSON.stringify(emails), signedInUser.token, {
-      "Content-Type": "application/json",
-    }).then(props.refresh);
-    */
+    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   async function requestAccess(e) {
@@ -99,8 +73,8 @@ export default function CheckListModal(props) {
         <Form
           onSubmit={
             props.formfunction === "box"
-              ? (event) => postList(event, "/addBox")
-              : (event) => postList(event, "/removeShareEmail")
+              ? (event) => postList(event, "box", "add")
+              : (event) => postList(event, "share", "delete")
           }
         >
           <Stack gap={3}>

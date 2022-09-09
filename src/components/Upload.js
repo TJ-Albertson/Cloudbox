@@ -1,8 +1,7 @@
 import { React, useState, useContext } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
-import { fetchApi } from "../api/fetchApi";
 
-import { postApi } from "../api/postApi";
+import { fetchApi } from "../api/fetchApi";
 import { UserContext } from "./CloudBox";
 
 export default function Upload(props) {
