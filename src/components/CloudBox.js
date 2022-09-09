@@ -13,6 +13,7 @@ import "../CSS/Box.css";
 import { boxModalOptions, shareModalOptions } from "./utils";
 import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
+import ProfileModal from "./ProfileModal";
 
 export const UserContext = React.createContext();
 
@@ -20,6 +21,7 @@ export default function CloudBox() {
   const { user, isLoading } = useAuth0();
 
   const options = {
+    method: "GET",
     dummyData: {
       boxArray: [],
       accessArray: [],
@@ -28,13 +30,14 @@ export default function CloudBox() {
   };
 
   const { loading, token, refresh, data } = useApi(
-    "http://localhost:5000/getGroup", options
+    "http://localhost:5000/user/groups", options
   );
 
   const { ref } = useMuuri(data);
 
   const [shareModalShow, setShareModalShow] = useState(false);
   const [boxModalShow, setBoxModalShow] = useState(false);
+  const [profileModalShow, setProfileModalShow] = useState(false)
 
   useEffect(() => {
     const handleClick = () => setShowContextMenu(false);
@@ -51,6 +54,9 @@ export default function CloudBox() {
   };
   const showBoxModal = () => {
     setBoxModalShow(true);
+  };
+  const showProfileModal = () => {
+    setProfileModalShow(true);
   };
 
   if (isLoading && loading) {
@@ -71,7 +77,7 @@ export default function CloudBox() {
     <UserContext.Provider
       value={{ username: user.name, email: user.email, token: token }}
     >
-      <NavBar showModal={showShareModal} />
+      <NavBar showShareModal={showShareModal} showProfileModal={showProfileModal}/>
 
       <CheckListModal
         {...boxModalOptions}
@@ -89,9 +95,14 @@ export default function CloudBox() {
         refresh={refresh}
       />
 
+      <ProfileModal
+        show={profileModalShow}
+        onHide={() => setProfileModalShow(false)}
+      />
+
       <div className="grid" ref={ref}>
-        {data.boxArray.map((boxEmail) => (
-          <div className="item" key={boxEmail.toString()}>
+        {data.boxArray.map((boxEmail, i) => (
+          <div className="item" key={i}>
             <div className="item-content">
               <Box
                 id={boxEmail}

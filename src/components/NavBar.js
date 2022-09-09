@@ -17,8 +17,8 @@ export default function NavBar(props) {
                 <Dropdown.Toggle variant="success" id="dropdown-basic">{signedInUser.username}</Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item onClick="">Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={() => props.showModal(true)}>Share Settings</Dropdown.Item>
+                    <Dropdown.Item onClick={() => props.showProfileModal(true)}>Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={() => props.showShareModal(true)}>Share Settings</Dropdown.Item>
                     <Dropdown.Item onClick={() => logout({ returnTo: "http://localhost:3000/" })}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>

@@ -10,6 +10,7 @@ import { UserContext } from "./CloudBox";
 import { useSortableData, FileImage, localDate } from "../utilities/functions";
 
 import "../CSS/Box.css";
+import { fetchApi } from "../api/fetchApi";
 
 export default function Box(props) {
   const { loading, refresh, data } = useApi(
@@ -26,10 +27,22 @@ export default function Box(props) {
   const { items, requestSort } = useSortableData(data);
 
   async function removeBox() {
+
     const data = new URLSearchParams({
-      removeEmail: props.boxEmail,
+      type: "box",
+      desire: "delete",
+      targetEmail: props.boxEmail
     });
-    postApi("/removeBox", data, signedInUser.token).then(props.refresh);
+
+    const options = {
+      method: "PATCH",
+      body: data,
+      token: signedInUser.token
+    }
+
+    await fetchApi("/groups", options).then(props.refresh)
+
+    //postApi("/removeBox", data, signedInUser.token).then(props.refresh);
   }
 
   if (loading) {
@@ -76,11 +89,10 @@ export default function Box(props) {
             {headerArray.map(({ text, sortBy }, i) => (
               <Col
                 key={i}
-                className="headerColumn d-flex p-0"
+                className="header"
                 onClick={() => requestSort(sortBy)}
               >
-                <div className="flex-fill ps-2">{text}</div>
-                <div className="vr"></div>
+                {text}
               </Col>
             ))}
           </Row>
@@ -115,7 +127,9 @@ export default function Box(props) {
                       <Col>
                         <i className="bi bi-folder"></i> {name}
                       </Col>
+                      <Col>{localDate(updatedAt)}</Col>
                       <Col>{mimeType}</Col>
+                      <Col></Col>
                     </Row>
                   );
                 }
