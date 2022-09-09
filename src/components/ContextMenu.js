@@ -4,6 +4,7 @@ import { postApi } from "../api/postApi";
 
 import { useContext } from "react";
 import { UserContext } from "./CloudBox";
+import { fetchApi } from "../api/fetchApi";
 
 export default function ContextMenu(props) {
   const signedInUser = useContext(UserContext);
@@ -11,36 +12,50 @@ export default function ContextMenu(props) {
   async function newFolder(event) {
     event.preventDefault();
 
-    const { directory } = props.selection
+    const { directory } = props.selection;
 
     const data = new URLSearchParams({
-      "owner": signedInUser.email,
-      "name": "New Folder",
-      "mimeType": "File folder",
-      "directory": directory
+      owner: signedInUser.email,
+      name: "New Folder",
+      mimeType: "File folder",
+      directory: directory,
     });
 
-    await postApi("/files/uploadFolder", data, signedInUser.token,
-    "application/x-www-form-urlencoded");
+    const options = {
+      method: "POST",
+      body: data,
+      token: signedInUser.token,
+      headers: ["application/x-www-form-urlencoded"],
+    };
+
+    await fetchApi("/files/folder", options)
   }
 
   async function deleteFile() {
-    const { id, path, mimetype } = props.selection
+    const { id } = props.selection;
 
-    const data = new URLSearchParams({
-      "id": id,
-    });
+    const options = {
+      method: "DELETE",
+      token: signedInUser.token
+    }
 
-    await postApi("/uploadFolder", data, signedInUser.token,
-    "application/x-www-form-urlencoded");
+    await fetchApi(`/files/${id}`, options)
   }
 
-  function renameFile() {
-    
+  async function renameFile() {
+    const { id, newName } = props.selection
+
+    const options = {
+      method: "PATCH",
+      body: {id, newName},
+      token: signedInUser.token
+    }
+
+    await fetchApi("/files", options)
   }
 
   const downloadFile = async (id, path, mimetype) => {
-    const result = await getApi(`/downloadFile/${id}`, signedInUser.token);
+    const result = await getApi(`/files/${id}`, signedInUser.token);
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);

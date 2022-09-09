@@ -1,12 +1,13 @@
 import { React, useState, useContext } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
+import { fetchApi } from "../api/fetchApi";
 
 import { postApi } from "../api/postApi";
-import { UserContext } from "./CloudBox"
+import { UserContext } from "./CloudBox";
 
 export default function Upload(props) {
   const [file, setFile] = useState();
-  const signedInUser = useContext(UserContext)
+  const signedInUser = useContext(UserContext);
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -20,13 +21,15 @@ export default function Upload(props) {
     formData.append("owner", signedInUser.email);
     formData.append("name", file.name);
     formData.append("size", file.size); //bytes
-    formData.append("directory", props.directory)
+    formData.append("directory", props.directory);
 
-    for (const value of formData.values()) {
-      console.log(value);
-    }
+    const options = {
+      method: "POST",
+      body: formData,
+      token: signedInUser.token,
+    };
 
-    await postApi("/upload", formData, signedInUser.token);
+    await fetchApi("/files", options)
   }
 
   return (

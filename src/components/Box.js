@@ -7,7 +7,6 @@ import { useApi } from "../hooks/useApi";
 import { postApi } from "../api/postApi";
 import { UserContext } from "./CloudBox";
 
-
 import { useSortableData, FileImage, localDate } from "../utilities/functions";
 
 import "../CSS/Box.css";
@@ -103,7 +102,6 @@ export default function Box(props) {
                       onContextMenu={(e) => {
                         e.preventDefault();
                         props.setShowContextMenu(true);
-                        props.setContextMenuType("folder");
                         props.setSelection({
                           type: "folder",
                           id: _id,
@@ -128,7 +126,6 @@ export default function Box(props) {
                     onContextMenu={(e) => {
                       e.preventDefault();
                       props.setShowContextMenu(true);
-                      props.setContextMenuType("file");
                       props.setSelection({
                         type: "file",
                         id: _id,
@@ -144,7 +141,7 @@ export default function Box(props) {
                     </Col>
                     <Col>{localDate(updatedAt)}</Col>
                     <Col>{mimeType}</Col>
-                    <Col className="text-end">{size} bytes</Col>
+                    <Col className="text-end">{Math.ceil(size/1000)} KB</Col>
                   </Row>
                 );
               }
@@ -157,7 +154,6 @@ export default function Box(props) {
           onContextMenu={(e) => {
             e.preventDefault();
             props.setShowContextMenu(true);
-            props.setContextMenuType("default");
             props.setSelection({ type: "default", directory: currentDirectory });
             props.setPoints({ x: e.pageX, y: e.pageY });
           }}

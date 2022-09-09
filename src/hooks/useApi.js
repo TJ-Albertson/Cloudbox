@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const useApi = (url, options = {}) => {
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState({
     token: null,
     loading: true,
@@ -13,8 +13,8 @@ export const useApi = (url, options = {}) => {
   useEffect(() => {
     (async () => {
         const audience = 'http://localhost:5000'
-        const { scope, boxEmail, ...fetchOptions } = options;
-        const accessToken = await getAccessTokenSilently({ audience });
+        const { scope, ...fetchOptions } = options;
+        const accessToken = await getAccessTokenSilently({ audience, scope });
         const res = await fetch(url, {
           ...fetchOptions,
           headers: {

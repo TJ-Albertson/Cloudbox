@@ -45,7 +45,6 @@ export default function CloudBox() {
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [selection, setSelection] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [contextMenuType, setContextMenuType] = useState("file");
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -102,7 +101,6 @@ export default function CloudBox() {
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
-                setContextMenuType={setContextMenuType}
               />
             </div>
           </div>
@@ -120,7 +118,6 @@ export default function CloudBox() {
 
       {showContextMenu && (
         <ContextMenu
-          type={contextMenuType}
           points={points}
           selection={selection}
         />
