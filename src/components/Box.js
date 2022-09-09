@@ -40,7 +40,7 @@ export default function Box(props) {
       token: signedInUser.token
     }
 
-    await fetchApi("/groups", options).then(props.refresh)
+    await fetchApi("user/groups", options).then(props.refresh)
 
     //postApi("/removeBox", data, signedInUser.token).then(props.refresh);
   }
