@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
 import Upload from "./Upload";
@@ -11,17 +11,24 @@ import { useSortableData, FileImage, localDate } from "../utilities/functions";
 
 import "../CSS/Box.css";
 
-export default function Box(props) {
-  const { loading, refresh, data } = useApi(
-    `http://localhost:5000/files/${props.id}`,
-    { dummyData: [] }
-  );
-
-  //need to create main folder
+function Box(props, ref) {
   const [history, setHistory] = useState([{ name: "main", _id: "main" }]);
   const [currentDirectory, setCurrentDirectory] = useState("main");
 
   const signedInUser = useContext(UserContext);
+
+  const { loading, refresh, data } = useApi(
+    `http://localhost:5000/files/${props.boxEmail}`,
+    { dummyData: [] }
+  );
+
+  useImperativeHandle(ref, () => ({
+    refresh: () => refresh(),
+  }))
+
+
+  //need to create main folder
+  
 
   const { items, requestSort } = useSortableData(data);
 
@@ -59,7 +66,7 @@ export default function Box(props) {
           roundedCircle="true"
           style={{ width: "2rem", height: "2rem", marginRight: "10px" }}
         />
-        <div className="flex-grow-1">{props.id}</div>
+        <div className="flex-grow-1">{props.boxEmail}</div>
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
@@ -180,3 +187,5 @@ export default function Box(props) {
     </Card>
   );
 }
+
+export default forwardRef(Box)

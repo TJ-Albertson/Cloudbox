@@ -39,6 +39,12 @@ export default function CloudBox() {
   const [boxModalShow, setBoxModalShow] = useState(false);
   const [profileModalShow, setProfileModalShow] = useState(false)
 
+  const fileRefreshRef = useRef(null)
+
+  const refreshFiles = () => {
+    fileRefreshRef.current.refresh();
+}
+
   useEffect(() => {
     const handleClick = () => setShowContextMenu(false);
     window.addEventListener("click", handleClick);
@@ -105,7 +111,7 @@ export default function CloudBox() {
           <div className="item" key={i}>
             <div className="item-content">
               <Box
-                id={boxEmail}
+                ref={fileRefreshRef}
                 boxEmail={boxEmail}
                 refresh={refresh}
                 picture={user.picture}
@@ -131,6 +137,7 @@ export default function CloudBox() {
         <ContextMenu
           points={points}
           selection={selection}
+          refreshFiles={refreshFiles}
         />
       )}
     </UserContext.Provider>

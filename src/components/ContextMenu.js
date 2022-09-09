@@ -9,9 +9,7 @@ import { fetchApi } from "../api/fetchApi";
 export default function ContextMenu(props) {
   const signedInUser = useContext(UserContext);
 
-  async function newFolder(event) {
-    event.preventDefault();
-
+  async function newFolder() {
     const { directory } = props.selection;
 
     const data = new URLSearchParams({
@@ -28,7 +26,7 @@ export default function ContextMenu(props) {
       headers: ["application/x-www-form-urlencoded"],
     };
 
-    await fetchApi("/files/folder", options)
+    await fetchApi("/files/folder", options).then(props.refreshFiles)
   }
 
   async function deleteFile() {
@@ -39,7 +37,7 @@ export default function ContextMenu(props) {
       token: signedInUser.token
     }
 
-    await fetchApi(`/files/${id}`, options)
+    await fetchApi(`/files/${id}`, options).then(props.refreshFiles)
   }
 
   async function renameFile() {
@@ -76,7 +74,7 @@ export default function ContextMenu(props) {
               <i className="bi bi-pencil-square"></i> Rename
             </li>
             <hr className="hr-override"></hr>
-            <li onClick={() => console.log(props.selection)}>
+            <li onClick={() => deleteFile()}>
               <i className="bi bi-trash"></i> Delete
             </li>
           </ul>
@@ -93,7 +91,7 @@ export default function ContextMenu(props) {
               <i className="bi bi-pencil-square"></i> Rename
             </li>
             <hr className="hr-override"></hr>
-            <li onClick={() => console.log(props.selection)}>
+            <li onClick={() => deleteFile()}>
               <i className="bi bi-trash"></i> Delete
             </li>
           </ul>
@@ -106,7 +104,7 @@ export default function ContextMenu(props) {
           style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
         >
           <ul className="bootstrap-overrides">
-            <li onClick={(e) => newFolder(e)}>
+            <li onClick={() => newFolder()}>
               <i className="bi bi-folder-plus"></i> New Folder
             </li>
           </ul>
