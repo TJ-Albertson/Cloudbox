@@ -26,9 +26,7 @@ function Box(props, ref) {
     refresh: () => refresh(),
   }))
 
-
   //need to create main folder
-  
 
   const { items, requestSort } = useSortableData(data);
 
@@ -126,12 +124,12 @@ function Box(props, ref) {
                         props.setPoints({ x: e.pageX, y: e.pageY });
                       }}
                     >
-                      <Col>
+                      <Col className="text-truncate">
                         <i className="bi bi-folder"></i> {name}
                       </Col>
-                      <Col>{localDate(updatedAt)}</Col>
-                      <Col>{mimeType}</Col>
-                      <Col></Col>
+                      <Col className="text-truncate">{localDate(updatedAt)}</Col>
+                      <Col className="text-truncate">{mimeType}</Col>
+                      <Col className="text-truncate"></Col>
                     </Row>
                   );
                 }
@@ -155,9 +153,9 @@ function Box(props, ref) {
                     <Col className="text-truncate">
                       <FileImage value={mimeType} /> {name}
                     </Col>
-                    <Col>{localDate(updatedAt)}</Col>
-                    <Col>{mimeType}</Col>
-                    <Col className="text-end">{Math.ceil(size / 1000)} KB</Col>
+                    <Col className="text-truncate">{localDate(updatedAt)}</Col>
+                    <Col className="text-truncate">{mimeType}</Col>
+                    <Col className="text-truncate text-end">{Math.ceil(size / 1000)} KB</Col>
                   </Row>
                 );
               }

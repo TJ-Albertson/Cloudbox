@@ -41,3 +41,7 @@
   opacity: 1;
   transition: opacity 0.5s linear;
 }
+
+.addbutton:hover {
+  color: #b5f4ff;
+}
