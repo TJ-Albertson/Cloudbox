@@ -22,6 +22,8 @@ function Box(props, ref) {
     { dummyData: [] }
   );
 
+  //api call for profile pic and username
+
   useImperativeHandle(ref, () => ({
     refresh: () => refresh(),
   }))
