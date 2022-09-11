@@ -6,5 +6,5 @@ export const getApi = (route, token) => {
         headers: {
             Authorization: `Bearer ${token}`,
         }
-    }).then(res => res.json())
+    }).then(res => res.blob())
 }

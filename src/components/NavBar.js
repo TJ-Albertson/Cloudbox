@@ -22,11 +22,11 @@ export default function NavBar(props) {
       </h1>
       <h1 className="me-auto">CloudBox</h1>
 
-      <img src={sun} />
+      <img src={sun} alt="sun" />
       <Form>
         <Form.Check type="switch" id="custom-switch" style={{paddingLeft: "2.20em"}}/>
       </Form>
-      <img src={moon} style={{ marginLeft: "-0.75em" }}/>
+      <img src={moon} style={{ marginLeft: "-0.75em" }} alt="moon" />
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">

@@ -18,7 +18,7 @@ function Box(props, ref) {
   const signedInUser = useContext(UserContext);
 
   const { loading, refresh, data } = useApi(
-    `http://localhost:5000/files/${props.boxEmail}`,
+    `http://localhost:5000/files/list/${props.boxEmail}`,
     { dummyData: [] }
   );
 
@@ -70,18 +70,23 @@ function Box(props, ref) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
+
+
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
+          <div>
+              <i className="bi bi-hdd ms-1"></i>
+          </div>
           {history.map(({ name, _id }, i) => (
             <div
               key={i}
-              className="navMenu"
+              className="navMenu ms-1"
               onClick={() => {
                 setCurrentDirectory(_id);
                 setHistory([...history.slice(0, i + 1)]);
               }}
-            >
-              /{name}
+            > 
+              {">"}<i className="bi bi-folder2-open ms-1"> {name}</i>
             </div>
           ))}
         </div>
@@ -180,7 +185,7 @@ function Box(props, ref) {
       </div>
 
       <Card.Footer>
-        {props.boxEmail == signedInUser.email ? (
+        {props.boxEmail === signedInUser.email ? (
           <Upload directory={currentDirectory}></Upload>
         ) : null}
       </Card.Footer>

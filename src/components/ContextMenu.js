@@ -1,6 +1,4 @@
 import download from "downloadjs";
-import { getApi } from "../api/getApi";
-import { postApi } from "../api/postApi";
 
 import { useContext } from "react";
 import { UserContext } from "./CloudBox";
@@ -52,8 +50,20 @@ export default function ContextMenu(props) {
     await fetchApi("/files", options)
   }
 
-  const downloadFile = async (id, path, mimetype) => {
-    const result = await getApi(`/files/${id}`, signedInUser.token);
+  const downloadFile = async () => {
+    //const result = await getApi(`/files/${id}`, signedInUser.token);
+
+    const { id, path, mimetype } = props.selection
+
+    const options = {
+      method: "GET",
+      token: signedInUser.token,
+    };
+
+    const result = await fetchApi(`/files/${id}`, options).then(props.refreshFiles)
+
+    console.log(result)
+
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
@@ -67,7 +77,7 @@ export default function ContextMenu(props) {
           style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
         >
           <ul className="bootstrap-overrides">
-            <li>
+            <li onClick={() => downloadFile()}>
               <i className="bi bi-download"></i> Download
             </li>
             <li>
