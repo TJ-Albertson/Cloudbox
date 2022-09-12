@@ -126,12 +126,15 @@ export default function CloudBox() {
         ))}
       </div>
 
-      <div
+      <Button
         onClick={showBoxModal}
-        className="addbutton position-fixed bottom-0 end-0 m-5"
+        className="rounded-circle position-fixed bottom-0 end-0 m-5"
+        style={{ height: "75px", width: "75px" }}
       >
-        <img src={plus} className="addbutton" alt="plus" />
-      </div>
+        <h1>
+          <i className="bi bi-dropbox"></i>
+        </h1>
+      </Button>
 
       {showContextMenu && (
         <ContextMenu
