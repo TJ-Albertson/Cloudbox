@@ -35,15 +35,15 @@ export default function NavBar(props) {
 
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => props.showProfileModal(true)}>
-            Profile
+            <i className="bi bi-person-circle"></i> Profile
           </Dropdown.Item>
           <Dropdown.Item onClick={() => props.showShareModal(true)}>
-            Share Settings
+            <i className="bi bi-gear-fill"></i> Share Settings
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => logout({ returnTo: "http://localhost:3000/" })}
           >
-            Logout
+            <i className="bi bi-box-arrow-left"></i> Logout
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

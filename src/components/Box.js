@@ -22,19 +22,25 @@ function Box(props, ref) {
 
   const signedInUser = useContext(UserContext);
 
-  const { loading, refresh, data } = useApi(`/files/${props.boxEmail}`, {
+  const { loading: filesLoading , refresh: refreshFiles, data: fileList } = useApi(`/files/${props.boxEmail}`, {
     dummyData: [],
   });
-
-  //api call for profile pic and username
-
+  
+  const { loading: userMetaDataLoading, refresh: refreshUserMetaData, data: userMetaData } = useApi(`/user/email/${props.boxEmail}`, {
+    dummyData: {
+      username: "",
+      picture: "",
+      bio: ""
+    },
+  });
+  
   useImperativeHandle(ref, () => ({
-    refresh: () => refresh(),
+    refresh: () => refreshFiles(),
   }));
 
   //need to create main folder
 
-  const { items, requestSort } = useSortableData(data);
+  const { items, requestSort } = useSortableData(fileList);
 
   async function removeBox() {
     const options = {
@@ -51,7 +57,7 @@ function Box(props, ref) {
     await fetchApi("/user/groups", options).then(props.refresh);
   }
 
-  if (loading) {
+  if (filesLoading) {
     return <div>loading</div>;
   }
 
@@ -66,7 +72,7 @@ function Box(props, ref) {
     <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
       <Card.Header className=".handle d-flex">
         <Image
-          src={props.picture}
+          src={userMetaData.picture}
           roundedCircle="true"
           style={{ width: "2rem", height: "2rem", marginRight: "10px" }}
         />

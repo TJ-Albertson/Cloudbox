@@ -9,7 +9,6 @@ import ContextMenu from "./ContextMenu";
 
 import "../CSS/Cloudbox.css";
 import "../CSS/Box.css";
-import plus from "../SVG/plus.svg";
 
 import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 import { useApi } from "../hooks/useApi";
@@ -80,7 +79,7 @@ export default function CloudBox() {
 
   return (
     <UserContext.Provider
-      value={{ username: user.name, email: user.email, token: token }}
+      value={{ username: data.username, email: data.email, token: token }}
     >
       <NavBar
         showShareModal={showShareModal}
