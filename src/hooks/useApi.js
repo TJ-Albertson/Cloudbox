@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const useApi = (url, options = {}) => {
+const API_URL = process.env.REACT_APP_API_URL || `http://localhost:5000`;
+
+export const useApi = (route, options = {}) => {
   const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState({
     token: null,
@@ -12,10 +14,10 @@ export const useApi = (url, options = {}) => {
 
   useEffect(() => {
     (async () => {
-        const audience = 'http://localhost:5000'
+        const audience = API_URL
         const { scope, ...fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience, scope });
-        const res = await fetch(url, {
+        const res = await fetch(API_URL + route, {
           ...fetchOptions,
           headers: {
             ...fetchOptions.headers,

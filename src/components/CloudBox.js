@@ -11,7 +11,7 @@ import "../CSS/Cloudbox.css";
 import "../CSS/Box.css";
 import plus from "../SVG/plus.svg";
 
-import { boxModalOptions, shareModalOptions } from "./utils";
+import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
 import ProfileModal from "./ProfileModal";
@@ -30,10 +30,7 @@ export default function CloudBox() {
     },
   };
 
-  const { loading, token, refresh, data } = useApi(
-    "http://localhost:5000/user",
-    options
-  );
+  const { loading, token, refresh, data } = useApi("/user", options);
 
   const { ref } = useMuuri(data);
 
@@ -133,7 +130,7 @@ export default function CloudBox() {
         onClick={showBoxModal}
         className="addbutton position-fixed bottom-0 end-0 m-5"
       >
-        <img src={plus} className="addbutton" alt="plus"/>
+        <img src={plus} className="addbutton" alt="plus" />
       </div>
 
       {showContextMenu && (

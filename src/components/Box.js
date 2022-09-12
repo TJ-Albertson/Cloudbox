@@ -1,4 +1,9 @@
-import React, { forwardRef, useContext, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
 import Upload from "./Upload";
@@ -17,16 +22,15 @@ function Box(props, ref) {
 
   const signedInUser = useContext(UserContext);
 
-  const { loading, refresh, data } = useApi(
-    `http://localhost:5000/files/list/${props.boxEmail}`,
-    { dummyData: [] }
-  );
+  const { loading, refresh, data } = useApi(`/files/${props.boxEmail}`, {
+    dummyData: [],
+  });
 
   //api call for profile pic and username
 
   useImperativeHandle(ref, () => ({
     refresh: () => refresh(),
-  }))
+  }));
 
   //need to create main folder
 
@@ -70,12 +74,10 @@ function Box(props, ref) {
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
-
-
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
           <div>
-              <i className="bi bi-hdd ms-1"></i>
+            <i className="bi bi-hdd ms-1"></i>
           </div>
           {history.map(({ name, _id }, i) => (
             <div
@@ -85,8 +87,9 @@ function Box(props, ref) {
                 setCurrentDirectory(_id);
                 setHistory([...history.slice(0, i + 1)]);
               }}
-            > 
-              {">"}<i className="bi bi-folder2-open ms-1"> {name}</i>
+            >
+              {">"}
+              <i className="bi bi-folder2-open ms-1"> {name}</i>
             </div>
           ))}
         </div>
@@ -134,7 +137,9 @@ function Box(props, ref) {
                       <Col className="text-truncate">
                         <i className="bi bi-folder"></i> {name}
                       </Col>
-                      <Col className="text-truncate">{localDate(updatedAt)}</Col>
+                      <Col className="text-truncate">
+                        {localDate(updatedAt)}
+                      </Col>
                       <Col className="text-truncate">{mimeType}</Col>
                       <Col className="text-truncate"></Col>
                     </Row>
@@ -162,7 +167,9 @@ function Box(props, ref) {
                     </Col>
                     <Col className="text-truncate">{localDate(updatedAt)}</Col>
                     <Col className="text-truncate">{mimeType}</Col>
-                    <Col className="text-truncate text-end">{Math.ceil(size / 1000)} KB</Col>
+                    <Col className="text-truncate text-end">
+                      {Math.ceil(size / 1000)} KB
+                    </Col>
                   </Row>
                 );
               }
@@ -193,4 +200,4 @@ function Box(props, ref) {
   );
 }
 
-export default forwardRef(Box)
+export default forwardRef(Box);

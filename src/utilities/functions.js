@@ -13,6 +13,19 @@ export function FileImage(props) {
   }
 }
 
+export function FileType(props) {
+  switch (props.value) {
+    case "text/plain":
+      return "Text Document"
+    case "mp4":
+      return "MP4 File"
+    case "jpg":
+      return "JPG File"
+    default:
+      return props.value
+  }
+}
+
 export function localDate(dateString) {
   const date = new Date(dateString);
   let regex = /:\d\d\s/i;
