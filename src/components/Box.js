@@ -71,6 +71,7 @@ function Box(props, ref) {
           style={{ width: "2rem", height: "2rem", marginRight: "10px" }}
         />
         <div className="flex-grow-1">{props.boxEmail}</div>
+        <h5><i className="bi bi-upload me-3"></i></h5>
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
