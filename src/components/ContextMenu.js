@@ -38,18 +38,6 @@ export default function ContextMenu(props) {
     await fetchApi(`/files/${id}`, options).then(props.refreshFiles);
   }
 
-  async function renameFile() {
-    const { id, newName } = props.selection;
-
-    const options = {
-      method: "PATCH",
-      body: { id, newName },
-      token: signedInUser.token,
-    };
-
-    await fetchApi("/files", options);
-  }
-
   const downloadFile = async () => {
     //const result = await getApi(`/files/${id}`, signedInUser.token);
 
@@ -82,7 +70,7 @@ export default function ContextMenu(props) {
             <li onClick={() => downloadFile()}>
               <i className="bi bi-download"></i> Download
             </li>
-            <li>
+            <li onClick={() => props.showRenameModal(true)} >
               <i className="bi bi-pencil-square"></i> Rename
             </li>
             <hr className="hr-override"></hr>
@@ -109,7 +97,7 @@ export default function ContextMenu(props) {
           </ul>
         </div>
       );
-    case "other":
+    case "otherFile":
       return (
         <div
           className="menu"
@@ -123,19 +111,6 @@ export default function ContextMenu(props) {
         </div>
       );
     case "empty":
-      return (
-        <div
-          className="menu"
-          style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
-        >
-          <ul className="bootstrap-overrides">
-            <li onClick={() => newFolder()}>
-              <i className="bi bi-folder-plus"></i> New Folder
-            </li>
-          </ul>
-        </div>
-      );
-    default:
       return (
         <div
           className="menu"

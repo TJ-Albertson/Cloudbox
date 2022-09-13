@@ -6,8 +6,7 @@ import { UserContext } from "./CloudBox";
 import sun from "../SVG/sun.svg";
 import moon from "../SVG/moon.svg";
 
-//not really a navbar
-export default function NavBar(props) {
+export default function TopMenu(props) {
   const { logout } = useAuth0();
   const signedInUser = useContext(UserContext);
 
@@ -24,7 +23,11 @@ export default function NavBar(props) {
 
       <img src={sun} alt="sun" />
       <Form>
-        <Form.Check type="switch" id="custom-switch" style={{paddingLeft: "2.20em"}}/>
+        <Form.Check
+          type="switch"
+          id="custom-switch"
+          style={{ paddingLeft: "2.20em" }}
+        />
       </Form>
       <img src={moon} style={{ marginLeft: "-0.75em" }} alt="moon" />
 
@@ -38,7 +41,7 @@ export default function NavBar(props) {
             <i className="bi bi-person-circle"></i> Profile
           </Dropdown.Item>
           <Dropdown.Item onClick={() => props.showShareModal(true)}>
-            <i className="bi bi-gear-fill"></i> Share Settings
+            <i className="bi bi-send-plus-fill"></i> Share Settings
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => logout({ returnTo: "http://localhost:3000/" })}

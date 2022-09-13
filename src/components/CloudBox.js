@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import NavBar from "./NavBar";
+import NavBar from "./TopMenu";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
 import ContextMenu from "./ContextMenu";
+import RenameModal from "./RenameModal";
 
 import "../CSS/Cloudbox.css";
 
@@ -32,10 +33,6 @@ export default function CloudBox() {
 
   const { ref } = useMuuri(data);
 
-  const [shareModalShow, setShareModalShow] = useState(false);
-  const [boxModalShow, setBoxModalShow] = useState(false);
-  const [profileModalShow, setProfileModalShow] = useState(false);
-
   const fileRefreshRef = useRef(null);
 
   const refreshFiles = () => {
@@ -52,6 +49,12 @@ export default function CloudBox() {
   const [selection, setSelection] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
 
+  const [shareModalShow, setShareModalShow] = useState(false);
+  const [boxModalShow, setBoxModalShow] = useState(false);
+  const [profileModalShow, setProfileModalShow] = useState(false);
+  const [renameModalShow, setRenameModalShow] = useState(false);
+  const [uploadModalShow, setUploadModalShow] = useState(false);
+
   const showShareModal = () => {
     setShareModalShow(true);
   };
@@ -60,6 +63,9 @@ export default function CloudBox() {
   };
   const showProfileModal = () => {
     setProfileModalShow(true);
+  };
+  const showRenameModal = () => {
+    setRenameModalShow(true);
   };
 
   if (isLoading && loading) {
@@ -106,6 +112,13 @@ export default function CloudBox() {
         onHide={() => setProfileModalShow(false)}
       />
 
+      <RenameModal
+        show={renameModalShow}
+        onHide={() => setRenameModalShow(false)}
+        selection={selection}
+        refreshFiles={refreshFiles}
+      />
+
       <div className="grid" ref={ref}>
         {data.boxArray.map((boxEmail, i) => (
           <div className="item" key={i}>
@@ -139,6 +152,7 @@ export default function CloudBox() {
           points={points}
           selection={selection}
           refreshFiles={refreshFiles}
+          showRenameModal={showRenameModal}
         />
       )}
     </UserContext.Provider>
