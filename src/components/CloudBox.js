@@ -8,7 +8,6 @@ import CheckListModal from "./CheckListModal";
 import ContextMenu from "./ContextMenu";
 
 import "../CSS/Cloudbox.css";
-import "../CSS/Box.css";
 
 import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 import { useApi } from "../hooks/useApi";
@@ -115,10 +114,10 @@ export default function CloudBox() {
                 ref={fileRefreshRef}
                 boxEmail={boxEmail}
                 refresh={refresh}
-                picture={user.picture}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
+                owner={boxEmail === data.email}
               />
             </div>
           </div>

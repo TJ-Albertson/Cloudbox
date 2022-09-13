@@ -13,8 +13,9 @@ import { UserContext } from "./CloudBox";
 import { fetchApi } from "../api/fetchApi";
 
 import { useSortableData, FileImage, localDate } from "../utilities/functions";
+import { headerArray } from "../utilities/variables";
 
-import "../CSS/Box.css";
+import "../SCSS/Box.scss";
 
 function Box(props, ref) {
   const [history, setHistory] = useState([{ name: "main", _id: "main" }]);
@@ -22,23 +23,29 @@ function Box(props, ref) {
 
   const signedInUser = useContext(UserContext);
 
-  const { loading: filesLoading , refresh: refreshFiles, data: fileList } = useApi(`/files/${props.boxEmail}`, {
+  const {
+    loading: filesLoading,
+    refresh: refreshFiles,
+    data: fileList,
+  } = useApi(`/files/${props.boxEmail}`, {
     dummyData: [],
   });
-  
-  const { loading: userMetaDataLoading, refresh: refreshUserMetaData, data: userMetaData } = useApi(`/user/email/${props.boxEmail}`, {
+
+  const {
+    loading: userMetaDataLoading,
+    refresh: refreshUserMetaData,
+    data: userMetaData,
+  } = useApi(`/user/email/${props.boxEmail}`, {
     dummyData: {
       username: "",
       picture: "",
-      bio: ""
+      bio: "",
     },
   });
-  
+
   useImperativeHandle(ref, () => ({
     refresh: () => refreshFiles(),
   }));
-
-  //need to create main folder
 
   const { items, requestSort } = useSortableData(fileList);
 
@@ -57,56 +64,67 @@ function Box(props, ref) {
     await fetchApi("/user/groups", options).then(props.refresh);
   }
 
+  function moveFolder() {}
+
   if (filesLoading) {
     return <div>loading</div>;
   }
 
-  const headerArray = [
-    { text: "Name", sortBy: "name" },
-    { text: "Date", sortBy: "updatedAt" },
-    { text: "Type", sortBy: "mimeType" },
-    { text: "Size", sortBy: "size" },
-  ];
-
   return (
-    <Card className="Box" style={{ width: "40rem", height: "40rem" }}>
-      <Card.Header className=".handle d-flex">
+    <Card className="Box">
+      <Card.Header className=".handle d-flex p-2">
         <Image
           src={userMetaData.picture}
           roundedCircle="true"
-          style={{ width: "2rem", height: "2rem", marginRight: "10px" }}
+          className="picture"
         />
-        <div className="flex-grow-1">{props.boxEmail}</div>
-        <h5><i className="bi bi-upload me-3"></i></h5>
+
+        <div className="flex-grow-1 ">{props.boxEmail}</div>
+
+        {props.owner && (
+          <h5>
+            <i className="bi bi-upload me-3"></i>
+          </h5>
+        )}
+
         <CloseButton onClick={() => removeBox()} />
       </Card.Header>
 
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
-          <div>
-            <i className="bi bi-hdd ms-1"></i>
+          <div
+            className="ms-1"
+            onClick={() => {
+              setCurrentDirectory("main");
+              setHistory([...history.slice(0, 1)]);
+            }}
+          >
+            <i className="bi bi-hdd ms-1 navMenuItem"> C:</i>
           </div>
-          {history.map(({ name, _id }, i) => (
-            <div
-              key={i}
-              className="navMenu ms-1"
-              onClick={() => {
-                setCurrentDirectory(_id);
-                setHistory([...history.slice(0, i + 1)]);
-              }}
-            >
-              {">"}
-              <i className="bi bi-folder2-open ms-1"> {name}</i>
-            </div>
-          ))}
+
+          {history.map(({ name, _id }, i) =>
+            name != "main" ? (
+              <div
+                key={i}
+                className="ms-1"
+                onClick={() => {
+                  setCurrentDirectory(_id);
+                  setHistory([...history.slice(0, i + 1)]);
+                }}
+              >
+                {">"}
+                <i className="bi bi-folder2-open ms-1 navMenuItem"> {name}</i>
+              </div>
+            ) : null
+          )}
         </div>
 
-        <Container style={{ fontSize: "15px" }}>
+        <Container className="columnNames">
           <Row className="mb-1">
             {headerArray.map(({ text, sortBy }, i) => (
               <Col
                 key={i}
-                className="header"
+                className="column"
                 onClick={() => requestSort(sortBy)}
               >
                 {text}
@@ -115,7 +133,7 @@ function Box(props, ref) {
           </Row>
         </Container>
 
-        <Container className="overflow-auto">
+        <Container className="overflow-auto fluid">
           {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
               if (directory === currentDirectory) {
@@ -123,7 +141,7 @@ function Box(props, ref) {
                   return (
                     <Row
                       key={i}
-                      className="test"
+                      className="file"
                       onClick={() => {
                         setCurrentDirectory(_id);
                         setHistory([...history, { name, _id }]);
@@ -155,10 +173,9 @@ function Box(props, ref) {
                 return (
                   <Row
                     key={i}
-                    className="test"
+                    className="file"
                     onContextMenu={(e) => {
                       e.preventDefault();
-                      props.setShowContextMenu(true);
                       props.setSelection({
                         type: "file",
                         id: _id,
@@ -166,6 +183,7 @@ function Box(props, ref) {
                         mimeType,
                         name,
                       });
+                      props.setShowContextMenu(true);
                       props.setPoints({ x: e.pageX, y: e.pageY });
                     }}
                   >
@@ -198,11 +216,6 @@ function Box(props, ref) {
         ></div>
       </div>
 
-      <Card.Footer>
-        {props.boxEmail === signedInUser.email ? (
-          <Upload directory={currentDirectory}></Upload>
-        ) : null}
-      </Card.Footer>
     </Card>
   );
 }

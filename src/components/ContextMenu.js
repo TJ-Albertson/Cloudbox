@@ -24,7 +24,7 @@ export default function ContextMenu(props) {
       headers: ["application/x-www-form-urlencoded"],
     };
 
-    await fetchApi("/files/folder", options).then(props.refreshFiles)
+    await fetchApi("/files/folder", options).then(props.refreshFiles);
   }
 
   async function deleteFile() {
@@ -32,37 +32,39 @@ export default function ContextMenu(props) {
 
     const options = {
       method: "DELETE",
-      token: signedInUser.token
-    }
+      token: signedInUser.token,
+    };
 
-    await fetchApi(`/files/${id}`, options).then(props.refreshFiles)
+    await fetchApi(`/files/${id}`, options).then(props.refreshFiles);
   }
 
   async function renameFile() {
-    const { id, newName } = props.selection
+    const { id, newName } = props.selection;
 
     const options = {
       method: "PATCH",
-      body: {id, newName},
-      token: signedInUser.token
-    }
+      body: { id, newName },
+      token: signedInUser.token,
+    };
 
-    await fetchApi("/files", options)
+    await fetchApi("/files", options);
   }
 
   const downloadFile = async () => {
     //const result = await getApi(`/files/${id}`, signedInUser.token);
 
-    const { id, path, mimetype } = props.selection
+    const { id, path, mimetype } = props.selection;
 
     const options = {
       method: "GET",
       token: signedInUser.token,
     };
 
-    const result = await fetchApi(`/files/${id}`, options).then(props.refreshFiles)
+    const result = await fetchApi(`/files/${id}`, options).then(
+      props.refreshFiles
+    );
 
-    console.log(result)
+    console.log(result);
 
     const split = path.split("/");
     const filename = split[split.length - 1];
@@ -103,6 +105,32 @@ export default function ContextMenu(props) {
             <hr className="hr-override"></hr>
             <li onClick={() => deleteFile()}>
               <i className="bi bi-trash"></i> Delete
+            </li>
+          </ul>
+        </div>
+      );
+    case "other":
+      return (
+        <div
+          className="menu"
+          style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
+        >
+          <ul className="bootstrap-overrides">
+            <li onClick={() => downloadFile()}>
+              <i className="bi bi-download"></i> Download
+            </li>
+          </ul>
+        </div>
+      );
+    case "empty":
+      return (
+        <div
+          className="menu"
+          style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
+        >
+          <ul className="bootstrap-overrides">
+            <li onClick={() => newFolder()}>
+              <i className="bi bi-folder-plus"></i> New Folder
             </li>
           </ul>
         </div>
