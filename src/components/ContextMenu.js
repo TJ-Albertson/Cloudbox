@@ -87,7 +87,7 @@ export default function ContextMenu(props) {
           style={{ top: props.points.y, left: props.points.x, zIndex: 4 }}
         >
           <ul className="bootstrap-overrides">
-            <li>
+            <li onClick={() => props.showRenameModal(true)}>
               <i className="bi bi-pencil-square"></i> Rename
             </li>
             <hr className="hr-override"></hr>

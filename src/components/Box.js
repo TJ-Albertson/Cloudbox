@@ -6,8 +6,6 @@ import React, {
 } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
-import Upload from "./Upload";
-
 import { useApi } from "../hooks/useApi";
 import { UserContext } from "./CloudBox";
 import { fetchApi } from "../api/fetchApi";
@@ -18,8 +16,8 @@ import { headerArray } from "../utilities/variables";
 import "../SCSS/Box.scss";
 
 function Box(props, ref) {
-  const [history, setHistory] = useState([{ name: "main", _id: "main" }]);
-  const [currentDirectory, setCurrentDirectory] = useState("main");
+  const [history, setHistory] = useState([{ name: "C:", _id: "C:" }]);
+  const [currentDirectory, setCurrentDirectory] = useState("C:");
 
   const signedInUser = useContext(UserContext);
 
@@ -82,7 +80,14 @@ function Box(props, ref) {
         <div className="flex-grow-1 ">{props.boxEmail}</div>
 
         {props.owner && (
-          <h5>
+          <h5
+            onClick={() => {
+              props.setSelection(
+                history[history.length - 1]
+              );
+              props.showUploadModal(true);
+            }}
+          >
             <i className="bi bi-upload me-3"></i>
           </h5>
         )}
@@ -95,7 +100,7 @@ function Box(props, ref) {
           <div
             className="ms-1"
             onClick={() => {
-              setCurrentDirectory("main");
+              setCurrentDirectory("C:");
               setHistory([...history.slice(0, 1)]);
             }}
           >
@@ -103,7 +108,7 @@ function Box(props, ref) {
           </div>
 
           {history.map(({ name, _id }, i) =>
-            name != "main" ? (
+            name != "C:" ? (
               <div
                 key={i}
                 className="ms-1"
@@ -156,6 +161,11 @@ function Box(props, ref) {
                           mimeType,
                           name,
                         });
+
+                        if (!props.owner) {
+                          props.setSelection({});
+                        }
+
                         props.setPoints({ x: e.pageX, y: e.pageY });
                       }}
                     >
@@ -183,6 +193,17 @@ function Box(props, ref) {
                         mimeType,
                         name,
                       });
+
+                      if (!props.owner) {
+                        props.setSelection({
+                          type: "otherFile",
+                          id: _id,
+                          path,
+                          mimeType,
+                          name,
+                        });
+                      }
+
                       props.setShowContextMenu(true);
                       props.setPoints({ x: e.pageX, y: e.pageY });
                     }}
@@ -208,14 +229,18 @@ function Box(props, ref) {
             e.preventDefault();
             props.setShowContextMenu(true);
             props.setSelection({
-              type: "default",
+              type: "empty",
               directory: currentDirectory,
             });
+
+            if (!props.owner) {
+              props.setSelection({});
+            }
+
             props.setPoints({ x: e.pageX, y: e.pageY });
           }}
         ></div>
       </div>
-
     </Card>
   );
 }

@@ -7,6 +7,7 @@ import Box from "./Box";
 import CheckListModal from "./CheckListModal";
 import ContextMenu from "./ContextMenu";
 import RenameModal from "./RenameModal";
+import UploadModal from "./UploadModal"
 
 import "../CSS/Cloudbox.css";
 
@@ -67,6 +68,9 @@ export default function CloudBox() {
   const showRenameModal = () => {
     setRenameModalShow(true);
   };
+  const showUploadModal = () => {
+    setUploadModalShow(true);
+  };
 
   if (isLoading && loading) {
     return (
@@ -119,6 +123,13 @@ export default function CloudBox() {
         refreshFiles={refreshFiles}
       />
 
+      <UploadModal
+        show={uploadModalShow}
+        onHide={() => setUploadModalShow(false)}
+        selection={selection}
+        refreshFiles={refreshFiles}
+      />
+
       <div className="grid" ref={ref}>
         {data.boxArray.map((boxEmail, i) => (
           <div className="item" key={i}>
@@ -131,6 +142,7 @@ export default function CloudBox() {
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
                 owner={boxEmail === data.email}
+                showUploadModal={showUploadModal}
               />
             </div>
           </div>
