@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import NavBar from "./TopMenu";
+import TopMenu from "./TopMenu";
 import Box from "./Box";
 import CheckListModal from "./CheckListModal";
 import ContextMenu from "./ContextMenu";
@@ -73,24 +73,14 @@ export default function CloudBox() {
   };
 
   if (isLoading && loading) {
-    return (
-      <div className="position-absolute top-50 start-50 translate-middle">
-        <Spinner
-          animation="border"
-          style={{ width: "10em", height: "10em" }}
-          role="status"
-        >
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return
   }
 
   return (
     <UserContext.Provider
       value={{ username: data.username, email: data.email, token: token, picture: data.picture}}
     >
-      <NavBar
+      <TopMenu
         showShareModal={showShareModal}
         showProfileModal={showProfileModal}
       />
