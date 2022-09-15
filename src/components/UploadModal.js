@@ -18,8 +18,8 @@ export default function RenameModal(props) {
       <Modal.Header closeButton className="pb-1">
         <Modal.Title id="contained-modal-title-vcenter">
           <h4 className="d-flex">
-            <i className=""></i> Current Directory: 
-            <div className="d-flex">{props.selection ? props.selection.name : null}</div>
+            Current Directory: ...<i className="bi bi-folder"/>
+            <div className="d-flex"> {props.selection ? props.selection.name : null}</div>
           </h4>
         </Modal.Title>
       </Modal.Header>

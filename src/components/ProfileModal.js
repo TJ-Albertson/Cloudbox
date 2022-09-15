@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { UserContext } from "./CloudBox";
+
+import "../CSS/ProfileModal.css"
 
 export default function ProfileModal(props) {
   const [showSubmitButton, setShowSubmitButton] = useState(false);
+  const signedInUser = useContext(UserContext);
 
   return (
     <Modal
@@ -12,19 +16,19 @@ export default function ProfileModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton className="pb-1">
-        <Modal.Title id="contained-modal-title-vcenter">
-          <img
+      <Modal.Header closeButton className="pb-3">
+          {<img
             style={{ width: "48px", height: "48px", borderRadius: "50%" }}
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-          ></img>
-          <h3>username</h3>
+            src={signedInUser.picture}
+          ></img>}
+        <Modal.Title id="contained-modal-title-vcenter">
+          <h3>&nbsp;&nbsp;{signedInUser.username}</h3>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        bio:
-        <textarea></textarea>
+        <h5>bio:</h5>
+        <textarea className="bio"></textarea>
       </Modal.Body>
 
       <Modal.Footer>

@@ -120,6 +120,9 @@ export default function ContextMenu(props) {
             <li onClick={() => newFolder()}>
               <i className="bi bi-folder-plus"></i> New Folder
             </li>
+            <li onClick={() => props.refreshFiles}>
+              <i className="bi bi-folder-plus"></i> REfersh
+            </li>
           </ul>
         </div>
       );

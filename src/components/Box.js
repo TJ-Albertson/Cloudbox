@@ -31,7 +31,6 @@ function Box(props, ref) {
 
   const {
     loading: userMetaDataLoading,
-    refresh: refreshUserMetaData,
     data: userMetaData,
   } = useApi(`/user/email/${props.boxEmail}`, {
     dummyData: {

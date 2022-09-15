@@ -88,7 +88,7 @@ export default function CloudBox() {
 
   return (
     <UserContext.Provider
-      value={{ username: data.username, email: data.email, token: token }}
+      value={{ username: data.username, email: data.email, token: token, picture: data.picture}}
     >
       <NavBar
         showShareModal={showShareModal}
@@ -134,16 +134,26 @@ export default function CloudBox() {
         {data.boxArray.map((boxEmail, i) => (
           <div className="item" key={i}>
             <div className="item-content">
-              <Box
+
+              {(boxEmail == data.email) ? (<Box
                 ref={fileRefreshRef}
                 boxEmail={boxEmail}
                 refresh={refresh}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
-                owner={boxEmail === data.email}
+                owner={true}
                 showUploadModal={showUploadModal}
-              />
+              />) : (<Box
+                boxEmail={boxEmail}
+                refresh={refresh}
+                setPoints={setPoints}
+                setSelection={setSelection}
+                setShowContextMenu={setShowContextMenu}
+              />)}
+              
+
+              
             </div>
           </div>
         ))}
