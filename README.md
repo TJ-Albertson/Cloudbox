@@ -14,4 +14,4 @@ Single page progressive web app. Each user has a "box" of files they can share w
 - File navigation system mirrors Windows
 - File upload, download, rename, and delete
 - Customize which boxes appear in your dashboard
-- Share files with other users
+- Add or remove users who have access to your files
