@@ -161,6 +161,7 @@ export default function CloudBox() {
 
       {showContextMenu && (
         <ContextMenu
+          style={{listStyle: "none"}}
           points={points}
           selection={selection}
           refreshFiles={refreshFiles}

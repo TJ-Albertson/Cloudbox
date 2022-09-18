@@ -2,12 +2,14 @@ import React from "react";
 
 export function FileImage(props) {
   switch (props.value) {
-    case "txt":
+    case "text/plain":
       return <i className="bi bi-filetype-txt"></i>;
-    case "mp4":
-      return <i className="bi bi-filetype-mp4"></i>;
-    case "jpg":
+    case "video/mp4":
+      return <i className="bi bi-film"></i>;
+    case "image/jpeg":
       return <i className="bi bi-file-earmark-image"></i>;
+    case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+      return <i className="bi bi-filetype-xlsx"></i>
     default:
       return <i className="bi bi-file-earmark-text"></i>;
   }

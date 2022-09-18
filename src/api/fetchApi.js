@@ -1,4 +1,6 @@
-const API_URL = process.env.REACT_APP_API_URL || `http://localhost:5000`;
+import config from "../config.json"
+
+const API_URL = config.API || `http://localhost:5000`;
 
 //switch to axios
 export const fetchApi = (route, options) => {
