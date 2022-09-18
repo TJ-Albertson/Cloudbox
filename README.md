@@ -4,12 +4,6 @@ Single page progressive web app. Each user has a "box" of files they can share w
 
 ---
 
-![image](https://user-images.githubusercontent.com/78708210/190927502-7b761375-8f85-411f-8755-06ffd807d2c5.png)  
-
-![image](https://user-images.githubusercontent.com/78708210/190928033-dc0b6c28-edc4-410f-bf31-64b942291ea9.png)  
-
----
-
 ### Functionality
 
 - File navigation system mirrors Windows
@@ -17,3 +11,9 @@ Single page progressive web app. Each user has a "box" of files they can share w
 - Customize which boxes appear in the dashboard
 - Add or remove users who have access to your files
 - Simple UI
+
+---
+
+![image](https://user-images.githubusercontent.com/78708210/190927502-7b761375-8f85-411f-8755-06ffd807d2c5.png)  
+
+![image](https://user-images.githubusercontent.com/78708210/190928033-dc0b6c28-edc4-410f-bf31-64b942291ea9.png)  
