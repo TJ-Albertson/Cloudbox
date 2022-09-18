@@ -5,3 +5,13 @@ Single page progressive web app. Each user has a "box" of files they can share w
 ---
 
 ![image](https://user-images.githubusercontent.com/78708210/190927502-7b761375-8f85-411f-8755-06ffd807d2c5.png)
+
+---
+
+### Functionality
+
+- Simple UI
+- File navigation system mirrors Windows
+- File upload, download, rename, and delete
+- Customize which boxes appear in your dashboard
+- Share files with other users
