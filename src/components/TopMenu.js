@@ -6,6 +6,8 @@ import { UserContext } from "./CloudBox";
 import sun from "../SVG/sun.svg";
 import moon from "../SVG/moon.svg";
 
+import "../CSS/TopMenu.css"
+
 export default function TopMenu(props) {
   const { logout } = useAuth0();
   const signedInUser = useContext(UserContext);
@@ -22,14 +24,11 @@ export default function TopMenu(props) {
       <h1 className="me-auto">CloudBox</h1>
 
       <img src={sun} alt="sun" />
-      <Form>
-        <Form.Check
-          type="switch"
-          id="custom-switch"
-          style={{ paddingLeft: "2.20em" }}
-        />
-      </Form>
-      <img src={moon} style={{ marginLeft: "-0.75em" }} alt="moon" />
+      <label className="switch">
+        <input type="checkbox"></input>
+        <span className="slider round"></span>
+      </label>
+      <img src={moon} alt="moon" />
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
