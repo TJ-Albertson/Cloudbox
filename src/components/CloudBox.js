@@ -124,7 +124,6 @@ export default function CloudBox() {
         {data.boxArray.map((boxEmail, i) => (
           <div className="item" key={i}>
             <div className="item-content">
-
               {(boxEmail == data.email) ? (<Box
                 ref={fileRefreshRef}
                 boxEmail={boxEmail}
@@ -141,9 +140,6 @@ export default function CloudBox() {
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
               />)}
-              
-
-              
             </div>
           </div>
         ))}
