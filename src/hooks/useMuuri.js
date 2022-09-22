@@ -9,6 +9,10 @@ export const useMuuri = (data) => {
     let grid = new Muuri(ref.current, { 
       dragEnabled: true,
       dragHandle: '.handle',
+      layout: {
+        fillGaps: true,
+        rounding: true
+      },
       dragPlaceholder: {
         enabled: true,
         createElement(item) {

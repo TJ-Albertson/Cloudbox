@@ -31,9 +31,7 @@ export default function CloudBox() {
   };
 
   const { loading, token, refresh, data } = useApi("/user", options);
-
   const { ref } = useMuuri(data);
-
   const fileRefreshRef = useRef(null);
 
   const refreshFiles = () => {
@@ -119,7 +117,7 @@ export default function CloudBox() {
         selection={selection}
         refreshFiles={refreshFiles}
       />
-
+ 
       <div className="grid" ref={ref}>
         {data.boxArray.map((boxEmail, i) => (
           <div className="item" key={i}>
