@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import TopMenu from "./TopMenu";
 import Box from "./Box";
@@ -12,27 +11,21 @@ import UploadModal from "./UploadModal"
 import "../CSS/Cloudbox.css";
 
 import { boxModalOptions, shareModalOptions } from "../utilities/variables";
-import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
 import ProfileModal from "./ProfileModal";
 
 export const UserContext = React.createContext();
 
 export default function CloudBox() {
-  const { user, isLoading } = useAuth0();
 
-  const options = {
-    method: "GET",
-    dummyData: {
-      boxArray: [],
-      accessArray: [],
-      shareArray: [],
-    },
-  };
+  const data = {
+    boxArray: [],
+    accessArray: [],
+    shareArray: []
+  }
 
-  const { loading, token, refresh, data } = useApi("/user", options);
+
   const { ref } = useMuuri(data);
-  const fileRefreshRef = useRef(null);
 
   const refreshFiles = () => {
     fileRefreshRef.current.refresh();
