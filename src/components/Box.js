@@ -22,6 +22,7 @@ function Box(props) {
 
   const fileList = [
     {
+      "_id": "1",
       "owner": "robertchapman@gmail.com",
       "name": "Cat Picture",
       "size": "4124",
