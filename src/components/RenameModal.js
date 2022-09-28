@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { Modal, Form, Stack, Button } from "react-bootstrap";
 
-import { fetchApi } from "../api/fetchApi";
 import { UserContext } from "./CloudBox";
-
 
 export default function RenameModal(props) {
     const signedInUser = useContext(UserContext);
@@ -23,8 +21,6 @@ export default function RenameModal(props) {
       token: signedInUser.token,
       headers: { "Content-Type": "application/json" },
     };
-
-    await fetchApi("/files", options).then(props.refreshFiles).then(props.onHide)
   }
 
   return (

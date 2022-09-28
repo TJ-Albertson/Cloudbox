@@ -14,22 +14,14 @@ import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 import { useMuuri } from "../hooks/useMuuri";
 import ProfileModal from "./ProfileModal";
 
+import { data } from "../demo/demoConfig"
+
 export const UserContext = React.createContext();
 
 export default function CloudBox() {
 
-  const data = {
-    boxArray: [],
-    accessArray: [],
-    shareArray: []
-  }
-
 
   const { ref } = useMuuri(data);
-
-  const refreshFiles = () => {
-    fileRefreshRef.current.refresh();
-  };
 
   useEffect(() => {
     const handleClick = () => setShowContextMenu(false);
@@ -63,13 +55,9 @@ export default function CloudBox() {
     setUploadModalShow(true);
   };
 
-  if (isLoading && loading) {
-    return
-  }
-
   return (
     <UserContext.Provider
-      value={{ username: data.username, email: data.email, token: token, picture: data.picture}}
+      value={{ username: data.username, email: data.email, picture: data.picture}}
     >
       <TopMenu
         showShareModal={showShareModal}
@@ -81,7 +69,6 @@ export default function CloudBox() {
         emailgroup={data.accessArray}
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
-        refresh={refresh}
       />
 
       <CheckListModal
@@ -89,7 +76,6 @@ export default function CloudBox() {
         emailgroup={data.shareArray}
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
-        refresh={refresh}
       />
 
       <ProfileModal
@@ -101,14 +87,12 @@ export default function CloudBox() {
         show={renameModalShow}
         onHide={() => setRenameModalShow(false)}
         selection={selection}
-        refreshFiles={refreshFiles}
       />
 
       <UploadModal
         show={uploadModalShow}
         onHide={() => setUploadModalShow(false)}
         selection={selection}
-        refreshFiles={refreshFiles}
       />
  
       <div className="grid" ref={ref}>
@@ -116,9 +100,7 @@ export default function CloudBox() {
           <div className="item" key={i}>
             <div className="item-content">
               {(boxEmail == data.email) ? (<Box
-                ref={fileRefreshRef}
                 boxEmail={boxEmail}
-                refresh={refresh}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
@@ -126,7 +108,6 @@ export default function CloudBox() {
                 showUploadModal={showUploadModal}
               />) : (<Box
                 boxEmail={boxEmail}
-                refresh={refresh}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
@@ -151,7 +132,6 @@ export default function CloudBox() {
           style={{listStyle: "none"}}
           points={points}
           selection={selection}
-          refreshFiles={refreshFiles}
           showRenameModal={showRenameModal}
         />
       )}

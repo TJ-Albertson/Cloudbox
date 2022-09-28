@@ -2,7 +2,6 @@ import download from "downloadjs";
 
 import { useContext } from "react";
 import { UserContext } from "./CloudBox";
-import { fetchApi } from "../api/fetchApi";
 
 export default function ContextMenu(props) {
   const signedInUser = useContext(UserContext);
@@ -24,7 +23,6 @@ export default function ContextMenu(props) {
       headers: ["application/x-www-form-urlencoded"],
     };
 
-    await fetchApi("/files/folder", options).then(props.refreshFiles);
   }
 
   async function deleteFile() {
@@ -35,7 +33,6 @@ export default function ContextMenu(props) {
       token: signedInUser.token,
     };
 
-    await fetchApi(`/files/${id}`, options).then(props.refreshFiles);
   }
 
   const downloadFile = async () => {
@@ -48,15 +45,12 @@ export default function ContextMenu(props) {
       token: signedInUser.token,
     };
 
-    const result = await fetchApi(`/files/${id}`, options).then(
-      props.refreshFiles
-    );
 
-    console.log(result);
-
+      /*
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
+    */
   };
 
   switch (props.selection.type) {
@@ -119,9 +113,6 @@ export default function ContextMenu(props) {
           <ul className="bootstrap-overrides">
             <li onClick={() => newFolder()}>
               <i className="bi bi-folder-plus"></i> New Folder
-            </li>
-            <li onClick={() => props.refreshFiles}>
-              <i className="bi bi-folder-plus"></i> REfersh
             </li>
           </ul>
         </div>

@@ -1,6 +1,5 @@
 import { React, useState, useContext } from "react";
 import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
-import { fetchApi } from "../api/fetchApi";
 
 import { UserContext } from "./CloudBox";
 
@@ -23,7 +22,6 @@ export default function CheckListModal(props) {
       headers: { "Content-Type": "application/json" },
     };
 
-    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   //for adding boxes and removing share emails
@@ -44,8 +42,6 @@ export default function CheckListModal(props) {
       token: signedInUser.token,
       headers: { "Content-Type": "application/json" },
     };
-
-    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   async function requestAccess(e) {

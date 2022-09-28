@@ -1,48 +1,42 @@
 import React, {
   forwardRef,
   useContext,
-  useImperativeHandle,
   useState,
 } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
-import { useApi } from "../hooks/useApi";
 import { UserContext } from "./CloudBox";
-import { fetchApi } from "../api/fetchApi";
 
 import { useSortableData, FileImage, localDate } from "../utilities/functions";
 import { headerArray } from "../utilities/variables";
 
 import "../SCSS/Box.scss";
+import Files from "../demo/files.json"
 
-function Box(props, ref) {
+function Box(props) {
   const [history, setHistory] = useState([{ name: "C:", _id: "C:" }]);
   const [currentDirectory, setCurrentDirectory] = useState("C:");
 
   const signedInUser = useContext(UserContext);
+  
 
-  const {
-    loading: filesLoading,
-    refresh: refreshFiles,
-    data: fileList,
-  } = useApi(`/files/${props.boxEmail}`, {
-    dummyData: [],
-  });
+  const fileList = [
+    {
+      "owner": "robertchapman@gmail.com",
+      "name": "Cat Picture",
+      "size": "4124",
+      "directory": "C:",
+      "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+      "mimeType": "JPG File",
+      "updatedAt": "2022-09-13T20:46:13.988+00:00"
+    }
+  ]
 
-  const {
-    loading: userMetaDataLoading,
-    data: userMetaData,
-  } = useApi(`/user/email/${props.boxEmail}`, {
-    dummyData: {
-      username: "",
-      picture: "",
-      bio: "",
-    },
-  });
-
-  useImperativeHandle(ref, () => ({
-    refresh: () => refreshFiles(),
-  }));
+  const userMetaData = {
+    username: "bill",
+    picture: "",
+    bio: ""
+  }
 
   const { items, requestSort } = useSortableData(fileList);
 
@@ -58,14 +52,9 @@ function Box(props, ref) {
       headers: { "Content-Type": "application/json" },
     };
 
-    await fetchApi("/user/groups", options).then(props.refresh);
   }
 
   function moveFolder() {}
-
-  if (filesLoading) {
-    return <div>loading</div>;
-  }
 
   return (
     <Card className="Box">

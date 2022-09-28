@@ -1,7 +1,6 @@
 import { React, useState, useContext } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
 
-import { fetchApi } from "../api/fetchApi";
 import { UserContext } from "./CloudBox";
 
 export default function Upload(props) {
@@ -28,7 +27,6 @@ export default function Upload(props) {
       token: signedInUser.token,
     };
 
-    await fetchApi("/files", options)
   }
 
   return (
