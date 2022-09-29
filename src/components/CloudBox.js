@@ -118,7 +118,8 @@ export default function CloudBox() {
         onHide={() => setUploadModalShow(false)}
         selection={selection}
       />
- 
+  
+  <div className="grid-parent">
       <div className="grid" ref={ref}>
         {boxEmails.map((boxEmail, i) => (
           <div className="item" key={i}>
@@ -143,6 +144,7 @@ export default function CloudBox() {
             </div>
           </div>
         ))}
+      </div>
       </div>
 
       <Button

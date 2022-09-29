@@ -2,9 +2,399 @@
   {
     "_id": "1",
     "owner": "robertchapman@gmail.com",
-    "name": "Cat Picture",
+    "name": "Cat Picture (1)",
     "size": "4124",
     "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "2",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (2)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "3",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (3)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "4",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (4)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "5",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (5)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "6",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (6)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "7",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (7)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "9",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (9)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "8",
+    "owner": "robertchapman@gmail.com",
+    "name": "Cat Picture (8)",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "JPG File",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "50",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 1",
+    "size": "4124",
+    "directory": "C:",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "51",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 2",
+    "size": "4124",
+    "directory": "50",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "52",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 3",
+    "size": "4124",
+    "directory": "51",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "53",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 4",
+    "size": "4124",
+    "directory": "52",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "54",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 5",
+    "size": "4124",
+    "directory": "53",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "55",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 6",
+    "size": "4124",
+    "directory": "54",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "56",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 7",
+    "size": "4124",
+    "directory": "55",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "57",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 8",
+    "size": "4124",
+    "directory": "56",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "58",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Nested File",
+    "size": "4124",
+    "directory": "57",
     "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
     "mimeType": "JPG File",
     "updatedAt": "2022-09-13T20:46:13.988+00:00"

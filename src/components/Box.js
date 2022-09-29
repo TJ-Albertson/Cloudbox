@@ -42,7 +42,7 @@ export default function Box(props) {
 
   return (
     <Card className="Box">
-      <Card.Header className=".handle d-flex p-2">
+      <Card.Header className="handle d-flex p-2" id="handle">
         <img src={userMetaData.picture} className="picture" />
 
         <div className="flex-grow-1 ">{props.boxEmail}</div>
@@ -75,6 +75,7 @@ export default function Box(props) {
             <i className="bi bi-hdd ms-1 navMenuItem"> C:</i>
           </div>
 
+          <div className="header-history">
           {history.map(({ name, _id }, i) =>
             name != "C:" ? (
               <div
@@ -90,6 +91,7 @@ export default function Box(props) {
               </div>
             ) : null
           )}
+          </div>
         </div>
 
         <Container className="columnNames">
@@ -106,7 +108,8 @@ export default function Box(props) {
           </Row>
         </Container>
 
-        <Container className="overflow-auto fluid">
+        <Container className="files fluid">
+          {items.length == 0 && <p>This folder is empty.</p>}
           {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
               if (directory === currentDirectory) {

@@ -1,17 +1,18 @@
+.grid-parent  {
+  padding-left: 4rem;
+}
+
 .grid {
-  margin-top: 100px;
   position: relative;
-  margin-left: auto;
+  margin-top: 100px;
 }
 
 .item {
   display: block;
   position: absolute;
   width: 30%;
-  height: 40rem;
   margin: 25px;
   z-index: 1;
-  color: "black";
 }
 
 .item.muuri-item-dragging {
@@ -72,3 +73,4 @@ ul li:hover {
   margin: 0;
   padding: 0;
 }
+
