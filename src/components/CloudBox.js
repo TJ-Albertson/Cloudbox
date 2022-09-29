@@ -14,14 +14,19 @@ import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 import { useMuuri } from "../hooks/useMuuri";
 import ProfileModal from "./ProfileModal";
 
-import { data } from "../demo/demoConfig"
+import { groupData, userData } from "../demo/demoConfig"
 
 export const UserContext = React.createContext();
 
 export default function CloudBox() {
 
+  //demo state
+  const [boxEmails, setBoxEmails] = useState(groupData.boxArray)
+  const [accessEmails, setAccessEmails] = useState(groupData.accessArray)
+  const [shareEmails, setShareEmails] = useState(groupData.shareArray)
+  const [user, setUser] = useState(userData)
 
-  const { ref } = useMuuri(data);
+  const { ref } = useMuuri(boxEmails);
 
   useEffect(() => {
     const handleClick = () => setShowContextMenu(false);
@@ -55,9 +60,25 @@ export default function CloudBox() {
     setUploadModalShow(true);
   };
 
+  const deleteBoxEmail = (email) => {
+    setBoxEmails((current) =>
+      current.filter((item) => item !== email)
+    );
+  }
+
+  const addBoxEmail = (emails) => {
+    setBoxEmails((current) => [...current, ...emails]);
+  }
+
+  const deleteShareEmail = (emails) => {
+    setShareEmails((current) =>
+      current.filter(item => !emails.includes(item)))
+    ;
+  }
+
   return (
     <UserContext.Provider
-      value={{ username: data.username, email: data.email, picture: data.picture}}
+      value={{ username: user.username, email: user.email, picture: user.picture}}
     >
       <TopMenu
         showShareModal={showShareModal}
@@ -66,16 +87,19 @@ export default function CloudBox() {
 
       <CheckListModal
         {...boxModalOptions}
-        emailgroup={data.accessArray}
+        emailgroup={accessEmails}
         show={boxModalShow}
         onHide={() => setBoxModalShow(false)}
+        addBoxEmail={addBoxEmail}
+        boxEmails={boxEmails}
       />
 
       <CheckListModal
         {...shareModalOptions}
-        emailgroup={data.shareArray}
+        emailgroup={shareEmails}
         show={shareModalShow}
         onHide={() => setShareModalShow(false)}
+        deleteShareEmail={deleteShareEmail}
       />
 
       <ProfileModal
@@ -96,21 +120,25 @@ export default function CloudBox() {
       />
  
       <div className="grid" ref={ref}>
-        {data.boxArray.map((boxEmail, i) => (
+        {boxEmails.map((boxEmail, i) => (
           <div className="item" key={i}>
             <div className="item-content">
-              {(boxEmail == data.email) ? (<Box
+              {(boxEmail == user.email) ? (<Box
                 boxEmail={boxEmail}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
                 owner={true}
                 showUploadModal={showUploadModal}
+
+                delete={deleteBoxEmail}
               />) : (<Box
                 boxEmail={boxEmail}
                 setPoints={setPoints}
                 setSelection={setSelection}
                 setShowContextMenu={setShowContextMenu}
+
+                delete={deleteBoxEmail}
               />)}
             </div>
           </div>
@@ -120,7 +148,7 @@ export default function CloudBox() {
       <Button
         onClick={showBoxModal}
         className="rounded-circle position-fixed bottom-0 end-0 m-5"
-        style={{ height: "75px", width: "75px" }}
+        style={{ height: "75px", width: "75px", zIndex: "4" }}
       >
         <h1>
           <i className="bi bi-dropbox"></i>

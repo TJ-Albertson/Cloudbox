@@ -21,7 +21,6 @@ export default function CheckListModal(props) {
       token: signedInUser.token,
       headers: { "Content-Type": "application/json" },
     };
-
   }
 
   //for adding boxes and removing share emails
@@ -36,12 +35,13 @@ export default function CheckListModal(props) {
       }
     }
 
-    const options = {
-      method: "PATCH",
-      body: JSON.stringify({ array, desire, targetEmail: emails }),
-      token: signedInUser.token,
-      headers: { "Content-Type": "application/json" },
-    };
+    if (desire == "add") {
+      props.addBoxEmail(emails);
+    }
+
+    if (desire == "delete") {
+      props.deleteShareEmail(emails);
+    }
   }
 
   async function requestAccess(e) {
@@ -74,14 +74,28 @@ export default function CheckListModal(props) {
           }
         >
           <Stack gap={3}>
-            {props.emailgroup.map((email) => (
-              <Form.Check
-                key={email}
-                type="checkbox"
-                label={email}
-                id={email}
-              />
-            ))}
+            {props.emailgroup.map((email) => {
+              if (props.boxEmails?.includes(email)) {
+                return (
+                  <Form.Check
+                  key={email}
+                  type="checkbox"
+                  label={email}
+                  id={email}
+                  disabled
+                />
+                )
+                
+              }
+              return (
+                <Form.Check
+                  key={email}
+                  type="checkbox"
+                  label={email}
+                  id={email}
+                />
+              );
+            })}
 
             {props.emailgroup.length > 0 ? (
               <div>

@@ -1,8 +1,4 @@
-import React, {
-  forwardRef,
-  useContext,
-  useState,
-} from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
 import { UserContext } from "./CloudBox";
@@ -11,48 +7,35 @@ import { useSortableData, FileImage, localDate } from "../utilities/functions";
 import { headerArray } from "../utilities/variables";
 
 import "../SCSS/Box.scss";
-import Files from "../demo/files.json"
+import files from "../demo/files.json";
+import { userMetaDataManifest } from "../demo/demoConfig";
 
-function Box(props) {
+import "../CSS/Box.css";
+
+export default function Box(props) {
   const [history, setHistory] = useState([{ name: "C:", _id: "C:" }]);
   const [currentDirectory, setCurrentDirectory] = useState("C:");
 
   const signedInUser = useContext(UserContext);
-  
 
-  const fileList = [
-    {
-      "_id": "1",
-      "owner": "robertchapman@gmail.com",
-      "name": "Cat Picture",
-      "size": "4124",
-      "directory": "C:",
-      "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
-      "mimeType": "JPG File",
-      "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  let userMetaData = {
+    username: userMetaDataManifest[props.boxEmail].username,
+    picture: userMetaDataManifest[props.boxEmail].picture,
+    bio: userMetaDataManifest[props.boxEmail].bio,
+  };
+
+  let fileList = [];
+
+  files.forEach((file) => {
+    if (file.owner == props.boxEmail) {
+      fileList.push(file);
     }
-  ]
-
-  const userMetaData = {
-    username: "bill",
-    picture: "",
-    bio: ""
-  }
+  });
 
   const { items, requestSort } = useSortableData(fileList);
 
   async function removeBox() {
-    const options = {
-      method: "PATCH",
-      body: JSON.stringify({
-        array: "box",
-        desire: "delete",
-        targetEmail: props.boxEmail,
-      }),
-      token: signedInUser.token,
-      headers: { "Content-Type": "application/json" },
-    };
-
+    props.delete(props.boxEmail)
   }
 
   function moveFolder() {}
@@ -60,20 +43,14 @@ function Box(props) {
   return (
     <Card className="Box">
       <Card.Header className=".handle d-flex p-2">
-        <Image
-          src={userMetaData.picture}
-          roundedCircle="true"
-          className="picture"
-        />
+        <img src={userMetaData.picture} className="picture" />
 
         <div className="flex-grow-1 ">{props.boxEmail}</div>
 
         {props.owner && (
           <h5
             onClick={() => {
-              props.setSelection(
-                history[history.length - 1]
-              );
+              props.setSelection(history[history.length - 1]);
               props.showUploadModal(true);
             }}
           >
@@ -81,7 +58,9 @@ function Box(props) {
           </h5>
         )}
 
-        <CloseButton onClick={() => removeBox()} />
+
+        {!props.owner && ( <CloseButton onClick={() => removeBox()} /> )}
+        
       </Card.Header>
 
       <div className="d-flex flex-column flex-fill">
@@ -233,5 +212,3 @@ function Box(props) {
     </Card>
   );
 }
-
-export default forwardRef(Box);
