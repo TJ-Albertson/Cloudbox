@@ -15,6 +15,7 @@ import { useMuuri } from "../hooks/useMuuri";
 import ProfileModal from "./ProfileModal";
 
 import { groupData, userData } from "../demo/demoConfig"
+import demoFiles from "../demo/files.json";
 
 export const UserContext = React.createContext();
 
@@ -25,6 +26,7 @@ export default function CloudBox() {
   const [accessEmails, setAccessEmails] = useState(groupData.accessArray)
   const [shareEmails, setShareEmails] = useState(groupData.shareArray)
   const [user, setUser] = useState(userData)
+  const [files, setFiles] = useState(demoFiles)
 
   const { ref } = useMuuri(boxEmails);
 
@@ -61,9 +63,15 @@ export default function CloudBox() {
   };
 
   const deleteBoxEmail = (email) => {
-    setBoxEmails((current) =>
-      current.filter((item) => item !== email)
-    );
+
+    let array = []
+    boxEmails.forEach(box => {
+      if (box == email) return;
+        array.push(box)
+    })
+
+    console.log(array)
+    setBoxEmails([...array])
   }
 
   const addBoxEmail = (emails) => {
@@ -74,6 +82,19 @@ export default function CloudBox() {
     setShareEmails((current) =>
       current.filter(item => !emails.includes(item)))
     ;
+  }
+
+  const newFolder = (folder) => {
+    setFiles([...files, folder])
+  }
+
+  const renameFile = (id, newName) => {
+    for(var i = 0; i < files.length; i++){                       
+      if (files[i]._id === id) { 
+          files[i].name = newName 
+          setFiles([...files])
+      }
+    }
   }
 
   return (
@@ -111,6 +132,7 @@ export default function CloudBox() {
         show={renameModalShow}
         onHide={() => setRenameModalShow(false)}
         selection={selection}
+        renamefile={renameFile}
       />
 
       <UploadModal
@@ -133,6 +155,8 @@ export default function CloudBox() {
                 showUploadModal={showUploadModal}
 
                 delete={deleteBoxEmail}
+                files={files}
+                
               />) : (<Box
                 boxEmail={boxEmail}
                 setPoints={setPoints}
@@ -140,6 +164,7 @@ export default function CloudBox() {
                 setShowContextMenu={setShowContextMenu}
 
                 delete={deleteBoxEmail}
+                files={files}
               />)}
             </div>
           </div>
@@ -163,6 +188,7 @@ export default function CloudBox() {
           points={points}
           selection={selection}
           showRenameModal={showRenameModal}
+          newfolder={newFolder}
         />
       )}
     </UserContext.Provider>

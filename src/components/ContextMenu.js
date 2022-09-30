@@ -9,20 +9,19 @@ export default function ContextMenu(props) {
   async function newFolder() {
     const { directory } = props.selection;
 
-    const data = new URLSearchParams({
-      owner: signedInUser.email,
+    console.log(directory);
+    let id = Math.random() * 10000;
+
+    props.newfolder({
+      _id: id,
+      owner: "johndoe@email.com",
       name: "New Folder",
-      mimeType: "File folder",
+      size: "0",
       directory: directory,
+      path: "0",
+      mimeType: "File folder",
+      updatedAt: "2022-09-13T20:46:13.988+00:00",
     });
-
-    const options = {
-      method: "POST",
-      body: data,
-      token: signedInUser.token,
-      headers: ["application/x-www-form-urlencoded"],
-    };
-
   }
 
   async function deleteFile() {
@@ -32,7 +31,6 @@ export default function ContextMenu(props) {
       method: "DELETE",
       token: signedInUser.token,
     };
-
   }
 
   const downloadFile = async () => {
@@ -45,8 +43,7 @@ export default function ContextMenu(props) {
       token: signedInUser.token,
     };
 
-
-      /*
+    /*
     const split = path.split("/");
     const filename = split[split.length - 1];
     return download(result.data, filename, mimetype);
@@ -64,7 +61,7 @@ export default function ContextMenu(props) {
             <li onClick={() => downloadFile()}>
               <i className="bi bi-download"></i> Download
             </li>
-            <li onClick={() => props.showRenameModal(true)} >
+            <li onClick={() => props.showRenameModal(true)}>
               <i className="bi bi-pencil-square"></i> Rename
             </li>
             <hr className="hr-override"></hr>

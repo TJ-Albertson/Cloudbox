@@ -7,7 +7,6 @@ import { useSortableData, FileImage, localDate } from "../utilities/functions";
 import { headerArray } from "../utilities/variables";
 
 import "../SCSS/Box.scss";
-import files from "../demo/files.json";
 import { userMetaDataManifest } from "../demo/demoConfig";
 
 import "../CSS/Box.css";
@@ -15,6 +14,7 @@ import "../CSS/Box.css";
 export default function Box(props) {
   const [history, setHistory] = useState([{ name: "C:", _id: "C:" }]);
   const [currentDirectory, setCurrentDirectory] = useState("C:");
+  
 
   const signedInUser = useContext(UserContext);
 
@@ -26,7 +26,7 @@ export default function Box(props) {
 
   let fileList = [];
 
-  files.forEach((file) => {
+  props.files.forEach((file) => {
     if (file.owner == props.boxEmail) {
       fileList.push(file);
     }
@@ -34,7 +34,7 @@ export default function Box(props) {
 
   const { items, requestSort } = useSortableData(fileList);
 
-  async function removeBox() {
+  function removeBox() {
     props.delete(props.boxEmail)
   }
 
@@ -108,8 +108,8 @@ export default function Box(props) {
           </Row>
         </Container>
 
-        <Container className="files fluid">
-          {items.length == 0 && <p>This folder is empty.</p>}
+        <Container className="">
+          {items.length == 0 && <span>This folder is empty.</span>}
           {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {
               if (directory === currentDirectory) {

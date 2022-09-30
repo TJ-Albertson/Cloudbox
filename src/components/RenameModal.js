@@ -4,23 +4,19 @@ import { Modal, Form, Stack, Button } from "react-bootstrap";
 import { UserContext } from "./CloudBox";
 
 export default function RenameModal(props) {
-    const signedInUser = useContext(UserContext);
-    
+  const signedInUser = useContext(UserContext);
+
   async function renameFile(e) {
     e.preventDefault();
     const form = e.target;
     const newName = form[0].value;
 
-    console.log(form[0].value)
+    console.log(form[0].value);
 
     const { id } = props.selection;
 
-    const options = {
-      method: "PATCH",
-      body: JSON.stringify({ id, newName }),
-      token: signedInUser.token,
-      headers: { "Content-Type": "application/json" },
-    };
+    props.renamefile(id, newName)
+
   }
 
   return (
