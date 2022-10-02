@@ -392,9 +392,79 @@
   {
     "_id": "58",
     "owner": "janicejohnston@yahoo.com",
-    "name": "Nested File",
+    "name": "Folder 9",
     "size": "4124",
     "directory": "57",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "59",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 10",
+    "size": "4124",
+    "directory": "58",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "60",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 11",
+    "size": "4124",
+    "directory": "59",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "61",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 12",
+    "size": "4124",
+    "directory": "60",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "62",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 13",
+    "size": "4124",
+    "directory": "61",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "63",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 14",
+    "size": "4124",
+    "directory": "62",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "64",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Folder 15",
+    "size": "4124",
+    "directory": "63",
+    "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
+    "mimeType": "File folder",
+    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "65",
+    "owner": "janicejohnston@yahoo.com",
+    "name": "Nested File",
+    "size": "4124",
+    "directory": "64",
     "path": "./files/robertchapman@gmail.com/cat_picture.jpg",
     "mimeType": "JPG File",
     "updatedAt": "2022-09-13T20:46:13.988+00:00"

@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useState, useRef } from "react";
 import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
 import { UserContext } from "./CloudBox";
@@ -15,6 +15,14 @@ export default function Box(props) {
   const [history, setHistory] = useState([{ name: "C:", _id: "C:" }]);
   const [currentDirectory, setCurrentDirectory] = useState("C:");
   
+  const historyRef = useRef(null);
+
+  useEffect(() => {
+    console.log(historyRef.current.scrollLeft)
+    console.log(historyRef.current.scrollWidth)
+    historyRef.current.scrollLeft = historyRef.current.scrollWidth
+  }, [history]);
+
 
   const signedInUser = useContext(UserContext);
 
@@ -66,7 +74,7 @@ export default function Box(props) {
       <div className="d-flex flex-column flex-fill">
         <div className="d-flex flex-row ps-1 border-bottom border-grey">
           <div
-            className="ms-1"
+            className="ms-1 home"
             onClick={() => {
               setCurrentDirectory("C:");
               setHistory([...history.slice(0, 1)]);
@@ -75,7 +83,7 @@ export default function Box(props) {
             <i className="bi bi-hdd ms-1 navMenuItem"> C:</i>
           </div>
 
-          <div className="header-history">
+          <div className="header-history" ref={historyRef}>
           {history.map(({ name, _id }, i) =>
             name != "C:" ? (
               <div
@@ -91,6 +99,7 @@ export default function Box(props) {
               </div>
             ) : null
           )}
+            <div className="anchor"></div>
           </div>
         </div>
 
@@ -108,7 +117,7 @@ export default function Box(props) {
           </Row>
         </Container>
 
-        <Container className="">
+        <Container className="files">
           {items.length == 0 && <span>This folder is empty.</span>}
           {items?.map(
             ({ _id, name, directory, path, mimeType, size, updatedAt }, i) => {

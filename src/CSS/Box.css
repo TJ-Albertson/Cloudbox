@@ -1,17 +1,52 @@
 .picture {
-    border-radius: 50%;
-    width: 3rem;
-    height: auto;
+  border-radius: 50%;
+  width: 3rem;
+  height: auto;
 }
 
 .files {
-    height: 65%;
-    overflow: auto;
-
+  max-height: 65%;
+  overflow: auto;
 }
 
 .header-history {
-    display: flex;
-    overflow: hidden;
-    flex: none;
+  display: flex;
+  overflow: auto;
+  max-width: 100%;
+  flex-direction: reverse;
+
+  overflow-anchor: none;
+}
+
+.anchor {
+  overflow-anchor: auto;
+}
+
+.header-history > div {
+  flex: none;
+}
+
+.header-history > div:last-of-type {
+  flex: none;
+  padding-right: 0.5em;
+}
+
+.home {
+  min-width: 3em;
+}
+
+.header-history::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+.header-history::-webkit-scrollbar-track {
+  background: #f2f3f4;
+}
+
+.header-history::-webkit-scrollbar-thumb {
+  background: #d6eaf8;
+}
+
+.header-history::-webkit-scrollbar-thumb:hover {
+  background: #aed6f1;
 }
