@@ -18,8 +18,6 @@ export default function Box(props) {
   const historyRef = useRef(null);
 
   useEffect(() => {
-    console.log(historyRef.current.scrollLeft)
-    console.log(historyRef.current.scrollWidth)
     historyRef.current.scrollLeft = historyRef.current.scrollWidth
   }, [history]);
 

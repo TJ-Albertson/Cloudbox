@@ -1,9 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Muuri from "muuri";
 
 export const useMuuri = (data) => {
   const ref = useRef(null);
-  const handleRef = useRef(null);
 
   useEffect(() => {
     let grid = new Muuri(ref.current, { 

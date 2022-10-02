@@ -62,16 +62,13 @@ export default function CloudBox() {
     setUploadModalShow(true);
   };
 
-  const deleteBoxEmail = (email) => {
+  function deleteBoxEmail(email) {
 
-    let array = []
-    boxEmails.forEach(box => {
-      if (box == email) return;
-        array.push(box)
-    })
-
-    console.log(array)
-    setBoxEmails([...array])
+    setBoxEmails(current =>
+      current.filter(element => {
+        return element !== email;
+      }),
+    );
   }
 
   const addBoxEmail = (emails) => {
@@ -89,9 +86,12 @@ export default function CloudBox() {
   }
 
   const renameFile = (id, newName) => {
-    for(var i = 0; i < files.length; i++){                       
+    for(var i = 0; i < files.length; i++){ 
+      
+      const date = new Date();
       if (files[i]._id === id) { 
           files[i].name = newName 
+          files[i].updatedAt = date.toISOString()
           setFiles([...files])
       }
     }

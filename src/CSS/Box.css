@@ -50,3 +50,19 @@
 .header-history::-webkit-scrollbar-thumb:hover {
   background: #aed6f1;
 }
+
+.files::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.files::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.files::-webkit-scrollbar-thumb {
+  background: #d6eaf8;
+}
+
+.files::-webkit-scrollbar-thumb:hover {
+  background: #aed6f1;
+}

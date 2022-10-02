@@ -10,7 +10,9 @@ export default function ContextMenu(props) {
     const { directory } = props.selection;
 
     console.log(directory);
-    let id = Math.random() * 10000;
+    let id = Math.random() * 10000 + 100;
+
+    const date = new Date();
 
     props.newfolder({
       _id: id,
@@ -20,7 +22,7 @@ export default function ContextMenu(props) {
       directory: directory,
       path: "0",
       mimeType: "File folder",
-      updatedAt: "2022-09-13T20:46:13.988+00:00",
+      updatedAt: date.toISOString(),
     });
   }
 
