@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "downloadjs": "^1.4.7",
     "dropzone": "^6.0.0-beta.2",
+    "file-saver": "^2.0.5",
     "muuri": "^0.9.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",

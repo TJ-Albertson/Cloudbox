@@ -1,4 +1,4 @@
-import download from "downloadjs";
+import { saveAs } from 'file-saver';
 
 import { useContext } from "react";
 import { UserContext } from "./CloudBox";
@@ -9,9 +9,7 @@ export default function ContextMenu(props) {
   async function newFolder() {
     const { directory } = props.selection;
 
-    console.log(directory);
     let id = Math.random() * 10000 + 100;
-
     const date = new Date();
 
     props.newfolder({
@@ -29,27 +27,15 @@ export default function ContextMenu(props) {
   async function deleteFile() {
     const { id } = props.selection;
 
-    const options = {
-      method: "DELETE",
-      token: signedInUser.token,
-    };
+    props.deletefile(id)
   }
 
   const downloadFile = async () => {
-    //const result = await getApi(`/files/${id}`, signedInUser.token);
+    const { path } = props.selection;
 
-    const { id, path, mimetype } = props.selection;
-
-    const options = {
-      method: "GET",
-      token: signedInUser.token,
-    };
-
-    /*
     const split = path.split("/");
     const filename = split[split.length - 1];
-    return download(result.data, filename, mimetype);
-    */
+    saveAs(path, filename)
   };
 
   switch (props.selection.type) {
