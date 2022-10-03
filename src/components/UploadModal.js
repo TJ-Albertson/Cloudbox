@@ -18,14 +18,14 @@ export default function RenameModal(props) {
       <Modal.Header closeButton className="pb-1">
         <Modal.Title id="contained-modal-title-vcenter">
           <h4 className="d-flex">
-            Current Directory: ...<i className="bi bi-folder"/>
+            Current Directory: &nbsp; <i className="bi bi-folder"/>
             <div className="d-flex"> {props.selection ? props.selection.name : null}</div>
           </h4>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <Upload directory={props.selection._id}></Upload>
+        <Upload directory={props.selection._id} newfolder={props.newfolder}></Upload>
       </Modal.Body>
     </Modal>
   );

@@ -14,20 +14,20 @@ export default function Upload(props) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("owner", signedInUser.email);
-    formData.append("name", file.name);
-    formData.append("size", file.size); //bytes
-    formData.append("directory", props.directory);
 
-    console.log(file.name, file.size, file.type)
+    let id = Math.random() * 10000 + 100;
+    const date = new Date();
 
-    const options = {
-      method: "POST",
-      body: formData,
-      token: signedInUser.token,
-    };
+    props.newfolder({
+      _id: id,
+      owner: "johndoe@email.com",
+      name: file.name,
+      size: file.size,
+      directory: props.directory,
+      path: "0",
+      mimeType: file.type,
+      updatedAt: date.toISOString(),
+    });
 
   }
 

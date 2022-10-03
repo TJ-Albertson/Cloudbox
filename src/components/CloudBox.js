@@ -145,6 +145,7 @@ export default function CloudBox() {
         show={uploadModalShow}
         onHide={() => setUploadModalShow(false)}
         selection={selection}
+        newfolder={newFolder}
       />
 
       <div className="grid-parent">
