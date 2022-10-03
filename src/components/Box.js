@@ -39,9 +39,7 @@ export default function Box(props) {
       fileList.push(file);
     }
   });
-
-  console.log(fileList)
-
+  
   const { items, requestSort, sortConfig } = useSortableData(fileList);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {

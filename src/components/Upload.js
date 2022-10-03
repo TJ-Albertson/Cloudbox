@@ -21,6 +21,8 @@ export default function Upload(props) {
     formData.append("size", file.size); //bytes
     formData.append("directory", props.directory);
 
+    console.log(file.name, file.size, file.type)
+
     const options = {
       method: "POST",
       body: formData,
