@@ -5,8 +5,7 @@ export const groupData = {
     "janicejohnston@yahoo.com",
     "curtiskelley@outlook.com",
     "bryanblanton@gmail.com",
-    "kellydavid@gmail.com",
-    "margaretmccleskey@gmail.com",
+    "kellydavid@gmail.com"
   ],
   accessArray: [
     "robertchapman@gmail.com",
@@ -26,6 +25,7 @@ export const groupData = {
     "barbaradelgado@gmail.com",
   ],
 };
+
 
 export const userData = {
   username: "John Doe",

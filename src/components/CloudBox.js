@@ -61,12 +61,8 @@ export default function CloudBox() {
     setUploadModalShow(true);
   };
 
-  function deleteBoxEmail(email) {
-    setBoxEmails((current) =>
-      current.filter((element) => {
-        return element !== email;
-      })
-    );
+  const deleteBoxEmail = (email) => {
+    setBoxEmails(boxEmails.filter((item) => item !== email))
   }
 
   const addBoxEmail = (emails) => {

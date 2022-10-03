@@ -21,6 +21,12 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .item {
+    width: 85%;
+  }
+}
+
 .item.muuri-item-dragging {
   z-index: 3;
 }

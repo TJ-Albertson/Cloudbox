@@ -12,17 +12,17 @@ export function FileImage(props) {
       return <i className="bi bi-filetype-xlsx"></i>
 
     case "MP3 File":
-      return <i class="bi bi-file-earmark-music"></i>
+      return <i className="bi bi-file-earmark-music"></i>
     case "JSON File":
       return <i className="bi bi-filetype-json"></i>
     case "DOCX File":
-      return <i class="bi bi-file-earmark-word"></i>
+      return <i className="bi bi-file-earmark-word"></i>
     case "Application":
-      return <i class="bi bi-filetype-exe"></i>
+      return <i className="bi bi-filetype-exe"></i>
     case "PDF File":
-      return <i class="bi bi-file-earmark-pdf"></i>
+      return <i className="bi bi-file-earmark-pdf"></i>
     case "CSV File":
-      return <i class="bi bi-filetype-csv"></i>
+      return <i className="bi bi-filetype-csv"></i>
 
     default:
       return <i className="bi bi-file-earmark-text"></i>;
