@@ -3,7 +3,9 @@ import { Card, CloseButton, Image, Container, Row, Col } from "react-bootstrap";
 
 import { UserContext } from "./CloudBox";
 
-import { useSortableData, FileImage, localDate } from "../utilities/functions";
+import { useSortableData } from "../hooks/useSortableData";
+
+import { FileImage, localDate } from "../utilities/functions";
 import { headerArray } from "../utilities/variables";
 
 import "../SCSS/Box.scss";
@@ -38,7 +40,15 @@ export default function Box(props) {
     }
   });
 
-  const { items, requestSort } = useSortableData(fileList);
+  console.log(fileList)
+
+  const { items, requestSort, sortConfig } = useSortableData(fileList);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
 
   function removeBox() {
     props.delete(props.boxEmail)

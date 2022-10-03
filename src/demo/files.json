@@ -473,111 +473,101 @@
     "_id": "66",
     "owner": "curtiskelley@outlook.com",
     "name": "Dog Picture",
-    "size": "4124",
+    "size": 4124,
     "directory": "C:",
     "path": "files/dog_picture.jpg",
     "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+    "updatedAt": "2022-01-13T20:46:13.988+00:00"
   },
   {
     "_id": "67",
     "owner": "curtiskelley@outlook.com",
     "name": "Excel Sheet",
-    "size": "4124",
+    "size": 5219,
     "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+    "path": "files/Excel Sheet.xlsx",
+    "mimeType": "XLSX File",
+    "updatedAt": "2022-02-13T20:46:13.988+00:00"
   },
   {
     "_id": "68",
     "owner": "curtiskelley@outlook.com",
-    "name": "Movie File",
-    "size": "4124",
+    "name": "Video Clip",
+    "size": 58314690,
     "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+    "path": "files/Video Clip.mp4",
+    "mimeType": "MP4 File",
+    "updatedAt": "2022-03-13T20:46:13.988+00:00"
   },
   {
     "_id": "66",
     "owner": "curtiskelley@outlook.com",
     "name": "Text",
-    "size": "4124",
+    "size": 24,
     "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
+    "path": "files/Text.txt",
+    "mimeType": "Text Document",
+    "updatedAt": "2022-04-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "66",
+    "owner": "curtiskelley@outlook.com",
+    "name": "Richard Wagner - Ride of the Valkyries",
+    "size": 6002925,
+    "directory": "C:",
+    "path": "files/Richard Wagner - Ride of The Valkyries.mp3",
+    "mimeType": "MP3 File",
+    "updatedAt": "2022-05-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "66",
+    "owner": "curtiskelley@outlook.com",
+    "name": "Data",
+    "size": 4124,
+    "directory": "C:",
+    "path": "files/Data.json",
+    "mimeType": "JSON File",
+    "updatedAt": "2022-06-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "66",
+    "owner": "curtiskelley@outlook.com",
+    "name": "Word",
+    "size": 6146,
+    "directory": "C:",
+    "path": "files/Word.docx",
+    "mimeType": "DOCX File",
+    "updatedAt": "2022-07-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "66",
+    "owner": "curtiskelley@outlook.com",
+    "name": "7zip",
+    "size": 1575742,
+    "directory": "C:",
+    "path": "files/7zip.exe",
+    "mimeType": "Application",
+    "updatedAt": "2022-08-13T20:46:13.988+00:00"
+  },
+  {
+    "_id": "66",
+    "owner": "curtiskelley@outlook.com",
+    "name": "PDF File",
+    "size": 21728,
+    "directory": "C:",
+    "path": "files/PDF File.pdf",
+    "mimeType": "PDF File",
     "updatedAt": "2022-09-13T20:46:13.988+00:00"
   },
   {
     "_id": "66",
     "owner": "curtiskelley@outlook.com",
-    "name": "Dog Picture",
-    "size": "4124",
+    "name": "CSV File",
+    "size": 297,
     "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "mp3",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "json",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "docx",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "exe",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "pdf",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
-  },
-  {
-    "_id": "66",
-    "owner": "curtiskelley@outlook.com",
-    "name": "csv",
-    "size": "4124",
-    "directory": "C:",
-    "path": "files/dog_picture.jpg",
-    "mimeType": "JPG File",
-    "updatedAt": "2022-09-13T20:46:13.988+00:00"
+    "path": "files/CSV File.csv",
+    "mimeType": "CSV File",
+    "updatedAt": "2022-10-13T20:46:13.988+00:00"
   }
   
 ]
