@@ -27,6 +27,8 @@ export default function CloudBox() {
   const [user, setUser] = useState(userData);
   const [files, setFiles] = useState(demoFiles);
 
+  const [key, setKey] = useState(0)
+
   const { ref } = useMuuri(boxEmails);
 
   useEffect(() => {
@@ -44,6 +46,8 @@ export default function CloudBox() {
   const [profileModalShow, setProfileModalShow] = useState(false);
   const [renameModalShow, setRenameModalShow] = useState(false);
   const [uploadModalShow, setUploadModalShow] = useState(false);
+
+  
 
   const showShareModal = () => {
     setShareModalShow(true);
@@ -63,6 +67,8 @@ export default function CloudBox() {
 
   const deleteBoxEmail = (email) => {
     setBoxEmails(boxEmails.filter((item) => item !== email))
+    let i = key + 1;
+    setKey(i);
   }
 
   const addBoxEmail = (emails) => {
@@ -145,7 +151,7 @@ export default function CloudBox() {
       />
 
       <div className="grid-parent">
-        <div className="grid" ref={ref}>
+        <div className="grid" ref={ref} key={key}>
           {boxEmails.map((boxEmail, i) => (
             <div className="item" key={i}>
               <div className="item-content">

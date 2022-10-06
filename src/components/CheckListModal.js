@@ -37,6 +37,7 @@ export default function CheckListModal(props) {
 
     if (desire == "add") {
       props.addBoxEmail(emails);
+      props.onHide()
     }
 
     if (desire == "delete") {
