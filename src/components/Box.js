@@ -60,7 +60,7 @@ export default function Box(props) {
       <Card.Header className="handle d-flex p-2" id="handle">
         <img src={userMetaData.picture} className="picture" />
 
-        <div className="flex-grow-1 ">{props.boxEmail}</div>
+        <div className="flex-grow-1 close-box-button">&nbsp;{props.boxEmail}</div>
 
         {props.owner && (
           <h5 class="upload-button"
@@ -74,7 +74,7 @@ export default function Box(props) {
         )}
 
 
-        {!props.owner && ( <CloseButton onClick={() => removeBox()} /> )}
+        {!props.owner && ( <CloseButton className="close-box-button" onClick={() => removeBox()} /> )}
         
       </Card.Header>
 

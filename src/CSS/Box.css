@@ -75,3 +75,7 @@
 .upload-button:hover {
   color: black;
 }
+
+.close-box-button {
+  font-size: 1.5em;
+}
