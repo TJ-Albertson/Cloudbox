@@ -66,3 +66,12 @@
 .files::-webkit-scrollbar-thumb:hover {
   background: #aed6f1;
 }
+
+.upload-button {
+  font-size: 2em;
+  color: grey;
+}
+
+.upload-button:hover {
+  color: black;
+}

@@ -63,7 +63,7 @@ export default function Box(props) {
         <div className="flex-grow-1 ">{props.boxEmail}</div>
 
         {props.owner && (
-          <h5
+          <h5 class="upload-button"
             onClick={() => {
               props.setSelection(history[history.length - 1]);
               props.showUploadModal(true);
