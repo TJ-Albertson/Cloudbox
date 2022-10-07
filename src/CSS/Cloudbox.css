@@ -86,3 +86,6 @@ ul li:hover {
   padding: 0;
 }
 
+.bg-dark {
+  background-color: #212529;
+}

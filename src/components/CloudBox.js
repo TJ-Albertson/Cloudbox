@@ -29,6 +29,8 @@ export default function CloudBox() {
 
   const [key, setKey] = useState(0)
 
+  const [dark, setDark] = useState(false)
+
   const { ref } = useMuuri(boxEmails);
 
   useEffect(() => {
