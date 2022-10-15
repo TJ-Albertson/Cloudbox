@@ -1,3 +1,24 @@
+.grid-parent {
+  padding-left: 4rem;
+}
+
+.grid {
+  position: relative;
+  margin-top: 100px;
+}
+
+@media (max-width: 1920px) {
+  .item {
+    width: 45%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .item {
+    width: 85%;
+  }
+}
+
 .grid {
   margin-top: 100px;
   position: relative;
@@ -34,7 +55,7 @@
   width: 150px;
   height: auto;
   margin: 0;
-/* use absolute positioning  */
+  /* use absolute positioning  */
   position: absolute;
   list-style: none;
   box-shadow: 0 0 20px 0 #ccc;
@@ -72,4 +93,3 @@ ul li:hover {
   margin: 0;
   padding: 0;
 }
-

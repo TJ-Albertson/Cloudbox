@@ -68,8 +68,8 @@ function Box(props, ref) {
   }
 
   return (
-    <Card className="Box">
-      <Card.Header className=".handle d-flex p-2">
+    <Card >
+      <Card.Header className="handle d-flex p-2" id="handle">
         <Image
           src={userMetaData.picture}
           roundedCircle="true"

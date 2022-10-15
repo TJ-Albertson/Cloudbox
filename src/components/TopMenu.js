@@ -39,8 +39,8 @@ export default function TopMenu(props) {
           <Dropdown.Item onClick={() => props.showProfileModal(true)}>
             <i className="bi bi-person-circle"></i> Profile
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => props.showShareModal(true)}>
-            <i className="bi bi-send-plus-fill"></i> Share Settings
+          <Dropdown.Item onClick={() => props.showMenuModal(true)}>
+            <i className="bi bi-gear-fill"></i> Settings
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => logout({ returnTo: "http://localhost:3000/" })}
