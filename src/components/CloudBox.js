@@ -3,6 +3,7 @@ import { Button, Spinner } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import TopMenu from "./TopMenu";
+import SideMenu from "./SideMenu"
 import MenuModal from "./MenuModal";
 import Box from "./Box";
 import ContextMenu from "./ContextMenu";
@@ -75,6 +76,8 @@ export default function CloudBox() {
       }}
     >
       <TopMenu showMenuModal={showMenuModal} />
+
+      <SideMenu />
 
       <MenuModal
         show={menuModal}

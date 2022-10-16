@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login"
 import CloudBox from "./components/CloudBox"
+import Home from "./components/Home"
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./SCSS/App.scss";
@@ -17,7 +18,8 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/cloudbox" element={<ProtectedRoute component={CloudBox}/>} />
       </Routes>
     </div>

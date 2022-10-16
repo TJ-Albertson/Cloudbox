@@ -1,11 +1,20 @@
 .grid-parent {
-  padding-left: 4rem;
+  padding-left: 14.8rem;
 }
 
 .grid {
   position: relative;
-  margin-top: 100px;
+  margin-top: 0em;
 }
+
+
+.item {
+    display: block;
+    position: absolute;
+    width: 30%;
+    margin: 25px;
+    z-index: 1;
+  }
 
 @media (max-width: 1920px) {
   .item {
@@ -20,20 +29,11 @@
 }
 
 .grid {
-  margin-top: 100px;
+  margin-top: 4em;
   position: relative;
   margin-left: auto;
 }
 
-.item {
-  display: block;
-  position: absolute;
-  width: 30%;
-  height: 40rem;
-  margin: 25px;
-  z-index: 1;
-  color: "black";
-}
 
 .item.muuri-item-dragging {
   z-index: 3;

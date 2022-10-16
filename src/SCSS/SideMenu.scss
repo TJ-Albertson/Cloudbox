@@ -1,0 +1,18 @@
+#side-menu {
+    min-width: 14.3em;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    border-right: 1px solid grey;
+}
+
+#side-menu > p {
+    font-size: 1em;
+    margin-left: 0em;
+    font-weight: 500;
+}
+
+#side-menu > p > i {
+    font-size: 1.3em;
+    margin-right: 0.7em;
+}

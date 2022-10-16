@@ -1,0 +1,122 @@
+#home {
+  display: flex;
+  flex-direction: column;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  padding-top: 0.45em;
+  padding-bottom: 0.47em;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+#logo {
+  font-size: 2em;
+  font-weight: 400;
+  margin: 0em 1em 0em 0.3em;
+}
+
+i {
+  margin: 0em 0em 0.5em 0.5em;
+}
+
+#nav-link-p,
+#nav-link-o,
+#nav-link-f {
+  font-size: 1.3em;
+  color: black;
+  padding-bottom: 0em;
+  margin-right: 1em;
+  text-decoration: none;
+}
+
+#nav-link-p:hover,
+#nav-link-o:hover,
+#nav-link-f:hover {
+  border-bottom: 2px solid blue;
+}
+
+#dashboard {
+  font-size: 1.2em;
+}
+
+#sign-in {
+  margin-right: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(207, 207, 207);
+  font-size: 1.2em;
+}
+
+#sign-in:hover {
+  background-color: #f6f9fe;
+  border: 1px solid #1a73e8;
+  color: #174ea6;
+}
+
+#overview {
+  max-width: 50%;
+  margin: auto;
+  margin-top: 10em;
+  margin-bottom: 5em;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#overview > p {
+  text-align: left;
+  margin-left: 0em;
+}
+
+#overview > p > h1 {
+  font-size: 4em;
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+#overview > p > h2 {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-bottom: 1.3em;
+  color: #7f8c8d;
+}
+#overview > p > h3 {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 1.7em;
+  color: #7f8c8d;
+}
+
+#overview > img {
+  max-width: 750px;
+}
+
+#features {
+  max-width: 50%;
+  margin: auto;
+  margin-top: 10em;
+  margin-bottom: 5em;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#features > img {
+  max-width: 750px;
+}
+
+#pricing {
+  height: 700px;
+  margin: 2em 2em 0em;
+  background-color: blue;
+  text-align: center;
+}
+
+#hr-break {
+  margin: auto;
+  margin-top: 1em;
+  width: 50%;
+}
