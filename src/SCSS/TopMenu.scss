@@ -1,19 +1,57 @@
 #menu-logo {
-    font-size: 3em;
-    margin:0em;
+  font-size: 3em;
+  margin: 0em;
 }
 
 #top-menu {
-    background-color: white;
+  background-color: white;
 }
 
 #top-menu > img {
-    width: 2.5em;
-   
+  width: 2.5em;
 }
 
 #top-menu > i {
-    margin: 0;
-    margin-right: 0.3em;
-    font-size: 1.6em;
+  margin: 0;
+  margin-right: 0.3em;
+  font-size: 1.6em;
+}
+
+#user-popover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#user-popover > img {
+  width: 6em;
+  margin-bottom: 1em;
+}
+
+#user-popover > p:nth-of-type(1) {
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+#user-popover > p:nth-of-type(2) {
+  font-size: 1.1em;
+  color: rgb(95, 99, 104);
+}
+
+#sign-out {
+  margin-right: 0;
+  background-color: white;
+  color: rgb(95, 99, 104);
+  border: 1px solid rgb(207, 207, 207);
+  font-size: 1.1em;
+  padding: 0.5em 1.2em 0.5em 1.2em;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+#sign-out:hover {
+  background-color: #f6f9fe;
+  border: 1px solid #1a73e8;
+  color: #174ea6;
 }
