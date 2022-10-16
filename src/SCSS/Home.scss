@@ -40,7 +40,9 @@ i {
 }
 
 #dashboard {
-  font-size: 1.2em;
+  font-size: 1em;
+  padding: 0.8em 1.2em 0.8em 1.2em;
+  border-radius: 4px;
 }
 
 #sign-in {
@@ -48,7 +50,9 @@ i {
   background-color: white;
   color: black;
   border: 1px solid rgb(207, 207, 207);
-  font-size: 1.2em;
+  font-size: 1em;
+  padding: 0.8em 1.2em 0.8em 1.2em;
+  border-radius: 4px;
 }
 
 #sign-in:hover {

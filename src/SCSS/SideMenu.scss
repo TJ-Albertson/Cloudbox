@@ -1,18 +1,47 @@
 #side-menu {
-    min-width: 14.3em;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    border-right: 1px solid grey;
+  min-width: 14.3em;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  border-right: 1px solid grey;
+  margin: 0;
+  padding: 0 !important;
+  color: rgb(95,99,104); 
 }
 
-#side-menu > p {
-    font-size: 1em;
-    margin-left: 0em;
+#side-menu > .btn {
     font-weight: 500;
+    font-size: 1.4em;
+    border-radius: 1em;
+    margin: 0.5em auto 0.5em auto;
+    padding-right: 1em;
+    box-shadow: 0px 1px 7px #888888;
 }
 
-#side-menu > p > i {
-    font-size: 1.3em;
-    margin-right: 0.7em;
+#side-menu > hr{
+    margin: 0.5em 0;
+}
+
+.side-menu-item {
+  display: flex;
+  padding-left: 1em;
+  padding-top: 0.2em;
+}
+
+.side-menu-item:hover {
+  background-color: #EBF5FB;
+  cursor: pointer;
+}
+
+.side-menu-item > p {
+  font-size: 1.2em;
+  padding-left: 0em;
+  font-weight: 400;
+  margin-bottom: 0;
+  margin-top: 0.3em;
+}
+
+.side-menu-item > i {
+  font-size: 1.6em;
+  margin-right: 0.7em;
 }

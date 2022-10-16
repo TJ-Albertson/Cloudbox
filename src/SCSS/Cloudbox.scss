@@ -7,14 +7,14 @@
   margin-top: 0em;
 }
 
-
 .item {
-    display: block;
-    position: absolute;
-    width: 30%;
-    margin: 25px;
-    z-index: 1;
-  }
+  display: block;
+  position: absolute;
+  width: 30%;
+  height: 40rem;
+  margin: 25px;
+  z-index: 1;
+}
 
 @media (max-width: 1920px) {
   .item {
@@ -33,6 +33,7 @@
   position: relative;
   margin-left: auto;
 }
+
 
 
 .item.muuri-item-dragging {

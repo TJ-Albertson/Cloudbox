@@ -15,12 +15,13 @@ export default function TopMenu(props) {
       direction="horizontal"
       id="top-menu"
       gap={3}
-    >
+    >   
         
         <p id="logo" className="me-auto">
           <i className="bi bi-box-seam-fill"></i> Cloudbox
         </p>
-
+        <i className="bi bi-question-circle"></i>
+        <i className="bi bi-gear"></i>
         <Image roundedCircle src={signedInUser.picture} className="me-3"></Image>
     </Stack>
   );
