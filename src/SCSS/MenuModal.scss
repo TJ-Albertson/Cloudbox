@@ -1,0 +1,68 @@
+$tab-active-color: #0d6efd;
+$inactive-color: #495057;
+
+.menu-modal {
+    min-width: 40%;
+    max-width: 40%;
+    font-size: 1.3em;
+}
+
+.nav {
+  margin: 0em;
+  border-radius: 0px;
+}
+
+.nav-item {
+  padding: 0;
+  color: var(--inactive-color);
+  border-radius: 0px;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  background-color: none;
+}
+
+#settings-tab-profile {
+    color: var(--inactive-color);
+}
+
+#settings-tab-boxes, #settings-tab-sharing {
+    color: var(--inactive-color);
+}
+
+#settings-tab-view {
+    color: var(--inactive-color);
+}
+
+
+#settings-tab-profile.active {
+    color: #0d6efd;
+    border-color: white;
+    border-right: 2px solid #dee2e6;
+}
+
+#settings-tab-boxes.active, #settings-tab-sharing.active {
+    color: #0d6efd;
+    border-right: 2px solid #dee2e6;
+    border-left: 2px solid #dee2e6;
+}
+
+#settings-tab-view.active {
+    color: #0d6efd;
+    border-left: 2px solid #dee2e6;
+}
+
+
+#settings-tab-profile {
+    border-top-right-radius: 0;
+}
+
+#settings-tab-boxes, #settings-tab-sharing {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#settings-tab-view {
+    border-top-left-radius: 0;
+}

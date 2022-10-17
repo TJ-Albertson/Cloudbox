@@ -4,3 +4,4 @@ config.env
 .vscode
 .env
 config.json
+build
