@@ -93,7 +93,9 @@ export default function Home() {
       </div>
       <div id="pricing-anchor"></div>
       <hr id="hr-break" />
+      <h2 className="ms-auto me-auto mt-5">Find the plan that’s right for you</h2>
       <div id="pricing">
+        
         <table id="pricing-table">
           <thead>
             <tr>
