@@ -89,24 +89,60 @@ export default function Home() {
       </div>
       <hr id="hr-break" />
       <div id="pricing">
-        <table>
+        <table id="pricing-table">
           <thead>
             <tr>
               <th></th>
-              <th>Free</th>
-              <th>Basic</th>
-              <th>Premium</th>
+              <th>
+                <p>Free</p>
+                <Button
+                  onClick={() => loginWithRedirect()}
+                  className="me-3"
+                  size="lg"
+                  id="sign-in"
+                >
+                  Create Account
+                </Button>
+              </th>
+              <th>
+                <p>Basic</p>
+                <p>$25 USD/month</p>
+                <Button
+                  onClick={() => loginWithRedirect()}
+                  className="me-3"
+                  size="lg"
+                  id="sign-in"
+                >
+                  Create Account
+                </Button>
+              </th>
+              <th>
+                <p>Premium</p>
+                <p>$50 USD/month</p>
+                <Button
+                  onClick={() => loginWithRedirect()}
+                  className="me-3"
+                  size="lg"
+                  id="sign-in"
+                >
+                  Create Account
+                </Button>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Secure Cloud Storage</td>
+              <td>
+                <i class="bi bi-device-hdd"></i> Secure Cloud Storage
+              </td>
               <td>15 MB</td>
               <td>50 GB</td>
               <td>150 GB</td>
             </tr>
             <tr>
-              <td>Unlimited Sharing</td>
+              <td>
+                <i class="bi bi-share"></i> Unlimited Sharing
+              </td>
 
               <td>
                 <i className="bi bi-check-lg"></i>
@@ -119,7 +155,9 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <td>Complete user interface experience</td>
+              <td>
+                <i class="bi bi-hand-index-thumb"></i> Fully featured interface
+              </td>
               <td>
                 <i className="bi bi-check-lg"></i>
               </td>
@@ -131,7 +169,9 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <td>24/7 Customer Support</td>
+              <td>
+                <i class="bi bi-person-workspace"></i> 24/7 Customer Support
+              </td>
               <td></td>
               <td>
                 <i className="bi bi-check-lg"></i>
@@ -141,7 +181,9 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <td>Extra member benfits</td>
+              <td>
+                <i class="bi bi-award"></i> Extra member benfits
+              </td>
               <td></td>
               <td></td>
               <td>
@@ -152,7 +194,27 @@ export default function Home() {
         </table>
       </div>
 
-      <footer id="home-footer"></footer>
+      <footer id="home-footer">
+        <div id="home-footer-item">
+          <div>
+            Check out my{" "}
+            <a href="https://www.tjalbertson.com/" target="_blank" id="portfolio-link">
+              Portfolio
+            </a>{" "}
+            <a href="https://github.com/TJ-Albertson" target="_blank" id="github-link">
+              <i className="bi bi-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/thomas-albertson-895443250/" target="_blank" id="linkedin-link">
+              <i className="bi bi-linkedin"></i>
+            </a>
+          </div>
+          <hr />
+          <div>
+            This app is not intended for commercial use. <a> Privacy </a>
+            <a> Terms</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -62,28 +62,27 @@ i {
 }
 
 #overview {
-  max-width: 50%;
+  display: grid;
+  grid-template-columns: 50% 50%;
   margin: auto;
   margin-top: 10em;
   margin-bottom: 5em;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
-@media (max-width:2500px)  {
+@media (max-width: 2500px) {
   #overview {
     max-width: 55%;
   }
 }
 
-@media (max-width: 2000px)  {
+@media (max-width: 2000px) {
   #overview {
     max-width: 60%;
   }
 }
 
-@media (max-width: 1500px)  {
+@media (max-width: 1500px) {
   #overview {
     max-width: 80%;
   }
@@ -91,7 +90,7 @@ i {
 
 #overview > p {
   text-align: left;
-  margin-left: 0em;
+  max-width: 550px;
 }
 
 #overview > p > h1 {
@@ -117,7 +116,6 @@ i {
 }
 
 #features {
-  max-width: 50%;
   margin: auto;
   margin-top: 5em;
   margin-bottom: 5em;
@@ -146,12 +144,33 @@ i {
 
 #feature-list > p > i {
   color: blue;
-  
+  margin-right: 0.5em;
 }
 
 #pricing {
-margin-left: auto;
-margin-right: auto;
+  font-size: 1.5em;
+  margin: 5em auto 5em 18%;
+}
+
+#pricing-table td:nth-child(1) {
+  border-left: 0;
+  text-align: left;
+}
+
+#pricing-table td {
+  font-size: 0.7em;
+  border: 1px solid #cfcfcf;
+  padding: 2em;
+  text-align: center;
+}
+
+#pricing-table th:nth-of-type(n + 2) {
+  border: 1px solid #cfcfcf;
+  padding-top: 1em;
+  padding-bottom: 5em;
+  text-align: center;
+  width: 15em;
+  font-weight: 400;
 }
 
 #hr-break {
@@ -172,5 +191,69 @@ margin-right: auto;
 
 #home-footer {
   background: #f8f9fa;
-  height: 200px;
+
+
 }
+
+#home-footer-item {
+  max-width: 50%;
+  margin: 0 auto 0 auto;
+}
+
+#home-footer-item > div:nth-child(1){
+  font-size: 1em;
+  font-weight: 500;
+  padding: 2.1em 0 1.1em 0;
+}
+
+#home-footer-item > div:nth-of-type(2){
+  font-size: 1em;
+  font-weight: 500;
+  padding: 1.2em 0 4em 0;
+}
+
+#portfolio-link {
+  text-decoration: 0;
+}
+
+#home-footer > hr {
+  width: 50%;
+}
+
+#github-link {
+  font-size: 1.6em;
+  border-radius: 50%;
+  margin-left: 0.2em;
+  padding: 10px 14px 10px 14px;
+  color: black;
+  
+}
+
+#linkedin-link {
+  font-size: 1.6em;
+  border-radius: 50%;
+  margin-left: 0.2em;
+  padding: 10px 14px 10px 14px;
+  color: black;
+}
+
+
+
+i.bi.bi-github {
+  margin: 0
+}
+
+i.bi.bi-linkedin {
+  margin: 0
+}
+
+#github-link:hover {
+  background-color: #ededed;
+}
+
+#linkedin-link:hover {
+  background-color: #ededed;
+}
+
+
+
