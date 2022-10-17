@@ -23,7 +23,12 @@ export default function Home() {
         <a id="nav-link-p" href="#pricing">
           Pricing
         </a>
-        <Button onClick={() => loginWithRedirect()} className="ms-auto" size="lg" id="sign-in">
+        <Button
+          onClick={() => loginWithRedirect()}
+          className="ms-auto"
+          size="lg"
+          id="sign-in"
+        >
           Sign in
         </Button>
         <Button href="/cloudbox" className="me-2" size="lg" id="dashboard">
@@ -37,26 +42,117 @@ export default function Home() {
             Store and access your files and folders with an intuitive and
             familiar user interface.
           </h2>
-          <Button onClick={() => loginWithRedirect()} className="me-3" size="lg" id="sign-in">
+          <Button
+            onClick={() => loginWithRedirect()}
+            className="me-3"
+            size="lg"
+            id="sign-in"
+          >
             Sign in
           </Button>
           <Button href="/cloudbox" size="lg" id="dashboard">
             Go to Dashboard
           </Button>
           <h3>
-            Don't have an account? <span id="sign-up-free" onClick={() => loginWithRedirect()}>Sign up for free</span>
+            Don't have an account?{" "}
+            <span id="sign-up-free" onClick={() => loginWithRedirect()}>
+              Sign up for free
+            </span>
           </h3>
         </p>
-        <Image src="https://lh3.googleusercontent.com/6MmVl3TEiBeEJCFIIfzO5DIgengYGPCdhEe8M6lXA6_Eh_xsKHDL_K4CLC31dETfiCue1hFOEf30IkIqlbOStvTfYbY_G85oEtJHQqjgz6OSXco8Aw=w0-l80-sg-rj-c0xffffff" />
+        <Image src="/cloudbox-laptop.svg" />
       </div>
       <hr id="hr-break" />
       <div id="features">
-        <Image src="https://lh3.googleusercontent.com/6MmVl3TEiBeEJCFIIfzO5DIgengYGPCdhEe8M6lXA6_Eh_xsKHDL_K4CLC31dETfiCue1hFOEf30IkIqlbOStvTfYbY_G85oEtJHQqjgz6OSXco8Aw=w0-l80-sg-rj-c0xffffff" />
+        <Image src="/feature-image.svg" id="feature-image" />
+        <div id="feature-list">
+          <p>
+            <i className="bi bi-check-lg"></i> Share your files and access
+            others
+          </p>
+          <p>
+            <i className="bi bi-check-lg"></i> Familiar file navigation system
+          </p>
+          <p>
+            <i className="bi bi-check-lg"></i> Fluid and customize-able box
+            driven interface
+          </p>
+          <p>
+            <i className="bi bi-check-lg"></i> Easily expand your dedicated
+            storage
+          </p>
+          <p>
+            <i className="bi bi-check-lg"></i> View favorite, recent, and
+            trashed files
+          </p>
+        </div>
       </div>
       <hr id="hr-break" />
-      <div id="pricing"></div>
+      <div id="pricing">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Free</th>
+              <th>Basic</th>
+              <th>Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Secure Cloud Storage</td>
+              <td>15 MB</td>
+              <td>50 GB</td>
+              <td>150 GB</td>
+            </tr>
+            <tr>
+              <td>Unlimited Sharing</td>
 
-      <footer></footer>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+            </tr>
+            <tr>
+              <td>Complete user interface experience</td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+            </tr>
+            <tr>
+              <td>24/7 Customer Support</td>
+              <td></td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+            </tr>
+            <tr>
+              <td>Extra member benfits</td>
+              <td></td>
+              <td></td>
+              <td>
+                <i className="bi bi-check-lg"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer id="home-footer"></footer>
     </div>
   );
 }

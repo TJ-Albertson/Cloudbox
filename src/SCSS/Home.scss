@@ -71,6 +71,24 @@ i {
   grid-template-columns: 1fr 1fr;
 }
 
+@media (max-width:2500px)  {
+  #overview {
+    max-width: 55%;
+  }
+}
+
+@media (max-width: 2000px)  {
+  #overview {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 1500px)  {
+  #overview {
+    max-width: 80%;
+  }
+}
+
 #overview > p {
   text-align: left;
   margin-left: 0em;
@@ -101,7 +119,7 @@ i {
 #features {
   max-width: 50%;
   margin: auto;
-  margin-top: 10em;
+  margin-top: 5em;
   margin-bottom: 5em;
   text-align: center;
   display: grid;
@@ -109,14 +127,31 @@ i {
 }
 
 #features > img {
-  max-width: 750px;
+  max-width: 500px;
+  margin-left: auto;
+}
+
+#feature-list {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 1.8em;
+}
+
+#feature-list > p {
+  margin-bottom: 1.2em;
+}
+
+#feature-list > p > i {
+  color: blue;
+  
 }
 
 #pricing {
-  height: 700px;
-  margin: 2em 2em 0em;
-  background-color: blue;
-  text-align: center;
+margin-left: auto;
+margin-right: auto;
 }
 
 #hr-break {
@@ -133,4 +168,9 @@ i {
 #sign-up-free:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+#home-footer {
+  background: #f8f9fa;
+  height: 200px;
 }

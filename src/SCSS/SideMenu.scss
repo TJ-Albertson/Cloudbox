@@ -30,11 +30,11 @@
 .side-menu-item {
   display: flex;
   padding-left: 1em;
-  padding-top: 0.2em;
+  padding-top: 0.5em;
 }
 
 .side-menu-item:hover {
-  background-color: #EBF5FB;
+  background-color: #F2F4F4;
   border-top-right-radius: 35px;
   border-bottom-right-radius: 35px;
 
@@ -56,4 +56,20 @@
 
 #dropdown-menu {
     z-index: 5;
+}
+
+.bi-boxes {
+ color: #5DADE2;
+}
+
+.bi-alarm {
+  color: #A9DFBF ;
+}
+
+.bi-star {
+  color: #F7DC6F;
+}
+
+.bi-trash {
+ color: #F5B7B1
 }
