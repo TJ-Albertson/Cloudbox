@@ -9,7 +9,7 @@ import Box from "./Box";
 import ContextMenu from "./ContextMenu";
 import RenameModal from "./RenameModal";
 import UploadModal from "./UploadModal";
-import List from "./List"
+import List from "./List";
 
 import "../SCSS/Cloudbox.scss";
 
@@ -17,8 +17,6 @@ import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
 
 export const UserContext = React.createContext();
-
-
 
 export default function CloudBox() {
   const { user, isLoading } = useAuth0();
@@ -34,7 +32,6 @@ export default function CloudBox() {
 
   const { loading, token, refresh, data } = useApi("/user", options);
 
-  
   const fileRefreshRef = useRef(null);
 
   const refreshFiles = () => {
@@ -60,9 +57,9 @@ export default function CloudBox() {
   const { ref } = useMuuri(data, location);
 
   const updateLocation = (id, name, icon) => {
-    let location = {id, name, icon}
-    setLocation(location)
-  } 
+    let location = { id, name, icon };
+    setLocation(location);
+  };
 
   const [renameModalShow, setRenameModalShow] = useState(false);
   const [uploadModalShow, setUploadModalShow] = useState(false);
@@ -77,7 +74,6 @@ export default function CloudBox() {
   const showUploadModal = () => {
     setUploadModalShow(true);
   };
-
 
   function WindowController() {
     if (location.id === 0) {
