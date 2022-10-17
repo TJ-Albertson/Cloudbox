@@ -10,17 +10,18 @@ export default function Home() {
 
   return (
     <div id="home">
+      <div id="overview-anchor"></div>
       <Stack id="navbar" direction="horizontal" gap="3">
         <p id="logo">
           <i className="bi bi-box-seam-fill"></i> Cloudbox
         </p>
-        <a id="nav-link-o" href="#overview">
+        <a id="nav-link-o" href="#overview-anchor">
           Overview
         </a>
-        <a id="nav-link-f" href="#features">
+        <a id="nav-link-f" href="#features-anchor">
           Features
         </a>
-        <a id="nav-link-p" href="#pricing">
+        <a id="nav-link-p" href="#pricing-anchor">
           Pricing
         </a>
         <Button
@@ -36,7 +37,7 @@ export default function Home() {
         </Button>
       </Stack>
       <div id="overview">
-        <p>
+        <div>
           <h1>File sharing made simple.</h1>
           <h2>
             Store and access your files and folders with an intuitive and
@@ -59,10 +60,13 @@ export default function Home() {
               Sign up for free
             </span>
           </h3>
-        </p>
+        </div>
         <Image src="/cloudbox-laptop.svg" />
+        <div id="features-anchor"></div>
       </div>
+
       <hr id="hr-break" />
+
       <div id="features">
         <Image src="/feature-image.svg" id="feature-image" />
         <div id="feature-list">
@@ -87,6 +91,7 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <div id="pricing-anchor"></div>
       <hr id="hr-break" />
       <div id="pricing">
         <table id="pricing-table">
@@ -95,37 +100,33 @@ export default function Home() {
               <th></th>
               <th>
                 <p>Free</p>
+                <p>
+                  <span>$0 USD</span>/month
+                </p>
                 <Button
                   onClick={() => loginWithRedirect()}
-                  className="me-3"
                   size="lg"
-                  id="sign-in"
+                  id="create-account"
                 >
-                  Create Account
+                  Create account
                 </Button>
               </th>
               <th>
                 <p>Basic</p>
-                <p>$25 USD/month</p>
-                <Button
-                  onClick={() => loginWithRedirect()}
-                  className="me-3"
-                  size="lg"
-                  id="sign-in"
-                >
-                  Create Account
+                <p>
+                  <span>$25 USD</span>/month
+                </p>
+                <Button size="lg" id="get-started">
+                  Get started
                 </Button>
               </th>
               <th>
                 <p>Premium</p>
-                <p>$50 USD/month</p>
-                <Button
-                  onClick={() => loginWithRedirect()}
-                  className="me-3"
-                  size="lg"
-                  id="sign-in"
-                >
-                  Create Account
+                <p>
+                  <span>$50 USD</span>/month
+                </p>
+                <Button size="lg" id="get-started">
+                  Get started
                 </Button>
               </th>
             </tr>
@@ -133,7 +134,7 @@ export default function Home() {
           <tbody>
             <tr>
               <td>
-                <i class="bi bi-device-hdd"></i> Secure Cloud Storage
+                <i className="bi bi-device-hdd"></i> Secure Cloud Storage
               </td>
               <td>15 MB</td>
               <td>50 GB</td>
@@ -141,7 +142,7 @@ export default function Home() {
             </tr>
             <tr>
               <td>
-                <i class="bi bi-share"></i> Unlimited Sharing
+                <i className="bi bi-share"></i> Unlimited Sharing
               </td>
 
               <td>
@@ -156,7 +157,8 @@ export default function Home() {
             </tr>
             <tr>
               <td>
-                <i class="bi bi-hand-index-thumb"></i> Fully featured interface
+                <i className="bi bi-hand-index-thumb"></i> Fully featured
+                interface
               </td>
               <td>
                 <i className="bi bi-check-lg"></i>
@@ -170,7 +172,7 @@ export default function Home() {
             </tr>
             <tr>
               <td>
-                <i class="bi bi-person-workspace"></i> 24/7 Customer Support
+                <i className="bi bi-person-workspace"></i> 24/7 Customer Support
               </td>
               <td></td>
               <td>
@@ -182,7 +184,7 @@ export default function Home() {
             </tr>
             <tr>
               <td>
-                <i class="bi bi-award"></i> Extra member benfits
+                <i className="bi bi-award"></i> Extra member benfits
               </td>
               <td></td>
               <td></td>
@@ -198,20 +200,32 @@ export default function Home() {
         <div id="home-footer-item">
           <div>
             Check out my{" "}
-            <a href="https://www.tjalbertson.com/" target="_blank" id="portfolio-link">
+            <a
+              href="https://www.tjalbertson.com/"
+              target="_blank"
+              id="portfolio-link"
+            >
               Portfolio
             </a>{" "}
-            <a href="https://github.com/TJ-Albertson" target="_blank" id="github-link">
+            <a
+              href="https://github.com/TJ-Albertson"
+              target="_blank"
+              id="github-link"
+            >
               <i className="bi bi-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/thomas-albertson-895443250/" target="_blank" id="linkedin-link">
+            <a
+              href="https://www.linkedin.com/in/thomas-albertson-895443250/"
+              target="_blank"
+              id="linkedin-link"
+            >
               <i className="bi bi-linkedin"></i>
             </a>
           </div>
           <hr />
           <div>
-            This app is not intended for commercial use. <a> Privacy </a>
-            <a> Terms</a>
+            This app is not intended for commercial use. <a id="privacy"> Privacy </a>
+            <a id="terms"> Terms</a>
           </div>
         </div>
       </footer>
