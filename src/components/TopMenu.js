@@ -28,11 +28,11 @@ export default function TopMenu(props) {
       <p id="logo" >
         <i className="bi bi-box-seam-fill"></i> Cloudbox
       </p>
-      <div class="vr"></div>
+      <div className="vr"></div>
       <p className="me-auto mb-0 fs-3"><i className={props.location.icon}></i> {props.location.name}</p>
 
-      <i className="bi bi-question-circle"></i>
-      <i className="bi bi-gear"></i>
+      <i id="help" className="bi bi-question-circle" ></i>
+      <i id="settings" className="bi bi-gear" onClick={() => props.showSettingsModal(true)}></i>
       <OverlayTrigger
         trigger="click"
         placement="bottom"

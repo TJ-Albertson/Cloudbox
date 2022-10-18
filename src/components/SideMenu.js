@@ -23,7 +23,7 @@ export default function TopMenu(props) {
             <i className="bi bi-file-earmark-plus"></i> Upload File
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="#/action-2">
+          <Dropdown.Item onClick={() => props.showBoxModal(true)}>
             <i className="bi bi-box-seam"></i> New Box
           </Dropdown.Item>
           <Dropdown.Item href="#/action-3">

@@ -1,12 +1,18 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Muuri from "muuri";
 
-export const useMuuri = (data, location) => {
+export const useMuuri = (data, location, settings) => {
   const ref = useRef(null);
   const handleRef = useRef(null);
 
+  
+  const [key, setKey] = useState(0)
+
   useEffect(() => {
+    //setKey(key + 1)
     if (location.id===0) {
+    
+
     let grid = new Muuri(ref.current, { 
       dragEnabled: true,
       dragHandle: '.handle',
@@ -25,7 +31,7 @@ export const useMuuri = (data, location) => {
     });
     return () => grid.destroy();
   }
-  }, [data, location]);
+  }, [data, location, settings]);
 
-  return { ref };
+  return { ref, key};
 };

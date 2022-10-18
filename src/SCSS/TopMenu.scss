@@ -55,3 +55,29 @@
   border: 1px solid #1a73e8;
   color: #174ea6;
 }
+
+#help {
+  margin-right: -0.5em !important;
+  border-radius: 50%;
+  padding: 4px 11px 5px 10px;
+  color: black;
+}
+
+#settings {
+  margin-right: -0.1em !important;
+  border-radius: 50%;
+  padding: 4px 11px 5px 10px;
+  color: black;
+}
+
+#help:hover {
+  background-color: #ededed;
+  color: rgb(48, 48, 48);
+  cursor: pointer;
+}
+
+#settings:hover {
+  background-color: #ededed;
+  color: rgb(48, 48, 48);
+  cursor: pointer;
+}

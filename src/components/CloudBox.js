@@ -9,12 +9,16 @@ import Box from "./Box";
 import ContextMenu from "./ContextMenu";
 import RenameModal from "./RenameModal";
 import UploadModal from "./UploadModal";
+import CheckListModal from "./CheckListModal"
 import List from "./List";
 
 import "../SCSS/Cloudbox.scss";
 
 import { useApi } from "../hooks/useApi";
 import { useMuuri } from "../hooks/useMuuri";
+import SettingsModal from "./SettingsModal";
+
+import { boxModalOptions, shareModalOptions } from "../utilities/variables";
 
 export const UserContext = React.createContext();
 
@@ -37,7 +41,7 @@ export default function CloudBox() {
   const refreshFiles = () => {
     fileRefreshRef.current.refresh();
   };
-
+  
   useEffect(() => {
     const handleClick = () => setShowContextMenu(false);
     window.addEventListener("click", handleClick);
@@ -48,13 +52,17 @@ export default function CloudBox() {
   const [selection, setSelection] = useState({});
   const [showContextMenu, setShowContextMenu] = useState(false);
 
+
   const [location, setLocation] = useState({
     id: 0,
     name: "My Boxes",
     icon: "bi bi-boxes",
   });
 
-  const { ref } = useMuuri(data, location);
+
+  const [settingsModal, setSettingsModal] = useState(false);
+
+  const { ref, key } = useMuuri(data, location, settingsModal);
 
   const updateLocation = (id, name, icon) => {
     let location = { id, name, icon };
@@ -63,11 +71,21 @@ export default function CloudBox() {
 
   const [renameModalShow, setRenameModalShow] = useState(false);
   const [uploadModalShow, setUploadModalShow] = useState(false);
-  const [menuModal, setMenuModal] = useState(false);
 
-  const showMenuModal = () => {
-    setMenuModal(true);
+ 
+
+  const showSettingsModal = () => {
+    setSettingsModal(true);
   };
+
+  const [boxModal, setBoxModal] = useState(false);
+  
+
+  const showBoxModal = () => {
+    setBoxModal(true);
+  };
+
+
   const showRenameModal = () => {
     setRenameModalShow(true);
   };
@@ -79,7 +97,7 @@ export default function CloudBox() {
     if (location.id === 0) {
       return (
         <div className="grid-parent">
-          <div className="grid" ref={ref}>
+          <div className="grid" ref={ref} key={key}>
             {data.boxArray.map((boxEmail, i) => (
               <div className="item" key={i}>
                 <div className="item-content">
@@ -134,17 +152,26 @@ export default function CloudBox() {
         picture: data.picture,
       }}
     >
-      <TopMenu location={location} />
+      <TopMenu location={location} showSettingsModal={showSettingsModal}/>
 
-      <SideMenu updateLocation={updateLocation} />
+      <SideMenu updateLocation={updateLocation} showBoxModal={showBoxModal}/>
 
-      <MenuModal
-        show={menuModal}
-        onHide={() => setMenuModal(false)}
+      <CheckListModal 
+          show={boxModal}
+          onHide={() => setBoxModal(false)}
+            {...boxModalOptions}
+            emailgroup={data.accessArray}
+            refresh={refresh}
+          />
+
+      <SettingsModal 
+        show={settingsModal}
+        onHide={() => setSettingsModal(false)}
         accessArray={data.accessArray}
         shareArray={data.shareArray}
         refresh={refresh}
       />
+
 
       <RenameModal
         show={renameModalShow}
