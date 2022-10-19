@@ -5,7 +5,7 @@ import "../SCSS/SettingsModal.scss"
 
 export default function SettingsModal(props) {
   return (
-    <Modal show={props.show} onHide={props.onHide} size="md" centered>
+    <Modal show={props.show} onHide={props.onHide} size="lg" centered>
         
         <ModalHeader id="settings-modal-header">
             Settings

@@ -26,7 +26,7 @@ export default function List(props) {
 
   if (props.recent) {
     list = fileList;
-    console.log(list) 
+
 
     list.sort((a, b) => {
       if(a.updatedAt === b.updatedAt) {
@@ -43,10 +43,8 @@ export default function List(props) {
       return index === 0 || element.mimeType !== "File folder";
     });
 
-
-    console.log(list)
-    //sort by updatedAt
   }
+  
   if (props.starred) {
     //get files based on users starred array
   }
@@ -61,6 +59,14 @@ export default function List(props) {
 
   return (
     <Container id="list">
+
+      <Row>
+        <Col>Name</Col>
+        <Col>Date</Col>
+        <Col>Type</Col>
+        <Col>Size</Col>
+      </Row>
+
       {list.map(item => 
         <Row key={item._id}>
           <Col>{item.name}</Col>

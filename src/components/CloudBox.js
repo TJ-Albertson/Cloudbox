@@ -62,7 +62,7 @@ export default function CloudBox() {
 
   const [settingsModal, setSettingsModal] = useState(false);
 
-  const { ref, key } = useMuuri(data, location, settingsModal);
+  const { ref } = useMuuri(data, location, settingsModal);
 
   const updateLocation = (id, name, icon) => {
     let location = { id, name, icon };
@@ -97,7 +97,7 @@ export default function CloudBox() {
     if (location.id === 0) {
       return (
         <div className="grid-parent">
-          <div className="grid" ref={ref} key={key}>
+          <div className="grid" ref={ref}>
             {data.boxArray.map((boxEmail, i) => (
               <div className="item" key={i}>
                 <div className="item-content">

@@ -3,13 +3,8 @@ import Muuri from "muuri";
 
 export const useMuuri = (data, location, settings) => {
   const ref = useRef(null);
-  const handleRef = useRef(null);
-
-  
-  const [key, setKey] = useState(0)
 
   useEffect(() => {
-    //setKey(key + 1)
     if (location.id===0) {
     
 
@@ -33,5 +28,5 @@ export const useMuuri = (data, location, settings) => {
   }
   }, [data, location, settings]);
 
-  return { ref, key};
+  return { ref };
 };
