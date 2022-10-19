@@ -1,0 +1,14 @@
+#settings-modal-header {
+    background-color: #eee;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 30%);
+}
+
+#settings-modal-body {
+    display: flex;
+    padding: 0;
+}
+
+#settings-modal-tabs {
+    width: 5em;
+    border-right: 2px solid #eee;
+}
