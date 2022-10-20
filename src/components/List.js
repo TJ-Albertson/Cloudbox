@@ -44,7 +44,7 @@ export default function List(props) {
     });
 
   }
-  
+
   if (props.starred) {
     //get files based on users starred array
   }
@@ -52,8 +52,8 @@ export default function List(props) {
     //get files with directory trash
   }
 
-  if (filesLoading) {
-    return <p id="list">loading</p>;
+  if (props.recent) {
+    return <p id="list">recent</p>;
   }
 
 

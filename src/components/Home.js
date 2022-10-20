@@ -32,7 +32,7 @@ export default function Home() {
         >
           Sign in
         </Button>
-        <Button href="/cloudbox" className="me-2" size="lg" id="dashboard">
+        <Button href="/dashboard/my-boxes" className="me-2" size="lg" id="dashboard">
           Go to Dashboard
         </Button>
       </Stack>
@@ -51,7 +51,7 @@ export default function Home() {
           >
             Sign in
           </Button>
-          <Button href="/cloudbox" size="lg" id="dashboard">
+          <Button href="/dashboard/my-boxes" size="lg" id="dashboard">
             Go to Dashboard
           </Button>
           <h3>

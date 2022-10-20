@@ -3,6 +3,7 @@ import { Button, Stack, Dropdown } from "react-bootstrap";
 import { UserContext } from "./CloudBox";
 
 import "../SCSS/SideMenu.scss";
+import { Link } from "react-router-dom";
 
 export default function TopMenu(props) {
   const signedInUser = useContext(UserContext);
@@ -32,40 +33,28 @@ export default function TopMenu(props) {
         </Dropdown.Menu>
       </Dropdown>
 
-      <div
-        className="side-menu-item"
-        onClick={() => setLocation(0, "My Boxes", "bi bi-boxes")}
-      >
+      <Link className="side-menu-item" to="my-boxes">
         <i className="bi bi-boxes" id="boxes-icon"></i>
         <p> My Boxes</p>
-      </div>
-      <div
-        className="side-menu-item"
-        onClick={() => setLocation(1, "Recent", "bi bi-alarm")}
-      >
+      </Link>
+      <Link className="side-menu-item" to="recent">
         <i className="bi bi-alarm" id="recent-icon"></i>
         <p> Recent</p>
-      </div>
-      <div
-        className="side-menu-item"
-        onClick={() => setLocation(2, "Starred", "bi bi-star")}
-      >
+      </Link>
+      <Link className="side-menu-item" to="starred">
         <i className="bi bi-star" id="starred-icon"></i>
         <p> Starred</p>
-      </div>
-      <div
-        className="side-menu-item"
-        onClick={() => setLocation(3, "Trash", "bi bi-trash")}
-      >
+      </Link>
+      <Link className="side-menu-item" to="trash">
         <i className="bi bi-trash" id="trash-icon"></i>
         <p> Trash</p>
-      </div>
+      </Link>
       <hr />
 
-      <div className="side-menu-item">
+      <Link className="side-menu-item" to="storage">
         <i className="bi bi-cloud"></i>
         <p> Storage</p>
-      </div>
+      </Link>
     </Stack>
   );
 }

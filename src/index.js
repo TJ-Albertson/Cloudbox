@@ -14,7 +14,7 @@ root.render(
       <Auth0Provider
         domain={config.domain} 
         clientId={config.clientId}
-        redirectUri="http://localhost:3000/cloudbox"
+        redirectUri="http://localhost:3000/dashboard/my-boxes"
         audience={config.API} 
       >
         <App />
