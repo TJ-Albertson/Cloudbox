@@ -3,10 +3,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { Stack, Button, Image } from "react-bootstrap";
 
+import { useNavigate } from "react-router-dom";
+
 import "../SCSS/Home.scss";
 
 export default function Home() {
   const { loginWithRedirect } = useAuth0();
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/dashboard`; 
+    navigate(path);
+  }
 
   return (
     <div id="home">
@@ -56,7 +64,7 @@ export default function Home() {
           </Button>
           <h3>
             Don't have an account?{" "}
-            <span id="sign-up-free" href="/dashboard">
+            <span id="sign-up-free" onClick={routeChange}>
               Sign up for free
             </span>
           </h3>
@@ -90,8 +98,9 @@ export default function Home() {
             trashed files
           </p>
         </div>
+        <div id="pricing-anchor"></div>
       </div>
-      <div id="pricing-anchor"></div>
+      
       <hr id="hr-break" />
       <h2 className="ms-auto me-auto mt-5">Find the plan that’s right for you</h2>
       <div id="pricing">
@@ -118,7 +127,7 @@ export default function Home() {
                 <p>
                   <span>$25 USD</span>/month
                 </p>
-                <Button size="lg" id="get-started">
+                <Button href="/dashboard" size="lg" id="get-started">
                   Get started
                 </Button>
               </th>
@@ -127,7 +136,7 @@ export default function Home() {
                 <p>
                   <span>$50 USD</span>/month
                 </p>
-                <Button size="lg" id="get-started">
+                <Button href="/dashboard" size="lg" id="get-started">
                   Get started
                 </Button>
               </th>

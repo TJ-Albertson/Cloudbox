@@ -198,7 +198,7 @@ export default function CloudBox() {
         style={{ height: "75px", width: "75px", zIndex: "4" }}
       >
         <h1>
-          <i className="bi bi-dropbox"></i>
+          <i id="dropbox" className="bi bi-dropbox"></i>
         </h1>
       </Button>
 
