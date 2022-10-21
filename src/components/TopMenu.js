@@ -36,7 +36,7 @@ export default function TopMenu(props) {
             <i className="bi bi-send-plus-fill"></i> Share Settings
           </Dropdown.Item>
           <Dropdown.Item
-            onClick={() => logout({ returnTo: "http://localhost:3000/" })}
+            href="/"
           >
             <i className="bi bi-box-arrow-left"></i> Logout
           </Dropdown.Item>
