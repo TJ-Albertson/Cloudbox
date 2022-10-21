@@ -44,11 +44,11 @@
 }
 
 .header-history::-webkit-scrollbar-thumb {
-  background: #d6eaf8;
+  background: #D5D8DC;
 }
 
 .header-history::-webkit-scrollbar-thumb:hover {
-  background: #aed6f1;
+  background: #ABB2B9 ;
 }
 
 .files::-webkit-scrollbar {
@@ -60,11 +60,11 @@
 }
 
 .files::-webkit-scrollbar-thumb {
-  background: #d6eaf8;
+  background: #D5D8DC;
 }
 
 .files::-webkit-scrollbar-thumb:hover {
-  background: #aed6f1;
+  background: #ABB2B9;
 }
 
 .upload-button {

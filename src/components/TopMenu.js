@@ -23,13 +23,6 @@ export default function TopMenu(props) {
       </h1>
       <h1 className="me-auto">CloudBox</h1>
 
-      <img src={sun} alt="sun" />
-      <label className="switch">
-        <input type="checkbox"></input>
-        <span className="slider round"></span>
-      </label>
-      <img src={moon} alt="moon" />
-
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           {signedInUser.username}

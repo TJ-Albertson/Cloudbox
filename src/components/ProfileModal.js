@@ -11,10 +11,29 @@ export default function ProfileModal(props) {
 
   const [edit, setEdit] = useState(true);
 
+  const [text, setText] = useState("")
+
+  function handleChange(event) {
+    setText(event.target.value);
+  }
+
+  function handleSubmit() {
+    props.updatebio(text)
+  }
+
+  const reverseButton = () => {
+    setShowSubmitButton(!showSubmitButton)
+  }
+
+  const reverseEdit = () => {
+    setEdit(!edit)
+  }
+
+
   return (
     <Modal
       show={props.show}
-      onHide={props.onHide}
+      onHide={edit ? props.onHide : null}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -34,7 +53,7 @@ export default function ProfileModal(props) {
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Bio:</Form.Label>
-            <Form.Control as="textarea" rows={3} readOnly={edit} />
+            <Form.Control as="textarea" rows={3} readOnly={edit} onChange={handleChange} defaultValue={signedInUser.bio}/>
           </Form.Group>
         </Modal.Body>
 
@@ -42,7 +61,10 @@ export default function ProfileModal(props) {
           {showSubmitButton && (
             <Button
               onClick={() => {
-                setShowSubmitButton(false);
+                handleSubmit()
+                reverseButton()
+                reverseEdit()
+                props.onHide()
               }}
             >
               Submit
@@ -50,8 +72,8 @@ export default function ProfileModal(props) {
           )}
           <Button
             onClick={() => {
-              setShowSubmitButton(true);
-              setEdit(false);
+              reverseButton()
+              reverseEdit()
             }}
           >
             <i className="bi bi-pencil-square" /> Edit

@@ -30,6 +30,7 @@ export default function Box(props) {
     username: userMetaDataManifest[props.boxEmail].username,
     picture: userMetaDataManifest[props.boxEmail].picture,
     bio: userMetaDataManifest[props.boxEmail].bio,
+    color: userMetaDataManifest[props.boxEmail].color,
   };
 
   let fileList = [];
@@ -57,13 +58,13 @@ export default function Box(props) {
 
   return (
     <Card className="Box">
-      <Card.Header className="handle d-flex p-2" id="handle">
+      <Card.Header className="handle d-flex p-2" id="handle" style={{backgroundColor: userMetaData.color}}>
         <img src={userMetaData.picture} className="picture" />
 
         <div className="flex-grow-1 close-box-button">&nbsp;{props.boxEmail}</div>
 
         {props.owner && (
-          <h5 class="upload-button"
+          <h5 className="upload-button"
             onClick={() => {
               props.setSelection(history[history.length - 1]);
               props.showUploadModal(true);

@@ -103,12 +103,19 @@ export default function CloudBox() {
     setFiles([...arr]);
   };
 
+  const updateBio = (text) => {
+    let updateUser = user
+    updateUser.bio = text
+    setUser(updateUser)
+  }
+
   return (
     <UserContext.Provider
       value={{
         username: user.username,
         email: user.email,
         picture: user.picture,
+        bio: user.bio
       }}
     >
       <TopMenu
@@ -136,6 +143,7 @@ export default function CloudBox() {
       <ProfileModal
         show={profileModalShow}
         onHide={() => setProfileModalShow(false)}
+        updatebio={updateBio}
       />
 
       <RenameModal
