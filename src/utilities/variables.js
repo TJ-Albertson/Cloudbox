@@ -6,6 +6,7 @@ export const headerArray = [
 ];
 
 export const boxModalOptions = {
+  type: "box",
   headerimage: "bi bi-box-fill",
   headertext: "Add Box",
   headersubtext: "These users have granted you access to their files",
@@ -17,6 +18,7 @@ export const boxModalOptions = {
 };
 
 export const shareModalOptions = {
+  type: "share",
   headerimage: "bi bi-people-fill",
   headertext: "Share Setting",
   headersubtext: "These users have access to your files",

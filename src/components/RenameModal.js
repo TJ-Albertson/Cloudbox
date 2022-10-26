@@ -45,10 +45,10 @@ export default function RenameModal(props) {
         <Stack>
           <Form className="flex-fill" onSubmit={(e) => renameFile(e)}>
             <Stack direction="horizontal" gap={3}>
-              <Form.Control
+              <Form.Controlz
                 className="me-auto"
                 type="text"
-                placeholder={props.selection.name}
+                placeholder={props.selection.name ? props.selection.name : "error"}
               />
               <Button variant="primary" type="submit">
                 OK

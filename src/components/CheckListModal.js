@@ -18,7 +18,18 @@ export default function CheckListModal(props) {
     },
   };
 
-  const { loading, token, refresh, data } = useApi(`/users/${signedInUser.email}`, options);
+  let emailgroup = [];
+
+  const { loading, token, refresh, data } = useApi(
+    `/users/${signedInUser.email}`,
+    options
+  );
+
+  if (props.type === "box") {
+    emailgroup = data.boxArray;
+  } else if (props.type === "share") {
+    emailgroup = data.shareArray;
+  }
 
   async function shareEmail(e) {
     e.preventDefault();
@@ -90,7 +101,7 @@ export default function CheckListModal(props) {
           }
         >
           <Stack gap={3}>
-            {props.emailgroup.map((email) => (
+            {emailgroup.map((email) => (
               <Form.Check
                 key={email}
                 type="checkbox"
@@ -99,7 +110,7 @@ export default function CheckListModal(props) {
               />
             ))}
 
-            {props.emailgroup.length > 0 ? (
+            {emailgroup.length > 0 ? (
               <div>
                 <hr className="" />
                 <Stack direction="horizontal">

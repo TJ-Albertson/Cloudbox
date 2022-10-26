@@ -20,6 +20,7 @@ import { useMuuri } from "../hooks/useMuuri";
 import SettingsModal from "./SettingsModal";
 
 import { boxModalOptions, shareModalOptions } from "../utilities/variables";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 export const UserContext = React.createContext();
 
@@ -43,6 +44,7 @@ export default function CloudBox() {
   const showRenameModal = () => {
     setRenameModalShow(true);
   };
+
   const showUploadModal = () => {
     setUploadModalShow(true);
   };
@@ -84,6 +86,7 @@ export default function CloudBox() {
       <RenameModal
         show={renameModalShow}
         onHide={() => setRenameModalShow(false)}
+        selection={pr}
       />
 
       <UploadModal
@@ -91,7 +94,7 @@ export default function CloudBox() {
         onHide={() => setUploadModalShow(false)}
       />
 
-      <Outlet/>
+      <Outlet showRenameModal={showRenameModal}/>
 
     </UserContext.Provider>
   );

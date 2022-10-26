@@ -80,7 +80,7 @@ export default function MyBoxes(props) {
           points={points}
           selection={selection}
           refreshFiles={refreshFiles}
-          showRenameModal={showRenameModal}
+          showRenameModal={props.showRenameModal}
         />
       )}
     </div>

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Muuri from "muuri";
 
 export const useMuuri = (data, location) => {
