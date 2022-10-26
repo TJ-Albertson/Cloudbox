@@ -3,10 +3,22 @@ import { Button, Modal, Form, Alert, Stack } from "react-bootstrap";
 import { fetchApi } from "../api/fetchApi";
 
 import { UserContext } from "./CloudBox";
+import { useApi } from "../hooks/useApi";
 
 export default function CheckListModal(props) {
   const [emailTaken, setEmailTaken] = useState(false);
   const signedInUser = useContext(UserContext);
+
+  const options = {
+    method: "GET",
+    dummyData: {
+      boxArray: [],
+      accessArray: [],
+      shareArray: [],
+    },
+  };
+
+  const { loading, token, refresh, data } = useApi(`/users/${signedInUser.email}`, options);
 
   async function shareEmail(e) {
     e.preventDefault();

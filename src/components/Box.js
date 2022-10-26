@@ -25,14 +25,14 @@ function Box(props, ref) {
     loading: filesLoading,
     refresh: refreshFiles,
     data: fileList,
-  } = useApi(`/files/${props.boxEmail}`, {
+  } = useApi(`/files?email=${props.boxEmail}`, {
     dummyData: [],
   });
 
   const {
     loading: userMetaDataLoading,
     data: userMetaData,
-  } = useApi(`/user/email/${props.boxEmail}`, {
+  } = useApi(`/users/${props.boxEmail}`, {
     dummyData: {
       username: "",
       picture: "",
@@ -58,7 +58,7 @@ function Box(props, ref) {
       headers: { "Content-Type": "application/json" },
     };
 
-    await fetchApi("/user/groups", options).then(props.refresh);
+    await fetchApi(`/users/${signedInUser.email}`, options).then(props.refresh);
   }
 
   function moveFolder() {}
